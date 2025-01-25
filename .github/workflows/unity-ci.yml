@@ -21,9 +21,9 @@ jobs:
 
       # Step 2: Set up Unity environment
       - name: Set up Unity
-        uses: game-ci/unity-actions/setup@v2
+        uses: game-ci/unity-actions@v2
         with:
-          unityVersion: 2022.3.56f1
+          unityVersion: 2022.3.56f1  # Replace with your Unity version
 
       # Step 3: Run Edit Mode Tests
       - name: Run Edit Mode Tests
