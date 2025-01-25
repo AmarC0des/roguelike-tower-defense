@@ -1,0 +1,35 @@
+name: Unity CI #generic example of ci pipeline for unity game project
+
+on:
+  push:
+    branches:
+      - develop
+      - main
+  pull_request:
+    branches:
+      - develop
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up Unity (requires Unity license activation if building)
+      - name: Set up Unity
+        uses: game-ci/unity-setup@v2
+        with:
+          unity-version: 2021.3.12f1  # Replace with our Unity version
+
+      # Run Unity build
+      - name: Build project
+        run: |
+          # Use Unity CLI to build the project
+          unity-editor -batchmode -nographics -quit \
+          -projectPath . \
+          -buildTarget StandaloneWindows64 \
+          -buildPath ./Builds
