@@ -1,0 +1,92 @@
+name: Unity CI Workflow
+
+on:
+  push:
+    branches:
+      - develop
+      - main
+  pull_request:
+    branches:
+      - develop
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Unity environment
+      - name: Set up Unity
+        uses: game-ci/unity-setup@v2
+        with:
+          unity-version: 2022.3.56f1
+
+      # Step 3: Run Edit Mode Tests
+      - name: Run Edit Mode Tests
+        run: |
+          unity-editor \
+            -batchmode -nographics -quit \
+            -projectPath . \
+            -runTests \
+            -testPlatform EditMode \
+            -testResults ./test-results-editmode.xml
+
+      # Step 4: Run Play Mode Tests
+      - name: Run Play Mode Tests
+        run: |
+          unity-editor \
+            -batchmode -nographics -quit \
+            -projectPath . \
+            -runTests \
+            -testPlatform PlayMode \
+            -testResults ./test-results-playmode.xml
+
+      # Step 5: Upload Test Results
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results
+          path: |
+            ./test-results-editmode.xml
+            ./test-results-playmode.xml
+
+      # Step 6: Build for Windows
+      - name: Build for Windows
+        run: |
+          unity-editor \
+            -batchmode -nographics -quit \
+            -projectPath . \
+            -buildTarget StandaloneWindows64 \
+            -buildPath ./Builds/Windows
+
+      # Step 7: Build for macOS
+      - name: Build for macOS
+        run: |
+          unity-editor \
+            -batchmode -nographics -quit \
+            -projectPath . \
+            -buildTarget StandaloneOSX \
+            -buildPath ./Builds/MacOS
+
+      # Step 8: Zip Builds for Upload
+      - name: Zip Windows Build
+        run: zip -r WindowsBuild.zip ./Builds/Windows
+      - name: Zip macOS Build
+        run: zip -r MacOSBuild.zip ./Builds/MacOS
+
+      # Step 9: Upload Zipped Builds as Artifacts
+      - name: Upload Windows Build
+        uses: actions/upload-artifact@v3
+        with:
+          name: WindowsBuild
+          path: ./WindowsBuild.zip
+      - name: Upload macOS Build
+        uses: actions/upload-artifact@v3
+        with:
+          name: MacOSBuild
+          path: ./MacOSBuild.zip
+
