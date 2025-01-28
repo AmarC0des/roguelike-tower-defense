@@ -26,6 +26,7 @@ jobs:
           projectPath: .
           unityVersion: 2022.3.56f1
           targetPlatform: StandaloneWindows64
+          activateLicense: true
 
       # Step 3: Build Unity Project for macOS
       - name: Build Unity Project for macOS
@@ -34,6 +35,7 @@ jobs:
           projectPath: .
           unityVersion: 2022.3.56f1
           targetPlatform: StandaloneOSX
+          activateLicense: true
 
       # Step 4: Run Edit Mode Tests
       - name: Run Edit Mode Tests
