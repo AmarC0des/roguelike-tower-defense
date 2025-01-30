@@ -19,10 +19,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Step 2: Decode and Save Unity License (Fixes Previous Errors)
-      - name: Decode Unity License
+      # Step 2: Save Unity License (No Decoding Needed)
+      - name: Save Unity License
         run: |
-          echo "${{ secrets.UNITY_LICENSE }}" | base64 --decode > Unity.ulf
+          echo "${{ secrets.UNITY_LICENSE }}" > Unity.ulf
           chmod 777 Unity.ulf  # Fix potential permission issues
           ls -l Unity.ulf  # Debugging: Check if the file exists
 
