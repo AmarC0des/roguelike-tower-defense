@@ -45,7 +45,7 @@ jobs:
         if: always()
         run: |
           echo "Clearing Unity Library Cache..."
-          rm -rf ./Library
+          Remove-Item -Recurse -Force ./Library -ErrorAction Ignore
 
       - uses: actions/cache@v4
         with:
@@ -136,3 +136,4 @@ jobs:
         with:
           name: Build
           path: build
+
