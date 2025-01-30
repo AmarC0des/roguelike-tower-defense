@@ -11,22 +11,53 @@ on:
       - main
 
 jobs:
-  buildForWindows:
-    name: Build for Windows (StandaloneWindows64)
-    runs-on: windows-latest
+  buildForWindowsBasedPlatforms:
+    name: Build for ${{ matrix.targetPlatform }}
+    runs-on: windows-2022
+    strategy:
+      fail-fast: false
+      matrix:
+        projectPath:
+          - .
+        unityVersion:
+          - 2022.3.56f1
+        targetPlatform:
+          - StandaloneWindows64 # Windows 64-bit standalone.
+
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
           lfs: true
 
+      # Debug Unity License Activation
+      - name: Debug License Activation
+        run: |
+          echo "Checking Unity License..."
+          if [[ -z "${{ secrets.UNITY_LICENSE }}" ]]; then
+            echo "⚠️ UNITY_LICENSE is empty. Make sure it is set in GitHub Secrets."
+            exit 1
+          fi
+          echo "✅ UNITY_LICENSE is set."
+
+      # Clear Unity Library Cache (Prevents Cache Issues)
+      - name: Clear Unity Library Cache (Windows)
+        if: always()
+        run: |
+          echo "Clearing Unity Library Cache..."
+          rm -rf ./Library
+
       - uses: actions/cache@v4
         with:
-          path: Library
-          key: Library-${{ runner.os }}-${{ hashFiles('Assets/**', 'ProjectSettings/**') }}
+          path: ${{ matrix.projectPath }}/Library
+          key: Unity-Cache-${{ github.run_id }}
           restore-keys: |
-            Library-${{ runner.os }}-
-            Library-
+            Unity-Cache-
+
+      - name: Debug Unity Installation
+        run: |
+          echo "Checking Unity installation..."
+          unity-editor --version || echo "⚠️ Unity is not installed or not found!"
 
       - uses: game-ci/unity-builder@v4
         env:
@@ -34,32 +65,62 @@ jobs:
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
-          projectPath: .
-          unityVersion: 2022.3.56f1
-          targetPlatform: StandaloneWindows64
+          projectPath: ${{ matrix.projectPath }}
+          unityVersion: ${{ matrix.unityVersion }}
+          targetPlatform: ${{ matrix.targetPlatform }}
 
-      - name: Upload Windows Build
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4
         with:
-          name: WindowsBuild
-          path: build/StandaloneWindows64
+          name: Build
+          path: build
 
-  buildForMacOS:
-    name: Build for macOS (StandaloneOSX)
+  buildForMacOSBasedPlatforms:
+    name: Build for ${{ matrix.targetPlatform }}
     runs-on: macos-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        projectPath:
+          - .
+        unityVersion:
+          - 2022.3.56f1
+        targetPlatform:
+          - StandaloneOSX # macOS standalone.
+
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
           lfs: true
 
+      # Debug Unity License Activation
+      - name: Debug License Activation
+        run: |
+          echo "Checking Unity License..."
+          if [[ -z "${{ secrets.UNITY_LICENSE }}" ]]; then
+            echo "⚠️ UNITY_LICENSE is empty. Make sure it is set in GitHub Secrets."
+            exit 1
+          fi
+          echo "✅ UNITY_LICENSE is set."
+
+      # Clear Unity Library Cache (Prevents Cache Issues)
+      - name: Clear Unity Library Cache (macOS)
+        if: always()
+        run: |
+          echo "Clearing Unity Library Cache..."
+          rm -rf ./Library
+
       - uses: actions/cache@v4
         with:
-          path: Library
-          key: Library-${{ runner.os }}-${{ hashFiles('Assets/**', 'ProjectSettings/**') }}
+          path: ${{ matrix.projectPath }}/Library
+          key: Unity-Cache-${{ github.run_id }}
           restore-keys: |
-            Library-${{ runner.os }}-
-            Library-
+            Unity-Cache-
+
+      - name: Debug Unity Installation
+        run: |
+          echo "Checking Unity installation..."
+          unity-editor --version || echo "⚠️ Unity is not installed or not found!"
 
       - uses: game-ci/unity-builder@v4
         env:
@@ -67,12 +128,11 @@ jobs:
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
-          projectPath: .
-          unityVersion: 2022.3.56f1
-          targetPlatform: StandaloneOSX
+          projectPath: ${{ matrix.projectPath }}
+          unityVersion: ${{ matrix.unityVersion }}
+          targetPlatform: ${{ matrix.targetPlatform }}
 
-      - name: Upload macOS Build
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4
         with:
-          name: MacOSBuild
-          path: build/StandaloneOSX
+          name: Build
+          path: build
