@@ -19,16 +19,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Step 2: Decode and Save Unity License (Fixed)
+      # Step 2: Decode and Save Unity License (Fixes Previous Errors)
       - name: Decode Unity License
         run: |
           echo "${{ secrets.UNITY_LICENSE }}" | base64 --decode > Unity.ulf
+          chmod 777 Unity.ulf  # Fix potential permission issues
+          ls -l Unity.ulf  # Debugging: Check if the file exists
 
-      # Step 3: Activate Unity License
+      # Step 3: Activate Unity License (Ensures Unity Uses the License)
       - name: Activate Unity License
         uses: game-ci/unity-activate@v1
         with:
           unityVersion: 2022.3.56f1
+          licenseFile: Unity.ulf
 
       # Step 4: Build Unity Project for Windows
       - name: Build Unity Project for Windows
