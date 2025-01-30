@@ -19,11 +19,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Step 2: Set up Unity License (Environment Variable)
+      # Step 2: Set Unity License Environment Variable (Fixed)
       - name: Set Unity License Environment Variable
-        run: echo "UNITY_LICENSE=${{ secrets.UNITY_LICENSE }}" >> $GITHUB_ENV
+        run: |
+          printf '%s\n' "${{ secrets.UNITY_LICENSE }}" > UNITY_LICENSE_FILE
+          echo "UNITY_LICENSE=$(cat UNITY_LICENSE_FILE)" >> $GITHUB_ENV
 
-      # Step 3: Activate Unity License (Fix applied)
+      # Step 3: Activate Unity License (Fixed)
       - name: Activate Unity License
         uses: game-ci/unity-activate@v1
         with:
