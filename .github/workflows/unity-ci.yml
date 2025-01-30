@@ -11,94 +11,159 @@ on:
       - main
 
 jobs:
-  build-and-test:
+  buildAndTestForLinuxBasedPlatforms:
+    name: Build for ${{ matrix.targetPlatform }}
     runs-on: ubuntu-latest
-
+    strategy:
+      fail-fast: false
+      matrix:
+        projectPath:
+          - test-project
+        unityVersion:
+          - 2019.4.1f1
+          - 2020.2.1f1
+        targetPlatform:
+          - StandaloneLinux64 # Build a Linux 64-bit standalone.
+          - iOS # Build an iOS player.
+          - Android # Build an Android player.
+          - WebGL # WebGL.
     steps:
-      # Step 1: Checkout the code
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      # Step 2: Save Unity License (No Decoding Needed)
-      - name: Save Unity License
-        run: |
-          echo "${{ secrets.UNITY_LICENSE }}" > Unity.ulf
-          chmod 777 Unity.ulf  # Fix potential permission issues
-          ls -l Unity.ulf  # Debugging: Check if the file exists
-
-      # Step 3: Activate Unity License
-      - name: Activate Unity License
-        uses: game-ci/unity-activate@v1
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          lfs: true
+      - uses: actions/cache@v3
+        with:
+          path: ${{ matrix.projectPath }}/Library
+          key:
+            Library-${{ matrix.projectPath }}-${{ matrix.targetPlatform }}-${{
+            hashFiles(matrix.projectPath) }}
+          restore-keys: |
+            Library-${{ matrix.projectPath }}-${{ matrix.targetPlatform }}-
+            Library-${{ matrix.projectPath }}-
+            Library-
+      - uses: game-ci/unity-test-runner@v4
+        id: testRunner
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
-
-      # Step 4: Build Unity Project for Windows
-      - name: Build Unity Project for Windows
-        uses: game-ci/unity-builder@v2
         with:
-          projectPath: .
-          unityVersion: 2022.3.56f1
-          targetPlatform: StandaloneWindows64
-
-      # Step 5: Build Unity Project for macOS
-      - name: Build Unity Project for macOS
-        uses: game-ci/unity-builder@v2
+          projectPath: ${{ matrix.projectPath }}
+          unityVersion: ${{ matrix.unityVersion }}
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/upload-artifact@v3
+        if: always()
         with:
-          projectPath: .
-          unityVersion: 2022.3.56f1
-          targetPlatform: StandaloneOSX
-
-      # Step 6: Run Edit Mode Tests
-      - name: Run Edit Mode Tests
-        run: |
-          unity-editor \
-            -batchmode -nographics -quit \
-            -projectPath . \
-            -runTests \
-            -testPlatform EditMode \
-            -testResults ./test-results-editmode.xml \
-            || echo "No Edit Mode tests found."
-
-      # Step 7: Run Play Mode Tests
-      - name: Run Play Mode Tests
-        run: |
-          unity-editor \
-            -batchmode -nographics -quit \
-            -projectPath . \
-            -runTests \
-            -testPlatform PlayMode \
-            -testResults ./test-results-playmode.xml \
-            || echo "No Play Mode tests found."
-
-      # Step 8: Upload Test Results
-      - name: Upload Test Results
-        uses: actions/upload-artifact@v4
+          name: Test results (all modes)
+          path: ${{ steps.testRunner.outputs.artifactsPath }}
+      - if: matrix.targetPlatform == 'Android'
+        uses: jlumbroso/free-disk-space@v1.2.0
+      - uses: game-ci/unity-builder@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
-          name: test-results
-          path: |
-            ./test-results-editmode.xml
-            ./test-results-playmode.xml
-
-      # Step 9: Zip Builds for Upload
-      - name: Zip Windows Build
-        run: zip -r WindowsBuild.zip ./Builds/StandaloneWindows64
-      - name: Zip macOS Build
-        run: zip -r MacOSBuild.zip ./Builds/StandaloneOSX
-
-      # Step 10: Upload Builds to GitHub as Artifacts
-      - name: Upload Windows Build
-        uses: actions/upload-artifact@v4
+          projectPath: ${{ matrix.projectPath }}
+          unityVersion: ${{ matrix.unityVersion }}
+          targetPlatform: ${{ matrix.targetPlatform }}
+          customParameters: '-myParameter myValue -myBoolean -ThirdParameter andItsValue'
+      - uses: actions/upload-artifact@v3
         with:
-          name: WindowsBuild
-          path: ./WindowsBuild.zip
-      - name: Upload macOS Build
-        uses: actions/upload-artifact@v4
-        with:
-          name: MacOSBuild
-          path: ./MacOSBuild.zip
+          name: Build
+          path: build
 
-      # Step 11: Post-Build Actions (Optional Placeholder)
-      - name: Cleanup or Notifications
-        run: echo "Build and tests completed!"
+  buildForWindowsBasedPlatforms:
+    name: Build for ${{ matrix.targetPlatform }}
+    runs-on: windows-2022
+    strategy:
+      fail-fast: false
+      matrix:
+        projectPath:
+          - test-project
+        unityVersion:
+          - 2019.4.1f1
+          - 2020.2.1f1
+        targetPlatform:
+          - StandaloneWindows # Build a Windows 32-bit standalone.
+          - StandaloneWindows64 # Build a Windows 64-bit standalone.
+          - tvOS # Build an AppleTV player.
+          - WSAPlayer # Build a UWP App.
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          lfs: true
+      - uses: actions/cache@v3
+        with:
+          path: ${{ matrix.projectPath }}/Library
+          key:
+            Library-${{ matrix.projectPath }}-${{ matrix.targetPlatform }}-${{
+            hashFiles(matrix.projectPath) }}
+          restore-keys: |
+            Library-${{ matrix.projectPath }}-${{ matrix.targetPlatform }}-
+            Library-${{ matrix.projectPath }}-
+            Library-
+      - uses: game-ci/unity-builder@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          projectPath: ${{ matrix.projectPath }}
+          unityVersion: ${{ matrix.unityVersion }}
+          targetPlatform: ${{ matrix.targetPlatform }}
+          customParameters: '-myParameter myValue -myBoolean -ThirdParameter andItsValue'
+      - uses: actions/upload-artifact@v3
+        with:
+          name: Build
+          path: build
+
+  buildForMacOSBasedPlatforms:
+    name: Build for ${{ matrix.targetPlatform }}
+    runs-on: macos-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        projectPath:
+          - test-project
+        unityVersion:
+          - 2019.4.1f1
+          - 2020.2.1f1
+        targetPlatform:
+          - StandaloneOSX # Build a macOS standalone.
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          lfs: true
+
+      - uses: actions/cache@v3
+        with:
+          path: ${{ matrix.projectPath }}/Library
+          key:
+            Library-${{ matrix.projectPath }}-${{ matrix.targetPlatform }}-${{
+            hashFiles(matrix.projectPath) }}
+          restore-keys: |
+            Library-${{ matrix.projectPath }}-${{ matrix.targetPlatform }}-
+            Library-${{ matrix.projectPath }}-
+            Library-
+
+      - uses: game-ci/unity-builder@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          projectPath: ${{ matrix.projectPath }}
+          unityVersion: ${{ matrix.unityVersion }}
+          targetPlatform: ${{ matrix.targetPlatform }}
+          customParameters: '-myParameter myValue -myBoolean -ThirdParameter andItsValue'
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: Build
+          path: build
