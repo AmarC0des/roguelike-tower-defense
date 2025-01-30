@@ -19,25 +19,31 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Step 2: Build Unity Project for Windows
+      # Step 2: Activate Unity License (New Step)
+      - name: Activate Unity License
+        uses: game-ci/unity-activate@v1
+        with:
+          unityVersion: 2022.3.56f1
+          license: ${{ secrets.UNITY_LICENSE }}
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+
+      # Step 3: Build Unity Project for Windows
       - name: Build Unity Project for Windows
         uses: game-ci/unity-builder@v2
         with:
           projectPath: .
           unityVersion: 2022.3.56f1
           targetPlatform: StandaloneWindows64
-          activateLicense: true
 
-      # Step 3: Build Unity Project for macOS
+      # Step 4: Build Unity Project for macOS
       - name: Build Unity Project for macOS
         uses: game-ci/unity-builder@v2
         with:
           projectPath: .
           unityVersion: 2022.3.56f1
           targetPlatform: StandaloneOSX
-          activateLicense: true
 
-      # Step 4: Run Edit Mode Tests
+      # Step 5: Run Edit Mode Tests
       - name: Run Edit Mode Tests
         run: |
           unity-editor \
@@ -48,7 +54,7 @@ jobs:
             -testResults ./test-results-editmode.xml \
             || echo "No Edit Mode tests found."
 
-      # Step 5: Run Play Mode Tests
+      # Step 6: Run Play Mode Tests
       - name: Run Play Mode Tests
         run: |
           unity-editor \
@@ -59,7 +65,7 @@ jobs:
             -testResults ./test-results-playmode.xml \
             || echo "No Play Mode tests found."
 
-      # Step 6: Upload Test Results
+      # Step 7: Upload Test Results
       - name: Upload Test Results
         uses: actions/upload-artifact@v3
         with:
@@ -68,13 +74,13 @@ jobs:
             ./test-results-editmode.xml
             ./test-results-playmode.xml
 
-      # Step 7: Zip Builds for Upload
+      # Step 8: Zip Builds for Upload
       - name: Zip Windows Build
         run: zip -r WindowsBuild.zip ./Builds/StandaloneWindows64
       - name: Zip macOS Build
         run: zip -r MacOSBuild.zip ./Builds/StandaloneOSX
 
-      # Step 8: Upload Builds to GitHub as Artifacts
+      # Step 9: Upload Builds to GitHub as Artifacts
       - name: Upload Windows Build
         uses: actions/upload-artifact@v3
         with:
@@ -86,7 +92,6 @@ jobs:
           name: MacOSBuild
           path: ./MacOSBuild.zip
 
-      # Step 9: Post-Build Actions (Optional Placeholder)
+      # Step 10: Post-Build Actions (Optional Placeholder)
       - name: Cleanup or Notifications
         run: echo "Build and tests completed!"
-
