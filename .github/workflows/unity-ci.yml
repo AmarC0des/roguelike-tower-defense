@@ -17,15 +17,14 @@ jobs:
     steps:
       # Step 1: Checkout the code
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      # Step 2: Activate Unity License (New Step)
+      # Step 2: Activate Unity License (Fixed)
       - name: Activate Unity License
-        uses: game-ci/unity-activate@v1
+        uses: game-ci/unity-activate@v2
         with:
           unityVersion: 2022.3.56f1
-          license: ${{ secrets.UNITY_LICENSE }}
-          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          unityLicense: ${{ secrets.UNITY_LICENSE }}
 
       # Step 3: Build Unity Project for Windows
       - name: Build Unity Project for Windows
