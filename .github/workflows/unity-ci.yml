@@ -1,6 +1,14 @@
 name: Actions 😎
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - develop
+      - main
+  pull_request_target:
+    branches:
+      - develop
+      - main
 
 jobs:
   build:
@@ -29,7 +37,7 @@ jobs:
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
-          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          githubToken: ${{ github.token }}
 
       # Build
       - name: Build project
@@ -46,3 +54,4 @@ jobs:
         with:
           name: Build
           path: build
+
