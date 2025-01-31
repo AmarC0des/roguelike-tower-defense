@@ -132,3 +132,5 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+/Builds/
+/UserSettings/Search.settings
