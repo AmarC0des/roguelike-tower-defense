@@ -51,7 +51,7 @@ jobs:
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           targetPlatform: StandaloneWindows64
-          buildPath: Builds/Windows/StandaloneWindows64
+          buildPath: roguelike-tower-defense/Builds/Windows
           allowDirtyBuild: true
 
       # Debug the build output
@@ -63,5 +63,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Windows-Build
-          path: Builds/Windows/StandaloneWindows64
+          path: roguelike-tower-defense/Builds/Windows
 
