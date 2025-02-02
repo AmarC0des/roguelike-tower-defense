@@ -28,14 +28,9 @@ jobs:
           rm -rf ~/.config/unity3d
           rm -rf ~/.local/share/unity3d
 
-      # Cache (Disabled)
-      - uses: actions/cache@v4
-        if: false
-      #  with:
-      #    path: Library
-      #    key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
-      #    restore-keys: |
-      #      Library-
+      # Ensure build directory exists
+      - name: Ensure Build Directory Exists
+        run: mkdir -p Builds/Windows
 
       # Test
       - name: Run tests
@@ -56,16 +51,17 @@ jobs:
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           targetPlatform: StandaloneWindows64
-          buildPath: Builds/Windows 
+          buildPath: Builds/Windows/StandaloneWindows64
           allowDirtyBuild: true
 
+      # Debug the build output
       - name: Debug Build Output
-        run: ls -R Builds || echo "No build output found"
+        run: ls -R || echo "No build output found"
 
-      # Output
+      # Upload Build
       - name: Upload Windows Build
         uses: actions/upload-artifact@v4
         with:
           name: Windows-Build
-          path: Builds/Windows
+          path: Builds/Windows/StandaloneWindows64
 
