@@ -51,31 +51,28 @@ jobs:
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           targetPlatform: StandaloneWindows64
-          buildPath: Builds/Windows  # Ensure Unity builds directly inside Windows/
+          buildPath: Builds/Windows/towergame
           allowDirtyBuild: true
 
-      # ✅ **STEP 1: Print the full directory structure inside Builds**
-      - name: List all files in Builds directory
-        run: find Builds -type f
+      # ✅ Debug: List All Files in Builds
+      - name: Debug Build Output
+        run: ls -R Builds || echo "No build output found"
 
-      # ✅ **STEP 2: Check file sizes to ensure files were created**
-      - name: Show file sizes in Windows build directory
-        run: du -ah Builds/Windows || echo "No files found in Windows build"
-
-      # ✅ **STEP 3: Verify if the .exe file exists**
+      # ✅ Fix: Dynamically find the EXE file
       - name: Check for EXE file
         run: |
-          if [ -f Builds/Windows/*.exe ]; then
-            echo "✅ EXE file found!"
-          else
+          EXE_FILE=$(find Builds -name "*.exe" | head -n 1)
+          if [ -z "$EXE_FILE" ]; then
             echo "❌ ERROR: No EXE file found!"
             exit 1
+          else
+            echo "✅ Found EXE: $EXE_FILE"
           fi
 
-      # ✅ **STEP 4: Upload Build Artifacts (Capture everything inside Builds/Windows/)**
+      # Upload Build
       - name: Upload Windows Build
         uses: actions/upload-artifact@v4
         with:
           name: Windows-Build
-          path: Builds/Windows/**
+          path: Builds/Windows/towergame/**
 
