@@ -12,8 +12,8 @@ on:
 
 jobs:
   build:
-    name: Build my project ✨
-    runs-on: ubuntu-latest
+    name: Build my project (macOS) 🍏
+    runs-on: macos-latest
     steps:
       # Checkout
       - name: Checkout repository
@@ -31,11 +31,10 @@ jobs:
       # Cache (Disabled)
       - uses: actions/cache@v4
         if: false
-      #  with:
-      #    path: Library
-      #    key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
-      #    restore-keys: |
-      #      Library-
+
+      # Ensure Build Directory Exists
+      - name: Ensure Build Directory Exists
+        run: mkdir -p Builds/Mac
 
       # Test
       - name: Run tests
@@ -55,13 +54,18 @@ jobs:
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
-          targetPlatform: StandaloneWindows64
-          buildPath: Builds/Windows/
+          targetPlatform: StandaloneOSX
+          buildPath: Builds/Mac/
           allowDirtyBuild: true
 
-      # Output
-      - name: Upload Windows Build
+      # Debug Build Output
+      - name: Debug Build Output
+        run: ls -R Builds/Mac || echo "⚠️ No build output found"
+
+      # Upload macOS Build
+      - name: Upload macOS Build
         uses: actions/upload-artifact@v4
         with:
-          name: Windows-Build
-          path: Builds/Windows/towergame/
+          name: Mac-Build
+          path: Builds/Mac/**
+
