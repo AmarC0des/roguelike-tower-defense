@@ -24,6 +24,25 @@ jobs:
           rm -rf ~/.config/unity3d
           rm -rf ~/.local/share/unity3d
 
+      # Setup Unity License
+      - name: Setup Unity License
+        run: |
+          echo "${{ secrets.UNITY_LICENSE }}" > UnityLicense.ulf
+          mkdir -p ~/.local/share/unity3d/Unity/
+          mv UnityLicense.ulf ~/.local/share/unity3d/Unity/Unity_lic.ulf
+
+      # Debug License File
+      - name: Debug License File
+        run: |
+          ls -l ~/.local/share/unity3d/Unity/
+          cat ~/.local/share/unity3d/Unity/Unity_lic.ulf | head -n 10
+
+      # Set up Unity version
+      - name: Set up Unity version
+        uses: game-ci/setup-unity@v4
+        with:
+          unityVersion: 2022.3.56
+
       # Cache (Disabled)
       - uses: actions/cache@v4
         if: false
@@ -52,7 +71,7 @@ jobs:
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           targetPlatform: StandaloneWindows64
-          buildPath: Builds/Windows/
+          buildsPath: Builds/Windows/
           allowDirtyBuild: true
 
       # Output
@@ -61,3 +80,4 @@ jobs:
         with:
           name: Windows-Build
           path: Builds/Windows/
+
