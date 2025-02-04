@@ -134,3 +134,7 @@ $RECYCLE.BIN/
 *.lnk
 /Builds/
 /UserSettings/Search.settings
+
+# Ignore temporaries from GameCI
+/[Aa]rtifacts/
+/[Cc]odeCoverage/
