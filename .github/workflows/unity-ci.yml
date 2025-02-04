@@ -8,8 +8,12 @@ on:
 
 jobs:
   build:
-    name: Build my project ✨
+    name: Build for ${{ matrix.targetPlatform }}
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        targetPlatform: [StandaloneWindows64, StandaloneOSX]
     steps:
       # Checkout
       - name: Checkout repository
@@ -51,13 +55,13 @@ jobs:
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
-          targetPlatform: StandaloneWindows64
-          buildsPath: Builds/Windows/
+          targetPlatform: ${{ matrix.targetPlatform }}
+          buildsPath: Builds/${{ matrix.targetPlatform }}/
           allowDirtyBuild: true
 
       # Output
-      - name: Upload Windows Build
+      - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Windows-Build
-          path: Builds/Windows/
+          name: Build-${{ matrix.targetPlatform }}
+          path: Builds/${{ matrix.targetPlatform }}/
