@@ -1,4 +1,4 @@
-/* Tower Scriptable Object Class
+/* Enemy Scriptable Object Class
  * -----------------------------
  * This class is used to create a data container for 
  * enemies. It holds the stats and functions 

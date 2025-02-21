@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//This class will eventually be absorbed by GameManager or PlayerController
 public class CameraContoller : MonoBehaviour
 {
-    public Transform topView;
-    public Transform frontView;
+    public GameObject topView;
+    public GameObject frontView;
 
     private void Start()
     {
@@ -29,16 +30,16 @@ public class CameraContoller : MonoBehaviour
 
     void ChangeToTopView()
     {
-        this.gameObject.transform.position = topView.position;
-        this.gameObject.transform.rotation = topView.rotation;
+       topView.SetActive(true);
+       frontView.SetActive(false);
 
     }
 
     void ChangeToFrontView()
     {
-        this.gameObject.transform.position = frontView.position;
-        this.gameObject.transform.rotation = frontView.rotation;
-   
+        topView.SetActive(false);
+        frontView.SetActive(true);
+
     }
 
 }

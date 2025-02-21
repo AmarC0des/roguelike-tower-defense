@@ -116,7 +116,6 @@ GameObject:
   - component: {fileID: 3513835992362343357}
   - component: {fileID: 8474993090585758857}
   - component: {fileID: 1375548873939300101}
-  - component: {fileID: 3322767735608288168}
   m_Layer: 0
   m_Name: Terrain_(0.00, 0.00, -50.00)
   m_TagString: Untagged
@@ -200,34 +199,6 @@ TerrainCollider:
   serializedVersion: 2
   m_TerrainData: {fileID: 15600000, guid: 9beb2af49abfb2b4081e7fec3647af95, type: 2}
   m_EnableTreeColliders: 1
---- !u!114 &3322767735608288168
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3670888891561643094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d37e5385efd7064cb1d54c94960acae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Resolution: 20
-  m_Appearance:
-    pathColor: {r: 0, g: 1, b: 0, a: 1}
-    inactivePathColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    width: 0.2
-  m_Looped: 0
-  m_Waypoints:
-  - position: {x: 45, y: 0, z: 20}
-    tangent: {x: 1, y: 0, z: 1.5569324}
-    roll: 0
-  - position: {x: 28.0038, y: 0, z: 35.726044}
-    tangent: {x: -23.068111, y: 0.030525923, z: -0.45820618}
-    roll: 0
-  - position: {x: 15, y: 0, z: 50}
-    tangent: {x: -0.8299761, y: -0.5744343, z: -0.45820618}
-    roll: 0
 --- !u!1 &7789746970178117281
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,6 +208,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8004883121461659517}
+  - component: {fileID: 4334438836717191590}
+  - component: {fileID: 5600638236499619234}
   m_Layer: 0
   m_Name: Tile_000
   m_TagString: Untagged
@@ -260,6 +233,49 @@ Transform:
   - {fileID: 3513835992362343357}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4334438836717191590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7789746970178117281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df9961677ea4e0a41a61c56e9517a175, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: {fileID: 11400000, guid: 5921c52079c180a48a4478a227c27e34, type: 2}
+  tileStats: {fileID: 0}
+  enemyCount: 0
+--- !u!114 &5600638236499619234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7789746970178117281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d37e5385efd7064cb1d54c94960acae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Resolution: 20
+  m_Appearance:
+    pathColor: {r: 0, g: 1, b: 0, a: 1}
+    inactivePathColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    width: 0.2
+  m_Looped: 0
+  m_Waypoints:
+  - position: {x: 45, y: 0, z: 20}
+    tangent: {x: 1, y: 0, z: 1.5569324}
+    roll: 0
+  - position: {x: 28.0038, y: 0, z: 35.726044}
+    tangent: {x: -23.068111, y: 0.030525923, z: -0.45820618}
+    roll: 0
+  - position: {x: 15, y: 0, z: 50}
+    tangent: {x: -0.8299761, y: -0.5744343, z: -0.45820618}
+    roll: 0
 --- !u!1001 &2855631359414138941
 PrefabInstance:
   m_ObjectHideFlags: 0
