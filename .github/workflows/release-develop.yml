@@ -1,0 +1,19 @@
+name: Release Develop
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Release Please
+        uses: googleapis/release-please-action@v3
+        with:
+          release-type: simple
+          token: ${{ secrets.GITHUB_TOKEN }}
