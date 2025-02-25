@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -27,6 +25,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 moveDirection = Vector3.zero;
 
+
         //set codes
         bool isWalkingUp = Input.GetKey(KeyCode.W);
         bool isWalkingDown = Input.GetKey(KeyCode.S);
@@ -36,21 +35,22 @@ public class PlayerController : MonoBehaviour
         //Check movement direction
         if (isWalkingUp) moveDirection += Vector3.back;
         if (isWalkingDown) moveDirection += Vector3.forward;
-        if (isWalkingLeft) moveDirection += Vector3.right;
-        if (isWalkingRight) moveDirection += Vector3.left;
+        if (isWalkingLeft) moveDirection += Vector3.right; //these have to be flipped because the player is rotated 90 degrees in the scene.
+        if (isWalkingRight) moveDirection += Vector3.left; //
+
+        //only update direction when moving, and keep direction when not moving.
+        if (moveDirection != Vector3.zero)
+        {
+            playerAnim.SetFloat("XDir", moveDirection.x);
+            playerAnim.SetFloat("YDir", moveDirection.z);
+        }
+
+        playerAnim.SetBool("Walking", moveDirection != Vector3.zero);
 
         //Move
         playerPos.position += moveDirection * speed * Time.deltaTime;
 
-        //Update animation
-        playerAnim.SetBool("WalkingUp", isWalkingUp);
-        playerAnim.SetBool("WalkingDown", isWalkingDown);
-        playerAnim.SetBool("WalkingLeft", isWalkingLeft);
-        playerAnim.SetBool("WalkingRight", isWalkingRight);
 
-        //Set Idling if no movement is happening
-        bool isMoving = isWalkingUp || isWalkingDown || isWalkingLeft || isWalkingRight;
-        playerAnim.SetBool("Idling", !isMoving);
     }
 
 
