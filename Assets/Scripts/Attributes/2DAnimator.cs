@@ -92,10 +92,13 @@ public class Animator2D : MonoBehaviour
     {
         if (directionedObject.direction == Vector2Int.up)
         {
+            spriteRenderer.flipX = animations[currentAnimation].UpAnimationFrames[frame].flipX;
             return animations[currentAnimation].UpAnimationFrames[frame].Sprite;
+
         }
         else if (directionedObject.direction == Vector2Int.down)
         {
+            spriteRenderer.flipX = animations[currentAnimation].DownAnimationFrames[frame].flipX;
             return animations[currentAnimation].DownAnimationFrames[frame].Sprite;
         }
         else
@@ -111,5 +114,6 @@ public class AnimFrame
 {
     public Sprite Sprite;
     public int HoldForTicks;
+    public bool flipX;
 }
 
