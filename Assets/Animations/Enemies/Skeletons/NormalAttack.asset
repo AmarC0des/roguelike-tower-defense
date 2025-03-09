@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32c8da6cee478d249a3424e5d16f9f83, type: 3}
+  m_Name: NormalAttack
+  m_EditorClassIdentifier: 
+  DownAnimationFrames:
+  - Sprite: {fileID: -219444454, guid: d11b01384526fe645b48e7db10ff9a1e, type: 3}
+    HoldForTicks: 10
+  - Sprite: {fileID: -1697756772, guid: d11b01384526fe645b48e7db10ff9a1e, type: 3}
+    HoldForTicks: 10
+  UpAnimationFrames:
+  - Sprite: {fileID: -349912031, guid: d11b01384526fe645b48e7db10ff9a1e, type: 3}
+    HoldForTicks: 10
+  - Sprite: {fileID: -578728856, guid: d11b01384526fe645b48e7db10ff9a1e, type: 3}
+    HoldForTicks: 10
+  SideAnimationFrames:
+  - Sprite: {fileID: 1384174806, guid: d11b01384526fe645b48e7db10ff9a1e, type: 3}
+    HoldForTicks: 10
+  - Sprite: {fileID: 1148414464, guid: d11b01384526fe645b48e7db10ff9a1e, type: 3}
+    HoldForTicks: 10
+  Looping: 1
+  LoopStart: 0
+  LoopEnd: 1
