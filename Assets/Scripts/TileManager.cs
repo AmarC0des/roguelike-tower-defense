@@ -39,14 +39,14 @@ public class TileManager : MonoBehaviour
     
     public int enemyCount;
 
-    // Start is called before the first frame update
+    
     void Awake()
     {
         tileStats = type.SetTileStats(); //sets TileStats via method in TileType 
         path = gameObject.GetComponent<CinemachinePath>();
     }
 
-    // Update is called once per frame
+   
     void Update()
     {
         timeSinceLastSpawn += Time.deltaTime;
@@ -63,7 +63,7 @@ public class TileManager : MonoBehaviour
     //Method used to spawn enemies on the tile
     public void SpawnEnemy()
     {
-        if( enemyCount <= tileStats.maxEnemyCount) //checks to make sure max enemy count per tile is set.
+        if( enemyCount <= tileStats.maxEnemyCount)//checks to make sure max enemy count per tile is set.
         {
             GameObject newEnemy;
 
