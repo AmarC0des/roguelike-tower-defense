@@ -19,5 +19,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewEnemy", menuName = "ScriptableObjects/EnemyScriptableObject")]
 public class EnemySO : ScriptableObject
 {
-    public int atk; 
+    public int atk;
+    public float speed;
+    public int HP;
+    [TextArea]
+    public string description;
 }
