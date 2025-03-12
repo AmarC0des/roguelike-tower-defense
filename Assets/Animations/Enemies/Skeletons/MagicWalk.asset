@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32c8da6cee478d249a3424e5d16f9f83, type: 3}
+  m_Name: MagicWalk
+  m_EditorClassIdentifier: 
+  DownAnimationFrames:
+  - Sprite: {fileID: 819884659, guid: dacb41d77a8e5f94589ff473fab3392a, type: 3}
+    HoldForTicks: 10
+  - Sprite: {fileID: -960402270, guid: dacb41d77a8e5f94589ff473fab3392a, type: 3}
+    HoldForTicks: 10
+  UpAnimationFrames:
+  - Sprite: {fileID: -1700832984, guid: dacb41d77a8e5f94589ff473fab3392a, type: 3}
+    HoldForTicks: 10
+  - Sprite: {fileID: -2049441734, guid: dacb41d77a8e5f94589ff473fab3392a, type: 3}
+    HoldForTicks: 10
+  SideAnimationFrames:
+  - Sprite: {fileID: 1251851302, guid: dacb41d77a8e5f94589ff473fab3392a, type: 3}
+    HoldForTicks: 10
+  - Sprite: {fileID: -937625302, guid: dacb41d77a8e5f94589ff473fab3392a, type: 3}
+    HoldForTicks: 10
+  Looping: 1
+  LoopStart: 0
+  LoopEnd: 2

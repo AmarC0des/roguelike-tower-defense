@@ -41,6 +41,9 @@ public class Direction4Way : MonoBehaviour
 
         // This requires that every sprite asset with a direction must be right facing for their side.
         // I use < 0 instead of <= 0 because left would show for like a split second.
-        spriteRenderer.flipX = Direction.x < 0;
+        if (Direction.x != 0)
+        {
+            spriteRenderer.flipX = Direction.x < 0;
+        }
     }
 }
