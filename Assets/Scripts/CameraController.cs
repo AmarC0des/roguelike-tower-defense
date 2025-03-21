@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 //This class will eventually be absorbed by GameManager or PlayerController
@@ -10,6 +8,7 @@ public class CameraController : MonoBehaviour
     public GameObject topView;
     public GameObject frontView;
     private float currentRotation = 0f; // Tracks the current rotation angle
+    private float targetRotation = 0f;
 
     // Variables for mouse rotation option
     // private float mouseX, mouseY;
@@ -40,13 +39,17 @@ public class CameraController : MonoBehaviour
             RotateCamera();
         } 
         */
+        currentRotation = Mathf.LerpAngle(currentRotation, targetRotation, Time.deltaTime * 5);
+        transform.rotation = Quaternion.Euler(0, currentRotation, 0);
     }
+
+
+
 
     // Rotates the camera 90 degrees in the specified direction
     void RotateCamera(float angle)
     {
-        currentRotation += angle;
-        transform.rotation = Quaternion.Euler(0, currentRotation, 0);
+        targetRotation += angle;
     }
 
     // Handles free camera rotation around the character
