@@ -25,6 +25,7 @@ using System.Collections.Generic;
 using Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TileManager : MonoBehaviour
 {
@@ -38,15 +39,24 @@ public class TileManager : MonoBehaviour
     private CinemachinePath path;
     
     public int enemyCount;
+    private int totalSpawnedEnemies = 0; // Keeps track of total enemies ever spawned
 
-    
+    [SerializeField]
+    private Text enemyCountText; // Reference to UI text component
+
+    private List<GameObject> spawnedEnemies = new List<GameObject>(); // Stores spawned enemies
+
+
+    // Start is called before the first frame update
     void Awake()
     {
         tileStats = type.SetTileStats(); //sets TileStats via method in TileType 
         path = gameObject.GetComponent<CinemachinePath>();
+
+        UpdateEnemyCountUI(); // Update UI at start
     }
 
-   
+    // Update is called once per frame
     void Update()
     {
         timeSinceLastSpawn += Time.deltaTime;
@@ -57,13 +67,19 @@ public class TileManager : MonoBehaviour
 
             timeSinceLastSpawn = 0f; //timer resets
         }
+
+        // Press X key to delete an enemy
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            DeleteEnemy();
+        }
     }//End of Update
 
 
     //Method used to spawn enemies on the tile
     public void SpawnEnemy()
     {
-        if( enemyCount <= tileStats.maxEnemyCount)//checks to make sure max enemy count per tile is set.
+        if( totalSpawnedEnemies <= tileStats.maxEnemyCount) //checks to make sure max enemy count per tile is set.
         {
             GameObject newEnemy;
 
@@ -71,11 +87,43 @@ public class TileManager : MonoBehaviour
             newEnemy = Instantiate(tileStats.GetEnemy(), path.m_Waypoints[0].position, Quaternion.identity);
             newEnemy.GetComponent<CinemachineDollyCart>().m_Path = path;
             enemyCount++;
+            spawnedEnemies.Add(newEnemy); // Keep track of spawned enemies
+            totalSpawnedEnemies++;
+
+            UpdateEnemyCountUI(); // Update the UI when enemy is spawned
             return;
         }
         Debug.Log("Enemy Maximum Count Reached");
 
     }//End of SpawnEnemy
+
+
+    //UI method to message player the number of enemies left
+    private void UpdateEnemyCountUI()
+    {
+        if (enemyCountText != null)
+        {
+            enemyCountText.text = "Enemies Left: " + enemyCount.ToString();
+        }
+    }
+
+    //Method testing to delete enemies to keep track of enemies but will be modified later to use it with enemy health
+    private void DeleteEnemy()
+    {
+        if (spawnedEnemies.Count > 0) // Check if there are enemies to delete
+        {
+            GameObject enemyToDelete = spawnedEnemies[0]; // Get the first enemy
+            spawnedEnemies.RemoveAt(0); // Remove from list
+            Destroy(enemyToDelete); // Delete enemy
+            enemyCount--;
+            UpdateEnemyCountUI(); // Update UI
+            Debug.Log("Enemy Deleted");
+        }
+        else
+        {
+            Debug.Log("No enemies to delete");
+        }
+    }
 }
 
 
