@@ -1,9 +1,11 @@
 using UnityEngine;
-
+using TMPro;
 public class GameManager : MonoBehaviour
 {
     public enum GameState { Set_Up, Wave, Progression, Victory, Gameover }
     public GameState currentState;
+    public TMP_Text stateText;
+
 
     void Start()
     {
@@ -16,17 +18,22 @@ public class GameManager : MonoBehaviour
         {
             case GameState.Set_Up:
                 HandlePlanning();
+                stateText.text = "Planning Phase";
                 break;
             case GameState.Wave:
                 HandleAttacking();
+                stateText.text = "Wave Phase";
                 break;
             case GameState.Progression:
+                stateText.text = "Progression Phase";
                 break;
             case GameState.Victory:
                 HandleWin();
+                stateText.text = "Victory Phase";
                 break;
             case GameState.Gameover:
                 HandleLose();
+                stateText.text = "End Phase";
                 break;
         }
     }
