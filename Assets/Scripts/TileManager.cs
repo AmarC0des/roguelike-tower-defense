@@ -8,9 +8,6 @@
  * Modified by Camron Carr 2/20/25:
  * -Basic setup of script
  * 
- * 
- * 
- * 
  * NOTES:
  * When game manager is made, we might need to update how the tile spawns enemies.
  * 

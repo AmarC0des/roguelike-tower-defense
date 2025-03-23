@@ -15,7 +15,6 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
-    public static UIManager Instance { get; private set; } //Using Singleton 
 
     public GameObject TowerPlaceUI;
 
@@ -23,25 +22,6 @@ public class UIManager : MonoBehaviour
     public TMP_Text enemyCountText;
     public TMP_Text waveCountText;
     public TMP_Text charLevelText;
-
-    public int goldCount;
-    public int enemyCount;
-    public int waveCount;
-    public int charLevel;
-
-    void Awake()
-    {
-        //checks if there is an instance of UIManager 
-        if (Instance == null) //If not, make one
-        {
-            Instance = this; 
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);//If there is one, destroy it
-        }
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -56,24 +36,20 @@ public class UIManager : MonoBehaviour
         
     }
 
-    public void UpdateGold(int gold)
+    public void UpdateGoldUI(int gold)
     {
-        goldCount += gold;
-        goldCountText.text = "Gold: " + goldCount;
+        goldCountText.text = "Gold: " + gold;
     }
-    public void UpdateEnemyCount()
+    public void UpdateEnemyCountUI(int enemyCount)
     {
-        enemyCount++;
         enemyCountText.text = "Enemies: " + enemyCount;
     }
-    public void UpdateWaveCount()
+    public void UpdateWaveCountUI(int waveCount)
     {
-        waveCount++;
         waveCountText.text = "Wave: " + waveCount;
     }
-    public void UpdateLevelCount()
+    public void UpdateLevelCountUI(int charLevel)
     {
-        charLevel++;
         charLevelText.text = "Character Level: " + charLevel;
     }
 
