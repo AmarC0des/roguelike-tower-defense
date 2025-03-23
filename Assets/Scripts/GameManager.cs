@@ -4,12 +4,17 @@ public class GameManager : MonoBehaviour
 {
     public enum GameState { Set_Up, Wave, Progression, Victory, Gameover }
     public GameState currentState;
+    public GameState nextState;
+    //Managers
+    public TowerPlacementManager towerManager;
+
+
     public TMP_Text stateText;
 
 
     void Start()
     {
-        ChangeState(GameState.Set_Up);
+        currentState = GameState.Set_Up;
     }
 
     void Update()
@@ -17,30 +22,37 @@ public class GameManager : MonoBehaviour
         switch (currentState)
         {
             case GameState.Set_Up:
+                towerManager.enabled = true;
                 HandlePlanning();
                 stateText.text = "Planning Phase";
+                nextState = GameState.Wave;
                 break;
             case GameState.Wave:
+                towerManager.enabled = false;
                 HandleAttacking();
                 stateText.text = "Wave Phase";
+                nextState = GameState.Progression;
                 break;
             case GameState.Progression:
                 stateText.text = "Progression Phase";
+                nextState = GameState.Victory;
                 break;
             case GameState.Victory:
                 HandleWin();
                 stateText.text = "Victory Phase";
+                nextState = GameState.Gameover;
                 break;
             case GameState.Gameover:
                 HandleLose();
-                stateText.text = "End Phase";
+                stateText.text = "GameOver Phase";
+                nextState = GameState.Set_Up;
                 break;
         }
     }
 
-    void ChangeState(GameState newState)
+    public void ChangeState()
     {
-        currentState = newState;
+        currentState = nextState;
         Debug.Log("Game State changed to: " + currentState);
     }
 
@@ -49,7 +61,7 @@ public class GameManager : MonoBehaviour
         // Player places towers, prepares for wave
         if (Input.GetKeyDown(KeyCode.Space)) // Example trigger to start wave
         {
-            ChangeState(GameState.Wave);
+            ChangeState();
         }
     }
 
@@ -58,11 +70,11 @@ public class GameManager : MonoBehaviour
         // Enemy wave attacks, player defends
         if (AllEnemiesDefeated()) // Placeholder function
         {
-            ChangeState(GameState.Victory);
+            ChangeState();
         }
         else if (PlayerLost()) // Placeholder function
         {
-            ChangeState(GameState.Gameover);
+            ChangeState();
         }
     }
 
@@ -70,7 +82,7 @@ public class GameManager : MonoBehaviour
     {
         // Prepare next level
         Debug.Log("Wave cleared! Proceeding to next level.");
-        ChangeState(GameState.Set_Up);
+        
     }
 
     void HandleLose()
@@ -95,6 +107,6 @@ public class GameManager : MonoBehaviour
     void RestartGame()
     {
         // Restart game logic
-        ChangeState(GameState.Set_Up);
+       // ChangeState();
     }
 }
