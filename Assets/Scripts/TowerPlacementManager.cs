@@ -35,7 +35,7 @@ public class TowerPlacementManager: MonoBehaviour
     }
 
     // Starts the tower placement preview
-    void StartPreview()
+    public void StartPreview()
     {
         isPlacing = true; // Enable placement mode
         previewTower = Instantiate(towerPrefab, GetPlacementPosition(), Quaternion.identity); // Create the preview tower

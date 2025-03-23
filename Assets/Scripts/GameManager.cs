@@ -1,3 +1,27 @@
+/* Game Manager Class
+ * ----------------------------
+ * Class used to run the game. Handles all 
+ * game logic and variables needed to access 
+ * game state or statistics. 
+ * 
+ * 
+ * Modified Eric Nunez 3/21/25:
+ * -Implemented State Machine
+ * 
+ * Modified Camron Carr 3/22/25:
+ * -Setting up some UI references
+ * -Started working on Set_Up Phase functions
+ * -Added state UI debugger of sorts
+ * 
+ * NOTES:
+ * When game manager is made, we might need to update how the tile spawns enemies.
+ * 
+ * Its possible we might run a spawns per tile in which case the current method is fine
+ * and we can just update the spawn location to the furthest tile that way enemy spawns
+ * will seem less predictable. This is the idea I am leaning toward.
+ * 
+ */
+
 using UnityEngine;
 using TMPro;
 public class GameManager : MonoBehaviour
