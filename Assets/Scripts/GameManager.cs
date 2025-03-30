@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
 
 
     public TMP_Text stateText;
-
+    public int xp;
     public int goldCount;
     public int enemyCount;
     public int waveCount;
@@ -165,5 +165,6 @@ public class GameManager : MonoBehaviour
         uiManager.UpdateEnemyCountUI(enemyCount);
         uiManager.UpdateWaveCountUI(waveCount);
         uiManager.UpdateLevelCountUI(charLevel);
+        uiManager.UpdateXPUI(xp, charLevel);
     }
 }

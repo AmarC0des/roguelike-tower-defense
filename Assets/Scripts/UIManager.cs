@@ -14,55 +14,66 @@ public class UIManager : MonoBehaviour
 
     public Button strengthButton, speedButton, closeButton;
 
-    private int strength, speed, points, charLevel;
+    private int strength, speed, points = 5, charLevel, xp, xpRequired;
 
     void Start()
     {
-        ResetStats();
         //TowerPlaceUI.SetActive(false);
         LevelUpUI.SetActive(false);  // Hide level-up menu initially
-
-        LoadStats();
-        UpdateUI();
+        
+        StatsUpdateUI();
 
         strengthButton.onClick.AddListener(() => UpgradeStat("strength"));
         speedButton.onClick.AddListener(() => UpgradeStat("speed"));
         closeButton.onClick.AddListener(CloseLevelUpMenu);
     }
 
-    void UpdateUI()
+    // Just for testing for now
+    void Update()
+    {
+        // Press "M" to toggle Level-Up screen
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            LevelUpUI.SetActive(!LevelUpUI.activeSelf);
+        }
+    }
+
+    void StatsUpdateUI()
     {
         strengthText.text = "Strength: " + strength;
         speedText.text = "Speed: " + speed;
         pointsText.text = "Available Points: " + points;
 
+        strengthButton.interactable = points > 0;
+        speedButton.interactable = points > 0;
+    }
 
+    public void UpdateXPUI(int xp, int charLevel)
+    {
+        xpRequired = CalculateXPRequirement(charLevel);
+        XPText.text = "XP: " + xp + " / " + xpRequired; // Show XP progress 
     }
 
     public void UpdateGoldUI(int gold)
     {
-        PlayerPrefs.SetInt("gold", gold);
         goldCountText.text = "Gold: " + gold;
     }
 
     public void UpdateEnemyCountUI(int enemyCount)
     {
-        PlayerPrefs.SetInt("enemyCount", enemyCount);
-        //enemyCountText.text = "Enemies: " + enemyCount;
+        enemyCountText.text = "Enemies: " + enemyCount;
     }
 
     public void UpdateWaveCountUI(int waveCount)
     {
-        PlayerPrefs.SetInt("waveCount", waveCount);
-        //waveCountText.text = "Wave: " + waveCount;
+        waveCountText.text = "Wave: " + waveCount;
     }
 
-    public void UpdateLevelCountUI(int level)
+    public void UpdateLevelCountUI(int charLevel)
     {
-        charLevel = level;
-        PlayerPrefs.SetInt("charLevel", charLevel);
-        //charLevelText.text = "Character Level: " + charLevel;
+        charLevelText.text = "Character Level: " + charLevel;
     }
+
 
     void UpgradeStat(string stat)
     {
@@ -72,8 +83,7 @@ public class UIManager : MonoBehaviour
             else if (stat == "speed") speed++;
 
             points--;
-            SaveStats();
-            UpdateUI();
+            StatsUpdateUI();
         }
     }
 
@@ -87,31 +97,35 @@ public class UIManager : MonoBehaviour
         LevelUpUI.SetActive(false);
     }
 
-    void SaveStats()
+
+    // Gain XP and check if leveling up is needed
+    public void GainXP(int amount)
     {
-        PlayerPrefs.SetInt("strength", strength);
-        PlayerPrefs.SetInt("speed", speed);
-        PlayerPrefs.SetInt("points", points);
-        PlayerPrefs.SetInt("charLevel", charLevel);
-        PlayerPrefs.Save();
+        xp += amount;
+
+        while (xp >= xpRequired)
+        {
+            xp -= xpRequired;
+            LevelUp();
+        }
+
+        StatsUpdateUI();
     }
 
-    void LoadStats()
+    // Trigger level-up when XP threshold is reached
+    void LevelUp()
     {
-        strength = PlayerPrefs.GetInt("strength", 0);
-        speed = PlayerPrefs.GetInt("speed", 0);
-        points = PlayerPrefs.GetInt("points", 5);
-        charLevel = PlayerPrefs.GetInt("charLevel", 1);
+        charLevel++;
+        points += 3; // Reward stat points
+        xpRequired = CalculateXPRequirement(charLevel);
+
+        StatsUpdateUI();
+        LevelUpUI.SetActive(true); // Show level-up screen
     }
 
-    void ResetStats()
+    // Calculate XP required for the next level (scales per level)
+    int CalculateXPRequirement(int level)
     {
-        PlayerPrefs.SetInt("strength", 0);
-        PlayerPrefs.SetInt("speed", 0);
-        PlayerPrefs.SetInt("points", 5);
-        PlayerPrefs.Save();
-
-        LoadStats();
-        UpdateUI();
+        return 100 + (level - 1) * 50;
     }
 }
