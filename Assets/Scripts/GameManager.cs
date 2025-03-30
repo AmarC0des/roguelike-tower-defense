@@ -1,76 +1,145 @@
-using UnityEngine;
+/* Game Manager Class
+ * ----------------------------
+ * Class used to run the game. Handles all 
+ * game logic and variables needed to access 
+ * game state or statistics. 
+ * 
+ * 
+ * Modified Eric Nunez 3/21/25:
+ * -Implemented State Machine
+ * 
+ * Modified Camron Carr 3/22/25:
+ * -Setting up some UI references
+ * -Started working on Set_Up Phase functions
+ * -Added state UI debugger of sorts
+ * -Moved state handling to its own function so that it is called each frame. 
+ * 
+ * NOTES:
+ * When game manager is made, we might need to update how the tile spawns enemies.
+ * 
+ * Its possible we might run a spawns per tile in which case the current method is fine
+ * and we can just update the spawn location to the furthest tile that way enemy spawns
+ * will seem less predictable. This is the idea I am leaning toward.
+ * 
+ */
 
+using UnityEngine;
+using TMPro;
 public class GameManager : MonoBehaviour
 {
-    public enum GameState { Set_Up, Wave, Progression, Victory, Gameover }
+    public enum GameState { StartGame, SetUp, Wave, Progression, WinGame, Gameover, TitleScreen }
     public GameState currentState;
+    public GameState nextState;
+    //Managers
+    public UIManager uiManager;
+    public TowerPlacementManager towerManager;
+
+
+    public TMP_Text stateText;
+
+    public int goldCount;
+    public int enemyCount;
+    public int waveCount;
+    public int charLevel;
+
 
     void Start()
     {
-        ChangeState(GameState.Set_Up);
+        nextState = GameState.StartGame;
+        ChangeState();
     }
 
     void Update()
     {
+        
+    }
+
+    public void ChangeState()
+    {
+        currentState = nextState;
+        Debug.Log("Game State changed to: " + currentState);
+        CheckState();
+
+    }
+
+    private void CheckState()
+    {
         switch (currentState)
         {
-            case GameState.Set_Up:
+            case GameState.StartGame:
+                HandleStartGame();
+                break;
+            case GameState.SetUp:
                 HandlePlanning();
                 break;
             case GameState.Wave:
-                HandleAttacking();
+                HandleWave();
                 break;
             case GameState.Progression:
+                HandleProgression();
                 break;
-            case GameState.Victory:
-                HandleWin();
+            case GameState.WinGame:
+                HandleWinGame();
                 break;
             case GameState.Gameover:
-                HandleLose();
+                HandleGameOver();
                 break;
         }
     }
 
-    void ChangeState(GameState newState)
+    private void HandleStartGame()
     {
-        currentState = newState;
-        Debug.Log("Game State changed to: " + currentState);
+        stateText.text = "Game Started";
+        nextState = GameState.SetUp;
+        goldCount = 0;  
+        enemyCount = 0;
+        waveCount = 0;
+        charLevel = 1;
+
+        UpdateUI();
+
     }
 
-    void HandlePlanning()
+    private void HandlePlanning()
     {
-        // Player places towers, prepares for wave
-        if (Input.GetKeyDown(KeyCode.Space)) // Example trigger to start wave
-        {
-            ChangeState(GameState.Wave);
-        }
+        waveCount++;
+        towerManager.enabled = true;
+        uiManager.TowerPlaceUI.SetActive(true);
+        stateText.text = "Planning Phase";
+        nextState = GameState.Wave;
+
+        UpdateUI();
     }
 
-    void HandleAttacking()
+    private void HandleWave()
     {
-        // Enemy wave attacks, player defends
-        if (AllEnemiesDefeated()) // Placeholder function
-        {
-            ChangeState(GameState.Victory);
-        }
-        else if (PlayerLost()) // Placeholder function
-        {
-            ChangeState(GameState.Gameover);
-        }
+        towerManager.enabled = false;
+        uiManager.TowerPlaceUI.SetActive(false);
+        stateText.text = "Wave Phase";
+        nextState = GameState.Progression;
+
+        UpdateUI();
     }
 
-    void HandleWin()
+    private void HandleProgression()
     {
-        // Prepare next level
-        Debug.Log("Wave cleared! Proceeding to next level.");
-        ChangeState(GameState.Set_Up);
+        charLevel++;
+        stateText.text = "Progress Phase";
+        nextState = GameState.SetUp;
+
+        UpdateUI();
     }
 
-    void HandleLose()
+    private void HandleWinGame()
     {
-        // Handle game over
-        Debug.Log("Game Over! Restarting...");
-        RestartGame();
+        stateText.text = "Victory Phase";
+        nextState = GameState.TitleScreen;
+
+    }
+    private void HandleGameOver()
+    {
+        stateText.text = "Game Over Phase";
+        nextState = GameState.TitleScreen;
     }
 
     bool AllEnemiesDefeated()
@@ -79,15 +148,22 @@ public class GameManager : MonoBehaviour
         return false;
     }
 
-    bool PlayerLost()
+    public void PlayerDied()
     {
-        // Logic to check if player has lost, in which health reaches 0
-        return false;
+        nextState = GameState.Gameover;
+        ChangeState();
     }
 
-    void RestartGame()
+    void ToTitleScreen()
     {
-        // Restart game logic
-        ChangeState(GameState.Set_Up);
+        //Goes to TitleScreen
+    }
+
+    private void UpdateUI()
+    {
+        uiManager.UpdateGoldUI(goldCount);
+        uiManager.UpdateEnemyCountUI(enemyCount);
+        uiManager.UpdateWaveCountUI(waveCount);
+        uiManager.UpdateLevelCountUI(charLevel);
     }
 }
