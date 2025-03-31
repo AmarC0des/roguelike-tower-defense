@@ -36,11 +36,12 @@ public class GameManager : MonoBehaviour
 
 
     public TMP_Text stateText;
-    public int xp;
+    public int xp, xpRequired;
     public int goldCount;
     public int enemyCount;
     public int waveCount;
     public int charLevel;
+    public int points;
 
 
     void Start()
@@ -51,8 +52,12 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            FindObjectOfType<GameManager>().GainXP(50);
+        }
     }
+
 
     public void ChangeState()
     {
@@ -95,6 +100,7 @@ public class GameManager : MonoBehaviour
         enemyCount = 0;
         waveCount = 0;
         charLevel = 1;
+        xpRequired = CalculateXPRequirement(charLevel);
 
         UpdateUI();
 
@@ -159,12 +165,48 @@ public class GameManager : MonoBehaviour
         //Goes to TitleScreen
     }
 
+    // Gain XP and check if leveling up is needed
+    public void GainXP(int amount)
+    {
+        xp += amount;
+
+        while (xp >= xpRequired)
+        {
+            LevelUp();
+        }
+
+        uiManager.UpdateXPUI(xp, xpRequired);
+    }
+
+    // Trigger level-up when XP threshold is reached
+    public void LevelUp()
+    {
+        charLevel++; // Increase character level
+        points = 3; // Give player 3 stat points upon leveling up
+        xp = 0; // Reset XP after leveling up
+        xpRequired = CalculateXPRequirement(charLevel); // Calculate the XP required for next level
+    
+        // Update UI after leveling up
+        uiManager.UpdatePoints(points);
+        uiManager.UpdateLevelCountUI(charLevel);  // Update character level UI
+        uiManager.StatsUpdateUI(points);  // Update stats (Strength, Speed, Available Points)
+
+        uiManager.LevelUpUI.SetActive(true); // Show the level-up screen
+    }
+
+    // Calculate XP required for the next level (scales per level)
+    int CalculateXPRequirement(int charLevel)
+    {
+        return 100 + (charLevel - 1) * 50;
+    }
+    
+
     private void UpdateUI()
     {
         uiManager.UpdateGoldUI(goldCount);
         uiManager.UpdateEnemyCountUI(enemyCount);
         uiManager.UpdateWaveCountUI(waveCount);
         uiManager.UpdateLevelCountUI(charLevel);
-        uiManager.UpdateXPUI(xp, charLevel);
+        uiManager.UpdateXPUI(xp, xpRequired);
     }
 }

@@ -14,14 +14,12 @@ public class UIManager : MonoBehaviour
 
     public Button strengthButton, speedButton, closeButton;
 
-    private int strength, speed, points = 5, charLevel, xp, xpRequired;
+    private int strength, speed, points, charLevel, xp, xpRequired;
 
     void Start()
     {
         //TowerPlaceUI.SetActive(false);
         LevelUpUI.SetActive(false);  // Hide level-up menu initially
-        
-        StatsUpdateUI();
 
         strengthButton.onClick.AddListener(() => UpgradeStat("strength"));
         speedButton.onClick.AddListener(() => UpgradeStat("speed"));
@@ -38,7 +36,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    void StatsUpdateUI()
+    public void StatsUpdateUI(int points)
     {
         strengthText.text = "Strength: " + strength;
         speedText.text = "Speed: " + speed;
@@ -48,9 +46,8 @@ public class UIManager : MonoBehaviour
         speedButton.interactable = points > 0;
     }
 
-    public void UpdateXPUI(int xp, int charLevel)
+    public void UpdateXPUI(int xp, int xpRequired)
     {
-        xpRequired = CalculateXPRequirement(charLevel);
         XPText.text = "XP: " + xp + " / " + xpRequired; // Show XP progress 
     }
 
@@ -71,11 +68,19 @@ public class UIManager : MonoBehaviour
 
     public void UpdateLevelCountUI(int charLevel)
     {
+        
         charLevelText.text = "Character Level: " + charLevel;
     }
 
+    public void UpdatePoints(int updatedPoints)
+    {
+        points = updatedPoints;
+        StatsUpdateUI(points);  // Update the UI with the new points
+    }
 
-    void UpgradeStat(string stat)
+
+
+    public void UpgradeStat(string stat)
     {
         if (points > 0)
         {
@@ -83,7 +88,7 @@ public class UIManager : MonoBehaviour
             else if (stat == "speed") speed++;
 
             points--;
-            StatsUpdateUI();
+            StatsUpdateUI(points);
         }
     }
 
@@ -95,37 +100,5 @@ public class UIManager : MonoBehaviour
     void CloseLevelUpMenu()
     {
         LevelUpUI.SetActive(false);
-    }
-
-
-    // Gain XP and check if leveling up is needed
-    public void GainXP(int amount)
-    {
-        xp += amount;
-
-        while (xp >= xpRequired)
-        {
-            xp -= xpRequired;
-            LevelUp();
-        }
-
-        StatsUpdateUI();
-    }
-
-    // Trigger level-up when XP threshold is reached
-    void LevelUp()
-    {
-        charLevel++;
-        points += 3; // Reward stat points
-        xpRequired = CalculateXPRequirement(charLevel);
-
-        StatsUpdateUI();
-        LevelUpUI.SetActive(true); // Show level-up screen
-    }
-
-    // Calculate XP required for the next level (scales per level)
-    int CalculateXPRequirement(int level)
-    {
-        return 100 + (level - 1) * 50;
     }
 }
