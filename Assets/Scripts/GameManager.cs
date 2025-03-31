@@ -13,10 +13,14 @@
  * -Started working on Set_Up Phase functions
  * -Added state UI debugger of sorts
  * -Moved state handling to its own function so that it is called each frame. 
+ *
+ * Modified Eric Nunez 3/31/2025
+ * - Added xp logic and UI for leveling up screen that is linked with XP.
+ * - Points are added for the stats to upgrade when you level up.
  * 
  * NOTES:
  * When game manager is made, we might need to update how the tile spawns enemies.
- * 
+ *
  * Its possible we might run a spawns per tile in which case the current method is fine
  * and we can just update the spawn location to the furthest tile that way enemy spawns
  * will seem less predictable. This is the idea I am leaning toward.
@@ -36,12 +40,11 @@ public class GameManager : MonoBehaviour
 
 
     public TMP_Text stateText;
-    public int xp, xpRequired;
+    public int xp, xpRequired, points;
     public int goldCount;
     public int enemyCount;
     public int waveCount;
     public int charLevel;
-    public int points;
 
 
     void Start()
@@ -50,6 +53,7 @@ public class GameManager : MonoBehaviour
         ChangeState();
     }
 
+    // Used for testing purposes making sure xp is connected with level up logic
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.P))
@@ -64,7 +68,6 @@ public class GameManager : MonoBehaviour
         currentState = nextState;
         Debug.Log("Game State changed to: " + currentState);
         CheckState();
-
     }
 
     private void CheckState()
@@ -186,8 +189,7 @@ public class GameManager : MonoBehaviour
         xp = 0; // Reset XP after leveling up
         xpRequired = CalculateXPRequirement(charLevel); // Calculate the XP required for next level
     
-        // Update UI after leveling up
-        uiManager.UpdatePoints(points);
+        uiManager.UpdatePoints(points);  // Update points after leveling up
         uiManager.UpdateLevelCountUI(charLevel);  // Update character level UI
         uiManager.StatsUpdateUI(points);  // Update stats (Strength, Speed, Available Points)
 

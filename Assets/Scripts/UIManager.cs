@@ -14,35 +14,27 @@ public class UIManager : MonoBehaviour
 
     public Button strengthButton, speedButton, closeButton;
 
-    private int strength, speed, points, charLevel, xp, xpRequired;
+    private int strength, speed, points;
 
     void Start()
     {
-        //TowerPlaceUI.SetActive(false);
         LevelUpUI.SetActive(false);  // Hide level-up menu initially
+        // TowerPlaceUI.SetActive(false); Commmented it out cause not sure how to use it but as long as
+        //                              an object is assigned in unity to TowerPlaceUI everything works fine
 
         strengthButton.onClick.AddListener(() => UpgradeStat("strength"));
         speedButton.onClick.AddListener(() => UpgradeStat("speed"));
         closeButton.onClick.AddListener(CloseLevelUpMenu);
     }
 
-    // Just for testing for now
-    void Update()
-    {
-        // Press "M" to toggle Level-Up screen
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            LevelUpUI.SetActive(!LevelUpUI.activeSelf);
-        }
-    }
-
+    // UI for the stats in the level up screen
     public void StatsUpdateUI(int points)
     {
         strengthText.text = "Strength: " + strength;
         speedText.text = "Speed: " + speed;
         pointsText.text = "Available Points: " + points;
 
-        strengthButton.interactable = points > 0;
+        strengthButton.interactable = points > 0; // If points is 0 buttons become unclickable
         speedButton.interactable = points > 0;
     }
 
@@ -79,7 +71,7 @@ public class UIManager : MonoBehaviour
     }
 
 
-
+    // Method that works with buttons to add points to specific stat
     public void UpgradeStat(string stat)
     {
         if (points > 0)
@@ -92,11 +84,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    void OpenLevelUpMenu()
-    {
-        LevelUpUI.SetActive(true);
-    }
-
+    // Method that works with continue button to close the level up screen.
     void CloseLevelUpMenu()
     {
         LevelUpUI.SetActive(false);
