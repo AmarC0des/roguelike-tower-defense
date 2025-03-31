@@ -3546,7 +3546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1aa230661d091b44bebe6f1232f4536, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TowerPlaceUI: {fileID: 0}
+  TowerPlaceUI: {fileID: 93874755}
   LevelUpUI: {fileID: 548904478}
   goldCountText: {fileID: 995321290}
   enemyCountText: {fileID: 407202604}
@@ -4703,11 +4703,11 @@ MonoBehaviour:
   stateText: {fileID: 645153429}
   xp: 0
   xpRequired: 0
+  points: 0
   goldCount: 0
   enemyCount: 0
   waveCount: 0
   charLevel: 0
-  points: 0
 --- !u!1001 &2951573319134445532
 PrefabInstance:
   m_ObjectHideFlags: 0
