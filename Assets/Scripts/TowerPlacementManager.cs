@@ -12,24 +12,28 @@
  * -Basic setup of script
  * -Added Functions for tower preview and placement
  * 
- * Modified by Camron Carr 3/23/23
+ * 
+ * Modified by Camron Carr 3/23/25
  * -Added functions for terrin analysis and placement
  * constraints. 
  * 
  * 
+ * Modified by Camron Carr 4/1/25
+ * -Finished tower placement. Now there is a check to see what
+ * terrain the tower is on to look for certain layers that are
+ * forbidden from placement. 
+ * 
  * 
  * NOTES:
  * Things still needed:
- * -Better materials
- * -More robust tower selection via UI. 
- * -Fix Layer detection
- * 
+ * -More UI elements, to show buttons and relay info to the user
+ * -Need to make forbiddenLayers an array that holds all layers
+ * in the game that are not allowed. 
  */
 
 
 
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class TowerPlacementManager : MonoBehaviour
@@ -160,25 +164,23 @@ public class TowerPlacementManager : MonoBehaviour
         splatHeight = Mathf.Min(splatHeight, terrainData.alphamapHeight - splatZ);
 
         splatMapData = terrainData.GetAlphamaps(splatX, splatZ, splatWidth, splatHeight);
-
-        splatMapData = terrainData.GetAlphamaps(splatX, splatZ, splatWidth, splatHeight);
     }
 
     bool CanPlaceOnTerrain(float[,,] splatMapData, TerrainData terrainData, int forbiddenLayerIndex = 1)
     {
-        //Checks for layer that is not allowed for placement
+        //checks for layer that is not allowed for placement
         for (int z = 0; z < splatMapData.GetLength(0); z++) //height
         {
             for (int x = 0; x < splatMapData.GetLength(1); x++) //width
             {
                 float weight = splatMapData[z, x, forbiddenLayerIndex];
-                if (weight > 0.5f) //Checks weight of splatmap data
+                if (weight > 0.5f) //checks weight of splatmap data
                 {
-                    return false; //Layer is present, so terrain cannot be placed
+                    return false; //layer is present, so terrain cannot be placed
                 }
             }
         }
-        return true; //Safe to place tower
+        return true; //safe to place tower
     }
 
     void UpdatePreview()
@@ -192,7 +194,7 @@ public class TowerPlacementManager : MonoBehaviour
 
         if (terrain != null)                 
             GenerateSplatMapData();
-            if (CanPlaceOnTerrain(splatMapData, terrainData, 1))//Check to see if it can be placed
+            if (CanPlaceOnTerrain(splatMapData, terrainData, 1))//check to see if it can be placed
             {
                 SetTowerMaterial(previewTower, canPlaceMat);
                 Debug.Log("Placement allowed!");
