@@ -28,19 +28,20 @@
 
 
 
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class TowerPlacementManager: MonoBehaviour
+public class TowerPlacementManager : MonoBehaviour
 {
     public GameObject towerPrefab; // The actual tower prefab to place
     private GameObject previewTower; // The transparent preview version of the tower
-    public Material transparentMaterial; // Transparent material for preview
+    public Material canPlaceMat; // Transparent material for preview
     public Material cannotPlaceMat; //transparent mat turns red when not able to be placed.
     public Material solidMaterial; // Solid material for the final tower
-    //public float placementDistance = 2f; // Distance from the player where the tower will be placed 
 
-    [SerializeField]
-    private Terrain terrain;
+    public float curTerrainHeight;
+    public Terrain terrain;
     TerrainData terrainData;
     float[,,] splatMapData;
 
@@ -56,53 +57,48 @@ public class TowerPlacementManager: MonoBehaviour
             if (!isPlacing)
             {
                 StartPreview(); // Start preview mode
-                GetTerrain();
             }
             else
             {
                 ConfirmPlacement(); // Confirm and finalize tower placement
             }
         }
-      
 
         // While in preview mode, keep updating the preview tower's position
         if (isPlacing && previewTower != null)
         {
-            UpdatePreviewPosition();
-            GenerateSplatMapData();
-            CheckTerrainLayers(splatMapData, terrainData);
+            UpdatePreview(); // Update the preview based on terrain check
         }
     }
 
     // Starts the tower placement preview
     public void StartPreview()
     {
+        GetTerrain();
         isPlacing = true; // Enable placement mode
         previewTower = Instantiate(towerPrefab, player.transform, worldPositionStays: false); // Create the preview tower
         player.GetComponent<PlayerController>().DetachCharacter();
         // Apply the transparent material to make it look like a preview
-        SetTowerMaterial(previewTower, transparentMaterial);
-    }
-
-    // Updates the preview tower's position to always appear near the player
-    void UpdatePreviewPosition()
-    {
-        if (previewTower != null)
-        {
-            previewTower.transform.position = GetPlacementPosition();
-        }
+        SetTowerMaterial(previewTower, canPlaceMat);
     }
 
     // Confirms the placement, making the tower solid and stopping preview mode
     void ConfirmPlacement()
     {
-        if (previewTower != null)
+        if (previewTower != null && terrain != null)
         {
-            isPlacing = false; // Disable placement mode
-            SetTowerMaterial(previewTower, solidMaterial); // Apply the solid material to finalize the tower
-            previewTower.transform.parent = null;
-            previewTower = null; // Clear reference to preview tower
-            player.GetComponent<PlayerController>().AttachCharacter();
+            if (CanPlaceOnTerrain(splatMapData, terrainData, 1))//Checks to see if tower can be placed on speific terrain layer
+            {
+                isPlacing = false; // Disable placement mode
+                SetTowerMaterial(previewTower, solidMaterial); // Apply the solid material to finalize the tower
+                previewTower.transform.parent = null;
+                previewTower = null; // Clear reference to preview tower
+                player.GetComponent<PlayerController>().AttachCharacter();
+            }
+            else
+            {
+                Debug.Log("Tower cannot be placed here! ");
+            }
         }
     }
 
@@ -122,156 +118,90 @@ public class TowerPlacementManager: MonoBehaviour
         }
     }
 
-
-
-    void GetTerrain() //Function used to get the terrain data via raycast
+    void GetTerrain() //function used to get the terrain data via raycast
     {
-       
-        Ray ray = new Ray(transform.position, Vector3.down); //typical raycast
-        if (Physics.Raycast(ray, out RaycastHit hit,10f))
+        Ray ray = new Ray(transform.position, Vector3.down); 
+        if (Physics.Raycast(ray, out RaycastHit hit, 10f))
         {
             Debug.Log(hit);
-            //Check to see if a terrain was hit
+            //check to see if a terrain was hit
             if (hit.collider.GetType() == typeof(TerrainCollider))
             {
                 terrain = hit.collider.gameObject.GetComponent<Terrain>(); //get terrain from collider
                 Debug.Log(terrain.gameObject.name);
             }
-            
+
         }
     }//End of GetTerrain() 
 
-    private Vector3 sampledAreaMin; // For Gizmo
-    private Vector3 sampledAreaMax; // For Gizmo
-
     void GenerateSplatMapData()
     {
-       
-        Collider collider = GetComponentInChildren<Collider>();
+        Collider towerCollider = GetComponentInChildren<BoxCollider>();
+        if (!towerCollider) return; //Ensure collider exists
 
-        // Use the collider's bounds to define the sampled area
-        Bounds bounds = collider.bounds;
-        Vector3 boundsMin = bounds.min; // Bottom-left corner in world space
-        Vector3 boundsMax = bounds.max; // Top-right corner in world space
+        Bounds bounds = towerCollider.bounds; //get collider bounds
+        Vector3 boundsMin = bounds.min;
+        Vector3 boundsMax = bounds.max;
 
-        terrainData = terrain.terrainData;
+        terrainData = terrain.terrainData; //grab terrain data
         Vector3 terrainPos = terrain.transform.position;
 
-        // Convert bounds to terrain local coordinates
-        Vector3 localMin = boundsMin - terrainPos;
+        Vector3 localMin = boundsMin - terrainPos; //converts to local space
         Vector3 localMax = boundsMax - terrainPos;
 
-        // Convert to splat map coordinates
-        int splatX = Mathf.FloorToInt(localMin.x / terrainData.size.x * terrainData.alphamapWidth);
-        int splatZ = Mathf.FloorToInt(localMin.z / terrainData.size.z * terrainData.alphamapHeight);
-        int splatWidth = Mathf.CeilToInt((localMax.x - localMin.x) / terrainData.size.x * terrainData.alphamapWidth);
-        int splatHeight = Mathf.CeilToInt((localMax.z - localMin.z) / terrainData.size.z * terrainData.alphamapHeight);
+        int splatX = Mathf.FloorToInt(localMin.x / terrainData.size.x * terrainData.alphamapWidth); //finds starting x-coor
+        int splatZ = Mathf.FloorToInt(localMin.z / terrainData.size.z * terrainData.alphamapHeight); //finds starting z-coor
+        int splatWidth = Mathf.CeilToInt((localMax.x - localMin.x) / terrainData.size.x * terrainData.alphamapWidth); //finds splat width
+        int splatHeight = Mathf.CeilToInt((localMax.z - localMin.z) / terrainData.size.z * terrainData.alphamapHeight); //finds splat hieght
 
-        // Clamp to valid range to avoid out-of-bounds errors
-        splatX = Mathf.Clamp(splatX, 0, terrainData.alphamapWidth - splatWidth);
+        splatX = Mathf.Clamp(splatX, 0, terrainData.alphamapWidth - splatWidth); //clamps from 0-to found values above, prevents out-of-bounds errors
         splatZ = Mathf.Clamp(splatZ, 0, terrainData.alphamapHeight - splatHeight);
-        splatWidth = Mathf.Min(splatWidth, terrainData.alphamapWidth - splatX);
+        splatWidth = Mathf.Min(splatWidth, terrainData.alphamapWidth - splatX); //finds range for the width and height of splatmap
         splatHeight = Mathf.Min(splatHeight, terrainData.alphamapHeight - splatZ);
 
-        // Sample the splat map area under the object
         splatMapData = terrainData.GetAlphamaps(splatX, splatZ, splatWidth, splatHeight);
 
-        // Store sampled area bounds for Gizmo drawing
-        sampledAreaMin = terrainPos + new Vector3(
-            splatX * terrainData.size.x / terrainData.alphamapWidth,
-            boundsMin.y,
-            splatZ * terrainData.size.z / terrainData.alphamapHeight
-        );
-        sampledAreaMax = terrainPos + new Vector3(
-            (splatX + splatWidth) * terrainData.size.x / terrainData.alphamapWidth,
-            boundsMax.y,
-            (splatZ + splatHeight) * terrainData.size.z / terrainData.alphamapHeight
-        );
-
+        splatMapData = terrainData.GetAlphamaps(splatX, splatZ, splatWidth, splatHeight);
     }
-    // Check if the object can be placed (returns true if valid, false if "Sandy" is present)
-    void CheckTerrainLayers(float[,,] splatMapData, TerrainData terrainData)
+
+    bool CanPlaceOnTerrain(float[,,] splatMapData, TerrainData terrainData, int forbiddenLayerIndex = 1)
     {
-        
-        // Track presence of each layer
-        bool[] layerPresent = new bool[terrainData.alphamapLayers];
-        for (int x = 0; x < splatMapData.GetLength(1); x++) // Width
+        //Checks for layer that is not allowed for placement
+        for (int z = 0; z < splatMapData.GetLength(0); z++) //height
         {
-            for (int z = 0; z < splatMapData.GetLength(0); z++) // Height
+            for (int x = 0; x < splatMapData.GetLength(1); x++) //width
             {
-                for (int layer = 0; layer < terrainData.alphamapLayers; layer++)
+                float weight = splatMapData[z, x, forbiddenLayerIndex];
+                if (weight > 0.5f) //Checks weight of splatmap data
                 {
-                    if (splatMapData[z, x, layer] > .95f) // Any weight > 0 means the layer is present
-                    {
-                        layerPresent[layer] = true;
-                    }
+                    return false; //Layer is present, so terrain cannot be placed
                 }
             }
         }
-
-        if (layerPresent[1] == true)
-        {
-            SetTowerMaterial(previewTower, cannotPlaceMat);
-        }
-
-        // Build list of present layers
-        int presentCount = 0;
-        for (int i = 0; i < layerPresent.Length; i++)
-        {
-            if (layerPresent[i]) presentCount++;
-        }
-
-        string[] presentLayers = new string[presentCount];
-        int index = 0;
-        for (int i = 0; i < layerPresent.Length; i++)
-        {
-            if (layerPresent[i])
-            {
-                presentLayers[index] = terrainData.terrainLayers[i].name;
-                index++;
-            }
-        }
-
-        // Log all present layers
-        Debug.Log("Layers present under object: " + (presentCount > 0 ? string.Join(", ", presentLayers) : "None"));
+        return true; //Safe to place tower
     }
 
-    void OnDrawGizmos()
+    void UpdatePreview()
     {
-        if (terrain == null) return;
+        GetTerrain();
 
-        Collider collider = GetComponentInChildren<Collider>();
-        if (collider == null) return;
+        if (previewTower != null)
+        {
+            previewTower.transform.position = GetPlacementPosition();
+        }
 
-        Gizmos.color = Color.yellow; // Yellow wireframe for the sampled area
-
-        // Define the corners of the sampled area
-        Vector3 bottomLeft = new Vector3(sampledAreaMin.x, sampledAreaMin.y, sampledAreaMin.z);
-        Vector3 bottomRight = new Vector3(sampledAreaMax.x, sampledAreaMin.y, sampledAreaMin.z);
-        Vector3 topLeft = new Vector3(sampledAreaMin.x, sampledAreaMax.y, sampledAreaMax.z);
-        Vector3 topRight = new Vector3(sampledAreaMax.x, sampledAreaMax.y, sampledAreaMax.z);
-
-        // Draw the wireframe box
-        Gizmos.DrawLine(bottomLeft, bottomRight);
-        Gizmos.DrawLine(bottomRight, topRight);
-        Gizmos.DrawLine(topRight, topLeft);
-        Gizmos.DrawLine(topLeft, bottomLeft);
-
-        // Draw vertical lines to show height
-        Gizmos.DrawLine(bottomLeft, bottomLeft + Vector3.up * (sampledAreaMax.y - sampledAreaMin.y));
-        Gizmos.DrawLine(bottomRight, bottomRight + Vector3.up * (sampledAreaMax.y - sampledAreaMin.y));
-        Gizmos.DrawLine(topLeft, topLeft + Vector3.up * (sampledAreaMax.y - sampledAreaMin.y));
-        Gizmos.DrawLine(topRight, topRight + Vector3.up * (sampledAreaMax.y - sampledAreaMin.y));
-
-        // Draw top rectangle
-        Gizmos.DrawLine(bottomLeft + Vector3.up * (sampledAreaMax.y - sampledAreaMin.y),
-                        bottomRight + Vector3.up * (sampledAreaMax.y - sampledAreaMin.y));
-        Gizmos.DrawLine(bottomRight + Vector3.up * (sampledAreaMax.y - sampledAreaMin.y),
-                        topRight + Vector3.up * (sampledAreaMax.y - sampledAreaMin.y));
-        Gizmos.DrawLine(topRight + Vector3.up * (sampledAreaMax.y - sampledAreaMin.y),
-                        topLeft + Vector3.up * (sampledAreaMax.y - sampledAreaMin.y));
-        Gizmos.DrawLine(topLeft + Vector3.up * (sampledAreaMax.y - sampledAreaMin.y),
-                        bottomLeft + Vector3.up * (sampledAreaMax.y - sampledAreaMin.y));
+        if (terrain != null)                 
+            GenerateSplatMapData();
+            if (CanPlaceOnTerrain(splatMapData, terrainData, 1))//Check to see if it can be placed
+            {
+                SetTowerMaterial(previewTower, canPlaceMat);
+                Debug.Log("Placement allowed!");
+            }
+            else
+            {
+                SetTowerMaterial(previewTower, cannotPlaceMat);
+                Debug.Log("Placement blocked due to forbidden texture!");
+            }
     }
 }
-   
+
