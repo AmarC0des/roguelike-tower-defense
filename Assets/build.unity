@@ -5724,6 +5724,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2669329870885080265, guid: 97a786948bb665e49ae30874d9d44ba5, type: 3}
+      propertyPath: enemyCountText
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3034460281981461515, guid: 97a786948bb665e49ae30874d9d44ba5, type: 3}
       propertyPath: m_Name
       value: Tile_Castle
