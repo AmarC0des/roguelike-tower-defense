@@ -107,7 +107,7 @@ public class TileManager : MonoBehaviour
         }
     }
 
-    //Method testing to delete enemies to keep track of enemies but will be modified later to use it with enemy health
+    //Method testing to delete enemies to keep track of enemies but will be modified later
     private void DeleteEnemy()
     {
         if (spawnedEnemies.Count > 0) // Check if there are enemies to delete

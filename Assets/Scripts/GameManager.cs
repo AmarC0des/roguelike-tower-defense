@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
     //Managers
     public UIManager uiManager;
     public TowerPlacementManager towerManager;
-
+    private PathManager pathManager;  // Reference to PathManager for tile selection
 
     public TMP_Text stateText;
     public int xp, xpRequired, points;
@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        pathManager = FindObjectOfType<PathManager>();
         nextState = GameState.StartGame;
         ChangeState();
     }
@@ -101,7 +102,7 @@ public class GameManager : MonoBehaviour
         nextState = GameState.SetUp;
         goldCount = 0;  
         enemyCount = 0;
-        waveCount = 0;
+        waveCount = 1;
         charLevel = 1;
         xpRequired = CalculateXPRequirement(charLevel);
 
@@ -132,7 +133,8 @@ public class GameManager : MonoBehaviour
 
     private void HandleProgression()
     {
-        charLevel++;
+        pathManager.ShowTileSelection();  // Show tile selection UI to the player
+        
         stateText.text = "Progress Phase";
         nextState = GameState.SetUp;
 
