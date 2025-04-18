@@ -1,0 +1,164 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32c8da6cee478d249a3424e5d16f9f83, type: 3}
+  m_Name: Ball
+  m_EditorClassIdentifier: 
+  DownAnimationFrames:
+  - Sprite: {fileID: -1291302723, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 0
+  - Sprite: {fileID: 16505483, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 0
+  - Sprite: {fileID: -1449429910, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 0
+  - Sprite: {fileID: -1381125721, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 0
+  - Sprite: {fileID: -277920740, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 0
+  - Sprite: {fileID: -1137764518, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 0
+  - Sprite: {fileID: 643373936, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 0
+  - Sprite: {fileID: -1923767415, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 0
+  - Sprite: {fileID: -1318951232, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 0
+  - Sprite: {fileID: 551276301, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 0
+  - Sprite: {fileID: 534144092, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 0
+  - Sprite: {fileID: 1040222194, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 0
+  - Sprite: {fileID: 6513509, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 0
+  - Sprite: {fileID: 341546348, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 0
+  - Sprite: {fileID: 37585633, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 0
+  - Sprite: {fileID: 67872721, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 0
+  UpAnimationFrames:
+  - Sprite: {fileID: -1291302723, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 0
+  - Sprite: {fileID: 16505483, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 0
+  - Sprite: {fileID: -1449429910, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 0
+  - Sprite: {fileID: -1381125721, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 0
+  - Sprite: {fileID: -277920740, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 0
+  - Sprite: {fileID: -1137764518, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 0
+  - Sprite: {fileID: 643373936, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 0
+  - Sprite: {fileID: -1923767415, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 0
+  - Sprite: {fileID: -1318951232, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 0
+  - Sprite: {fileID: 551276301, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 0
+  - Sprite: {fileID: 534144092, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 0
+  - Sprite: {fileID: 1040222194, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 0
+  - Sprite: {fileID: 6513509, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 0
+  - Sprite: {fileID: 341546348, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 0
+  - Sprite: {fileID: 37585633, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 0
+  - Sprite: {fileID: 67872721, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 0
+  SideAnimationFrames:
+  - Sprite: {fileID: -1291302723, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 1
+  - Sprite: {fileID: 16505483, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 1
+  - Sprite: {fileID: -1449429910, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 1
+  - Sprite: {fileID: -1381125721, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 1
+  - Sprite: {fileID: -277920740, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 1
+  - Sprite: {fileID: -1137764518, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 1
+  - Sprite: {fileID: 643373936, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 1
+  - Sprite: {fileID: -1923767415, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 1
+  - Sprite: {fileID: -1318951232, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 1
+  - Sprite: {fileID: 551276301, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 1
+  - Sprite: {fileID: 534144092, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 1
+  - Sprite: {fileID: 1040222194, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 1
+  - Sprite: {fileID: 6513509, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 1
+  - Sprite: {fileID: 341546348, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 1
+  - Sprite: {fileID: 37585633, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 1
+  - Sprite: {fileID: 67872721, guid: 5d6b5a0f055b09c4c819d6282b00c870, type: 3}
+    HoldForTicks: 20
+    flipX: 1
+  Looping: 0
+  LoopStart: 0
+  LoopEnd: 15

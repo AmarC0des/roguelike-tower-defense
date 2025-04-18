@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32c8da6cee478d249a3424e5d16f9f83, type: 3}
+  m_Name: DemonWalk
+  m_EditorClassIdentifier: 
+  DownAnimationFrames:
+  - Sprite: {fileID: 907203633, guid: bab1c88a546d120499702fdde93aeccd, type: 3}
+    HoldForTicks: 10
+    flipX: 0
+  - Sprite: {fileID: -262697010, guid: bab1c88a546d120499702fdde93aeccd, type: 3}
+    HoldForTicks: 10
+    flipX: 0
+  UpAnimationFrames:
+  - Sprite: {fileID: -629633287, guid: bab1c88a546d120499702fdde93aeccd, type: 3}
+    HoldForTicks: 10
+    flipX: 0
+  - Sprite: {fileID: 761292436, guid: bab1c88a546d120499702fdde93aeccd, type: 3}
+    HoldForTicks: 10
+    flipX: 0
+  SideAnimationFrames:
+  - Sprite: {fileID: 1880682318, guid: bab1c88a546d120499702fdde93aeccd, type: 3}
+    HoldForTicks: 10
+    flipX: 1
+  - Sprite: {fileID: 1128444517, guid: bab1c88a546d120499702fdde93aeccd, type: 3}
+    HoldForTicks: 10
+    flipX: 1
+  Looping: 1
+  LoopStart: 0
+  LoopEnd: 1
