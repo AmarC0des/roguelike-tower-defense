@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32c8da6cee478d249a3424e5d16f9f83, type: 3}
+  m_Name: BigAttack
+  m_EditorClassIdentifier: 
+  DownAnimationFrames:
+  - Sprite: {fileID: 301937827, guid: da22854681e96934cbec203b83ea3389, type: 3}
+    HoldForTicks: 10
+  - Sprite: {fileID: 796299280, guid: da22854681e96934cbec203b83ea3389, type: 3}
+    HoldForTicks: 10
+  UpAnimationFrames:
+  - Sprite: {fileID: -1762202122, guid: da22854681e96934cbec203b83ea3389, type: 3}
+    HoldForTicks: 10
+  - Sprite: {fileID: -587562656, guid: da22854681e96934cbec203b83ea3389, type: 3}
+    HoldForTicks: 10
+  SideAnimationFrames:
+  - Sprite: {fileID: 862272433, guid: da22854681e96934cbec203b83ea3389, type: 3}
+    HoldForTicks: 10
+  - Sprite: {fileID: -834959797, guid: da22854681e96934cbec203b83ea3389, type: 3}
+    HoldForTicks: 10
+  Looping: 1
+  LoopStart: 0
+  LoopEnd: 1

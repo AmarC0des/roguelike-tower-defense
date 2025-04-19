@@ -5,11 +5,8 @@
  * tile data. 
  * 
  * 
- * Modified 2/20/25:
+ * Modified by Camron Carr 2/20/25:
  * -Basic setup of script
- * 
- * 
- * 
  * 
  * NOTES:
  * When game manager is made, we might need to update how the tile spawns enemies.
@@ -23,8 +20,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TileManager : MonoBehaviour
 {
@@ -38,12 +35,21 @@ public class TileManager : MonoBehaviour
     private CinemachinePath path;
     
     public int enemyCount;
+    private int totalSpawnedEnemies = 0;
+
+    [SerializeField]
+    private Text enemyCountText;
+
+    private List<GameObject> spawnedEnemies = new List<GameObject>(); // Stores spawned enemies
+
 
     // Start is called before the first frame update
     void Awake()
     {
         tileStats = type.SetTileStats(); //sets TileStats via method in TileType 
         path = gameObject.GetComponent<CinemachinePath>();
+
+        UpdateEnemyCountUI(); // Update UI at start
     }
 
     // Update is called once per frame
@@ -57,13 +63,14 @@ public class TileManager : MonoBehaviour
 
             timeSinceLastSpawn = 0f; //timer resets
         }
+
     }//End of Update
 
 
     //Method used to spawn enemies on the tile
     public void SpawnEnemy()
     {
-        if( enemyCount <= tileStats.maxEnemyCount) //checks to make sure max enemy count per tile is set.
+        if( totalSpawnedEnemies <= tileStats.maxEnemyCount) //checks to make sure max enemy count per tile is set.
         {
             GameObject newEnemy;
 
@@ -71,11 +78,26 @@ public class TileManager : MonoBehaviour
             newEnemy = Instantiate(tileStats.GetEnemy(), path.m_Waypoints[0].position, Quaternion.identity);
             newEnemy.GetComponent<CinemachineDollyCart>().m_Path = path;
             enemyCount++;
+            spawnedEnemies.Add(newEnemy); // Keep track of spawned enemies
+            totalSpawnedEnemies++;
+
+            UpdateEnemyCountUI(); // Update the UI when enemy is spawned
             return;
         }
         Debug.Log("Enemy Maximum Count Reached");
 
     }//End of SpawnEnemy
+
+
+    //UI method to message player the number of enemies left
+    private void UpdateEnemyCountUI()
+    {
+        if (enemyCountText != null)
+        {
+            enemyCountText.text = "Enemies Left: " + enemyCount.ToString();
+        }
+    }//End of UpdateEnemyCountUI
+
 }
 
 

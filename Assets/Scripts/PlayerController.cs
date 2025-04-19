@@ -1,18 +1,49 @@
+/* Player Controller Class
+ * ----------------------------
+ * Handles player movement and animation updating. 
+ * 
+ *  Created by Ryan Trozzolo 3/22/25:
+ * -Added movement and rotation logic
+ * -Added anim updating
+ * 
+ * 
+ * Modified by Camron Carr 3/27/25:
+ * -Added functions to attach and detach the character. This is used to control the tower while
+ * the character sprite is frozen during tower placement.
+ * 
+ * NOTES:
+ * -Fix tower rotation so that controls work properly when rotation occurs.
+ */
+
+
+
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public Transform playerPos;
-    public Animator playerAnim;
+    public GameObject character;
+
+    Animator2D anim;
+    Direction4Way direction;
     public float speed = 3;
 
+    const int IDLE_ANIM = 0;
+    const int WALK_ANIM = 1;
+    const int ATTACK_ANIM = 2;
+    const int IDLE_HAMMER_ANIM = 3;
+    const int WALK_HAMMER_ANIM = 4;
+
+    public Vector3 oldPos;
+    public bool charActive;
 
     private void Start()
     {
-        playerPos = gameObject.transform;
-        playerAnim = gameObject.GetComponentInChildren<Animator>();
+        charActive = true;
+        anim = GetComponentInChildren<Animator2D>();
+        direction = GetComponentInChildren<Direction4Way>();
     }
 
     // Update is called once per frame
@@ -25,33 +56,56 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 moveDirection = Vector3.zero;
 
-
-        //set codes
+        // Set movement input keys
         bool isWalkingUp = Input.GetKey(KeyCode.W);
         bool isWalkingDown = Input.GetKey(KeyCode.S);
         bool isWalkingLeft = Input.GetKey(KeyCode.A);
         bool isWalkingRight = Input.GetKey(KeyCode.D);
 
-        //Check movement direction
+        // Check movement direction
         if (isWalkingUp) moveDirection += Vector3.back;
         if (isWalkingDown) moveDirection += Vector3.forward;
-        if (isWalkingLeft) moveDirection += Vector3.right; //these have to be flipped because the player is rotated 90 degrees in the scene.
-        if (isWalkingRight) moveDirection += Vector3.left; //
+        if (isWalkingLeft) moveDirection += Vector3.right;  
+        if (isWalkingRight) moveDirection += Vector3.left;  // Directions are flipped because of the rotation of the camera
 
-        //only update direction when moving, and keep direction when not moving.
-        if (moveDirection != Vector3.zero)
-        {
-            playerAnim.SetFloat("XDir", moveDirection.x);
-            playerAnim.SetFloat("YDir", moveDirection.z);
+        if (charActive) {
+            // Only update direction when moving, and keep direction when not moving
+            if (moveDirection != Vector3.zero)
+            {
+                // Convert movement to be relative to the character's rotation
+                moveDirection = transform.rotation * moveDirection;
+
+                // Convert movement to local space for animations
+                Vector3 localMoveDirection = transform.InverseTransformDirection(moveDirection);
+                direction.direction = Vector2Int.RoundToInt(new Vector2(localMoveDirection.x, -localMoveDirection.z));
+
+                // Move character
+                transform.position += moveDirection.normalized * speed * Time.deltaTime;
+            }
+            // Set animation state based on movement
+            anim.SetAnimation(moveDirection != Vector3.zero ? WALK_ANIM : IDLE_ANIM);
+
+            return;
         }
 
-        playerAnim.SetBool("Walking", moveDirection != Vector3.zero);
+        // Move character
+        transform.position += moveDirection.normalized * speed * Time.deltaTime;
+    }
 
-        //Move
-        playerPos.position += moveDirection * speed * Time.deltaTime;
-
+    public void DetachCharacter()
+    {
+        oldPos = transform.position;
+        charActive = false;
+        character.gameObject.transform.parent = null;
 
     }
 
+    public void AttachCharacter()
+    {
+        this.gameObject.transform.position = oldPos;
 
+        charActive = true;
+        character.gameObject.transform.parent = this.transform;
+
+    }
 }
