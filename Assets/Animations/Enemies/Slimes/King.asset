@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32c8da6cee478d249a3424e5d16f9f83, type: 3}
+  m_Name: King
+  m_EditorClassIdentifier: 
+  DownAnimationFrames:
+  - Sprite: {fileID: -1429997186, guid: 7e99c45b492883645a1d6a548f3e6dd6, type: 3}
+    HoldForTicks: 10
+    flipX: 0
+  - Sprite: {fileID: -1686101051, guid: 7e99c45b492883645a1d6a548f3e6dd6, type: 3}
+    HoldForTicks: 10
+    flipX: 0
+  - Sprite: {fileID: -266393639, guid: 7e99c45b492883645a1d6a548f3e6dd6, type: 3}
+    HoldForTicks: 10
+    flipX: 0
+  - Sprite: {fileID: -1499366061, guid: 7e99c45b492883645a1d6a548f3e6dd6, type: 3}
+    HoldForTicks: 10
+    flipX: 0
+  UpAnimationFrames:
+  - Sprite: {fileID: -1863994536, guid: 7e99c45b492883645a1d6a548f3e6dd6, type: 3}
+    HoldForTicks: 10
+    flipX: 0
+  - Sprite: {fileID: -1154075881, guid: 7e99c45b492883645a1d6a548f3e6dd6, type: 3}
+    HoldForTicks: 10
+    flipX: 0
+  - Sprite: {fileID: 974305822, guid: 7e99c45b492883645a1d6a548f3e6dd6, type: 3}
+    HoldForTicks: 10
+    flipX: 0
+  - Sprite: {fileID: 88820090, guid: 7e99c45b492883645a1d6a548f3e6dd6, type: 3}
+    HoldForTicks: 10
+    flipX: 0
+  SideAnimationFrames:
+  - Sprite: {fileID: -1312324498, guid: 7e99c45b492883645a1d6a548f3e6dd6, type: 3}
+    HoldForTicks: 10
+    flipX: 1
+  - Sprite: {fileID: 1690309986, guid: 7e99c45b492883645a1d6a548f3e6dd6, type: 3}
+    HoldForTicks: 10
+    flipX: 1
+  - Sprite: {fileID: 2084746097, guid: 7e99c45b492883645a1d6a548f3e6dd6, type: 3}
+    HoldForTicks: 10
+    flipX: 1
+  - Sprite: {fileID: -524718828, guid: 7e99c45b492883645a1d6a548f3e6dd6, type: 3}
+    HoldForTicks: 10
+    flipX: 1
+  Looping: 1
+  LoopStart: 0
+  LoopEnd: 3
