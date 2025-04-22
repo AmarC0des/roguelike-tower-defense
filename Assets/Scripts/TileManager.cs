@@ -84,7 +84,7 @@ public class TileManager : MonoBehaviour
             UpdateEnemyCountUI(); // Update the UI when enemy is spawned
             return;
         }
-        Debug.Log("Enemy Maximum Count Reached");
+        
 
     }//End of SpawnEnemy
 

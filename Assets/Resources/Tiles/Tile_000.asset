@@ -16,4 +16,4 @@ MonoBehaviour:
   - {fileID: 70930510765673804, guid: 6020767164fc5a94791a7d95de5ab782, type: 3}
   - {fileID: 70930510765673804, guid: 6020767164fc5a94791a7d95de5ab782, type: 3}
   spawnRate: 3
-  maxEnemyCount: 10
+  maxEnemyCount: 1

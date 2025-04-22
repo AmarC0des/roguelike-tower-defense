@@ -24,34 +24,56 @@
  */
 
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance { get; private set; }
+
     public enum GameState { StartGame, SetUp, Wave, Progression, WinGame, Gameover, TitleScreen }
     public GameState currentState;
     public GameState nextState;
     //Managers
     public UIManager uiManager;
     public TowerPlacementManager towerManager;
+    public PathManager pathManager;
 
 
     public TMP_Text stateText;
+
+    public Collider castleCol;
+    public int maxCastleHp;
+    public int curCastleHp;
 
     public int goldCount;
     public int enemyCount;
     public int waveCount;
     public int charLevel;
 
+    public List<GameObject> enemiesToSpawn = new List<GameObject>();
+    private List<GameObject> spawnedEnemies = new List<GameObject>(); // Stores spawned enemies
+
+
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            Debug.Log("I'm Instanced");
+        }
+    }
 
     void Start()
     {
+        curCastleHp = maxCastleHp;
         nextState = GameState.StartGame;
         ChangeState();
     }
 
     void Update()
     {
-        
+
     }
 
     public void ChangeState()
@@ -91,7 +113,7 @@ public class GameManager : MonoBehaviour
     {
         stateText.text = "Game Started";
         nextState = GameState.SetUp;
-        goldCount = 0;  
+        goldCount = 0;
         enemyCount = 0;
         waveCount = 0;
         charLevel = 1;
@@ -144,7 +166,7 @@ public class GameManager : MonoBehaviour
 
     bool AllEnemiesDefeated()
     {
-        // Logic to check if all enemies are defeated
+        
         return false;
     }
 
@@ -156,7 +178,7 @@ public class GameManager : MonoBehaviour
 
     void ToTitleScreen()
     {
-        //Goes to TitleScreen
+       
     }
 
     private void UpdateUI()
@@ -165,5 +187,15 @@ public class GameManager : MonoBehaviour
         uiManager.UpdateEnemyCountUI(enemyCount);
         uiManager.UpdateWaveCountUI(waveCount);
         uiManager.UpdateLevelCountUI(charLevel);
+    }
+
+    public void CastleTakeDamage(float damage)
+    {
+        curCastleHp -= Mathf.RoundToInt(damage);
+        Debug.Log(curCastleHp);
+    }
+    public void PlayerTakeDamage(float damage)
+    {
+      
     }
 }

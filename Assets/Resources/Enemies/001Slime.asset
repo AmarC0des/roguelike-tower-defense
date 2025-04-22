@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: 001Slime
   m_EditorClassIdentifier: 
   atk: 1
-  speed: 1
+  speed: 10
   HP: 5
   description: 

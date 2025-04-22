@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class PathManager : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class PathManager : MonoBehaviour
     public List<GameObject> placedTiles = new List<GameObject>();
 
     public GameObject furthestTile; //set in inspector to be the first tile
-  
+    public CinemachinePath path;
     void Start()
     {
 
