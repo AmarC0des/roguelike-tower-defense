@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
     public int maxCastleHp;
     public int curCastleHp;
 
+    public int xp, xpRequired, points;
     public int goldCount;
     public int enemyCount;
     public int waveCount;
@@ -73,7 +74,10 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            FindObjectOfType<GameManager>().GainXP(50);
+        }
     }
 
     public void ChangeState()
@@ -117,6 +121,7 @@ public class GameManager : MonoBehaviour
         enemyCount = 0;
         waveCount = 0;
         charLevel = 1;
+        xpRequired = CalculateXPRequirement(charLevel);
 
         UpdateUI();
 
@@ -145,6 +150,7 @@ public class GameManager : MonoBehaviour
 
     private void HandleProgression()
     {
+        pathManager.ShowTileSelection();  // Show tile selection UI to the player
         charLevel++;
         stateText.text = "Progress Phase";
         nextState = GameState.SetUp;
@@ -187,6 +193,7 @@ public class GameManager : MonoBehaviour
         uiManager.UpdateEnemyCountUI(enemyCount);
         uiManager.UpdateWaveCountUI(waveCount);
         uiManager.UpdateLevelCountUI(charLevel);
+        uiManager.UpdateXPUI(xp, xpRequired);
     }
 
     public void CastleTakeDamage(float damage)
@@ -197,5 +204,37 @@ public class GameManager : MonoBehaviour
     public void PlayerTakeDamage(float damage)
     {
 
+    }
+
+    public void GainXP(int amount)
+    {
+        xp += amount;
+
+        while (xp >= xpRequired)
+        {
+            LevelUp();
+        }
+
+        uiManager.UpdateXPUI(xp, xpRequired);
+    }
+    // Trigger level-up when XP threshold is reached
+    public void LevelUp()
+    {
+        charLevel++; // Increase character level
+        points = 3; // Give player 3 stat points upon leveling up
+        xp = 0; // Reset XP after leveling up
+        xpRequired = CalculateXPRequirement(charLevel); // Calculate the XP required for next level
+
+        uiManager.UpdatePoints(points);  // Update points after leveling up
+        uiManager.UpdateLevelCountUI(charLevel);  // Update character level UI
+        uiManager.StatsUpdateUI(points);  // Update stats (Strength, Speed, Available Points)
+
+        uiManager.LevelUpUI.SetActive(true); // Show the level-up screen
+    }
+
+    // Calculate XP required for the next level (scales per level)
+    int CalculateXPRequirement(int charLevel)
+    {
+        return 100 + (charLevel - 1) * 50;
     }
 }

@@ -167,9 +167,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilesPrefabs: []
+  tileOptionButtons: []
   placedTiles: []
+  tileOptionImages: []
   furthestTile: {fileID: 0}
-  path: {fileID: 1692586572}
+  selectionPanel: {fileID: 0}
+  currentlySelectedButton: {fileID: 0}
+  path: {fileID: 0}
 --- !u!1 &93874755
 GameObject:
   m_ObjectHideFlags: 0
@@ -1850,12 +1854,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerPrefab: {fileID: 3927640490445357400, guid: ebb68882b3f8e6d438a6fe66fd4cb0ba, type: 3}
-  canPlaceMat: {fileID: 2100000, guid: 2195aff5be6d73145a0447cd50f7f3b2, type: 2}
-  cannotPlaceMat: {fileID: 2100000, guid: 1e30d55c41630b5478c81a76b9171f93, type: 2}
+  canPlaceMat: {fileID: 0}
+  cannotPlaceMat: {fileID: 0}
   solidMaterial: {fileID: 2100000, guid: e6a4df59b0f9f9042b3e3134d7523ef7, type: 2}
   curTerrainHeight: 0
   terrain: {fileID: 0}
-  player: {fileID: 8715394431918087332}
+  player: {fileID: 0}
 --- !u!4 &849394058
 Transform:
   m_ObjectHideFlags: 0
@@ -2724,10 +2728,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TowerPlaceUI: {fileID: 93874755}
+  LevelUpUI: {fileID: 0}
   goldCountText: {fileID: 995321290}
   enemyCountText: {fileID: 407202604}
   waveCountText: {fileID: 749317836}
   charLevelText: {fileID: 625008903}
+  XPText: {fileID: 0}
+  strengthText: {fileID: 0}
+  speedText: {fileID: 0}
+  pointsText: {fileID: 0}
+  strengthButton: {fileID: 0}
+  speedButton: {fileID: 0}
+  closeButton: {fileID: 0}
 --- !u!1 &1448801018 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2204441266170474882, guid: 241c5a58093b21d4bb2a20e14562ec3a, type: 3}
@@ -3061,17 +3073,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 61.767, y: -161.159, z: -103.655}
---- !u!114 &1692586572 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5171611260555913179, guid: 97a786948bb665e49ae30874d9d44ba5, type: 3}
-  m_PrefabInstance: {fileID: 1131765781}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d37e5385efd7064cb1d54c94960acae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1782081184
 GameObject:
   m_ObjectHideFlags: 0
@@ -3534,8 +3535,11 @@ MonoBehaviour:
   pathManager: {fileID: 59476809}
   stateText: {fileID: 645153429}
   castleCol: {fileID: 690545095}
-  maxCastleHp: 100
+  maxCastleHp: 0
   curCastleHp: 0
+  xp: 0
+  xpRequired: 0
+  points: 0
   goldCount: 0
   enemyCount: 0
   waveCount: 0
@@ -3553,7 +3557,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e14ff45a9254234398fe79b62b1fdaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 262108338}
+  character: {fileID: 0}
   speed: 4
   oldPos: {x: 0, y: 0, z: 0}
   charActive: 0
@@ -3868,12 +3872,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerPrefab: {fileID: 3927640490445357400, guid: ebb68882b3f8e6d438a6fe66fd4cb0ba, type: 3}
-  canPlaceMat: {fileID: 2100000, guid: 2195aff5be6d73145a0447cd50f7f3b2, type: 2}
-  cannotPlaceMat: {fileID: 2100000, guid: 1e30d55c41630b5478c81a76b9171f93, type: 2}
+  canPlaceMat: {fileID: 0}
+  cannotPlaceMat: {fileID: 0}
   solidMaterial: {fileID: 2100000, guid: e6a4df59b0f9f9042b3e3134d7523ef7, type: 2}
   curTerrainHeight: 0
   terrain: {fileID: 0}
-  player: {fileID: 8715394431918087332}
+  player: {fileID: 0}
 --- !u!54 &9054363648340173390
 Rigidbody:
   m_ObjectHideFlags: 0
