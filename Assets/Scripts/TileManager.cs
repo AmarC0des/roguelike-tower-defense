@@ -5,11 +5,8 @@
  * tile data. 
  * 
  * 
- * Modified 2/20/25:
+ * Modified by Camron Carr 2/20/25:
  * -Basic setup of script
- * 
- * 
- * 
  * 
  * NOTES:
  * When game manager is made, we might need to update how the tile spawns enemies.
@@ -23,7 +20,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -39,10 +35,10 @@ public class TileManager : MonoBehaviour
     private CinemachinePath path;
     
     public int enemyCount;
-    private int totalSpawnedEnemies = 0; // Keeps track of total enemies ever spawned
+    private int totalSpawnedEnemies = 0;
 
     [SerializeField]
-    private Text enemyCountText; // Reference to UI text component
+    private Text enemyCountText;
 
     private List<GameObject> spawnedEnemies = new List<GameObject>(); // Stores spawned enemies
 
@@ -68,11 +64,6 @@ public class TileManager : MonoBehaviour
             timeSinceLastSpawn = 0f; //timer resets
         }
 
-        // Press X key to delete an enemy
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            DeleteEnemy();
-        }
     }//End of Update
 
 
@@ -105,25 +96,8 @@ public class TileManager : MonoBehaviour
         {
             enemyCountText.text = "Enemies Left: " + enemyCount.ToString();
         }
-    }
+    }//End of UpdateEnemyCountUI
 
-    //Method testing to delete enemies to keep track of enemies but will be modified later to use it with enemy health
-    private void DeleteEnemy()
-    {
-        if (spawnedEnemies.Count > 0) // Check if there are enemies to delete
-        {
-            GameObject enemyToDelete = spawnedEnemies[0]; // Get the first enemy
-            spawnedEnemies.RemoveAt(0); // Remove from list
-            Destroy(enemyToDelete); // Delete enemy
-            enemyCount--;
-            UpdateEnemyCountUI(); // Update UI
-            Debug.Log("Enemy Deleted");
-        }
-        else
-        {
-            Debug.Log("No enemies to delete");
-        }
-    }
 }
 
 
