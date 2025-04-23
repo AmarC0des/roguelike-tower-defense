@@ -13,14 +13,10 @@
  * -Started working on Set_Up Phase functions
  * -Added state UI debugger of sorts
  * -Moved state handling to its own function so that it is called each frame. 
- *
- * Modified Eric Nunez 3/31/2025
- * - Added xp logic and UI for leveling up screen that is linked with XP.
- * - Points are added for the stats to upgrade when you level up.
  * 
  * NOTES:
  * When game manager is made, we might need to update how the tile spawns enemies.
- *
+ * 
  * Its possible we might run a spawns per tile in which case the current method is fine
  * and we can just update the spawn location to the furthest tile that way enemy spawns
  * will seem less predictable. This is the idea I am leaning toward.
@@ -37,10 +33,10 @@ public class GameManager : MonoBehaviour
     //Managers
     public UIManager uiManager;
     public TowerPlacementManager towerManager;
-    private PathManager pathManager;  // Reference to PathManager for tile selection
+
 
     public TMP_Text stateText;
-    public int xp, xpRequired, points;
+
     public int goldCount;
     public int enemyCount;
     public int waveCount;
@@ -49,26 +45,21 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        pathManager = FindObjectOfType<PathManager>();
         nextState = GameState.StartGame;
         ChangeState();
     }
 
-    // Used for testing purposes making sure xp is connected with level up logic
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            FindObjectOfType<GameManager>().GainXP(50);
-        }
+        
     }
-
 
     public void ChangeState()
     {
         currentState = nextState;
         Debug.Log("Game State changed to: " + currentState);
         CheckState();
+
     }
 
     private void CheckState()
@@ -102,9 +93,8 @@ public class GameManager : MonoBehaviour
         nextState = GameState.SetUp;
         goldCount = 0;  
         enemyCount = 0;
-        waveCount = 1;
+        waveCount = 0;
         charLevel = 1;
-        xpRequired = CalculateXPRequirement(charLevel);
 
         UpdateUI();
 
@@ -133,8 +123,7 @@ public class GameManager : MonoBehaviour
 
     private void HandleProgression()
     {
-        pathManager.ShowTileSelection();  // Show tile selection UI to the player
-        
+        charLevel++;
         stateText.text = "Progress Phase";
         nextState = GameState.SetUp;
 
@@ -170,47 +159,11 @@ public class GameManager : MonoBehaviour
         //Goes to TitleScreen
     }
 
-    // Gain XP and check if leveling up is needed
-    public void GainXP(int amount)
-    {
-        xp += amount;
-
-        while (xp >= xpRequired)
-        {
-            LevelUp();
-        }
-
-        uiManager.UpdateXPUI(xp, xpRequired);
-    }
-
-    // Trigger level-up when XP threshold is reached
-    public void LevelUp()
-    {
-        charLevel++; // Increase character level
-        points = 3; // Give player 3 stat points upon leveling up
-        xp = 0; // Reset XP after leveling up
-        xpRequired = CalculateXPRequirement(charLevel); // Calculate the XP required for next level
-    
-        uiManager.UpdatePoints(points);  // Update points after leveling up
-        uiManager.UpdateLevelCountUI(charLevel);  // Update character level UI
-        uiManager.StatsUpdateUI(points);  // Update stats (Strength, Speed, Available Points)
-
-        uiManager.LevelUpUI.SetActive(true); // Show the level-up screen
-    }
-
-    // Calculate XP required for the next level (scales per level)
-    int CalculateXPRequirement(int charLevel)
-    {
-        return 100 + (charLevel - 1) * 50;
-    }
-    
-
     private void UpdateUI()
     {
         uiManager.UpdateGoldUI(goldCount);
         uiManager.UpdateEnemyCountUI(enemyCount);
         uiManager.UpdateWaveCountUI(waveCount);
         uiManager.UpdateLevelCountUI(charLevel);
-        uiManager.UpdateXPUI(xp, xpRequired);
     }
 }
