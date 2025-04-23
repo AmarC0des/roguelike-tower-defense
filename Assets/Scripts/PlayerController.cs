@@ -110,6 +110,7 @@ public class PlayerController : MonoBehaviour
             // Move character
             transform.position += moveDirection.normalized * speed * Time.deltaTime;
         }
+    }
 
     public void DetachCharacter()
     {
