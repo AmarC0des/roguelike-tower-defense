@@ -37,6 +37,8 @@ public class PlayerController : MonoBehaviour
     const int IDLE_HAMMER_ANIM = 3;
     const int WALK_HAMMER_ANIM = 4;
     [SerializeField] Collider hammer;
+    bool charActive;
+    Vector3 oldPos;
 
     private void Start()
     {
@@ -120,15 +122,13 @@ public class PlayerController : MonoBehaviour
     public void AttachCharacter()
     {
         this.gameObject.transform.position = oldPos;
-
         charActive = true;
         character.gameObject.transform.parent = this.transform;
 
     }
+    void DisableHammer()
+    {
+        hammer.gameObject.SetActive(false);
+    }
 
-}
-void DisableHammer()
-{
-    hammer.gameObject.SetActive(false);
-}
 }
