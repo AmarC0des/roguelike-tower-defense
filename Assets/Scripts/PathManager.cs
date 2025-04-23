@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,7 +18,7 @@ public class PathManager : MonoBehaviour
     private int selectedTileIndex = -1;
     public Button currentlySelectedButton = null;
 
-  
+    public CinemachinePath path;
     private void Start()
     {
         selectionPanel.SetActive(false);
@@ -39,7 +40,7 @@ public class PathManager : MonoBehaviour
 
     public void SelectTile(int index)
     {
-        Debug.Log("Selected tile index: " + index); 
+        Debug.Log("Selected tile index: " + index);
 
         // Reset previously selected button's color
         if (currentlySelectedButton != null)
@@ -93,7 +94,7 @@ public class PathManager : MonoBehaviour
         selectedTileIndex = -1;
     }
 
-    
+
 
     private void ConnectPaths()
     {
