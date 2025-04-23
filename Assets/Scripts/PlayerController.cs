@@ -20,6 +20,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -35,15 +36,16 @@ public class PlayerController : MonoBehaviour
     const int ATTACK_ANIM = 2;
     const int IDLE_HAMMER_ANIM = 3;
     const int WALK_HAMMER_ANIM = 4;
-
-    public Vector3 oldPos;
-    public bool charActive;
+    [SerializeField] Collider hammer;
+    bool charActive;
+    Vector3 oldPos;
 
     private void Start()
     {
         charActive = true;
         anim = GetComponentInChildren<Animator2D>();
         direction = GetComponentInChildren<Direction4Way>();
+        hammer.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -65,10 +67,11 @@ public class PlayerController : MonoBehaviour
         // Check movement direction
         if (isWalkingUp) moveDirection += Vector3.back;
         if (isWalkingDown) moveDirection += Vector3.forward;
-        if (isWalkingLeft) moveDirection += Vector3.right;  
+        if (isWalkingLeft) moveDirection += Vector3.right;
         if (isWalkingRight) moveDirection += Vector3.left;  // Directions are flipped because of the rotation of the camera
 
-        if (charActive) {
+        if (charActive)
+        {
             // Only update direction when moving, and keep direction when not moving
             if (moveDirection != Vector3.zero)
             {
@@ -82,14 +85,31 @@ public class PlayerController : MonoBehaviour
                 // Move character
                 transform.position += moveDirection.normalized * speed * Time.deltaTime;
             }
-            // Set animation state based on movement
-            anim.SetAnimation(moveDirection != Vector3.zero ? WALK_ANIM : IDLE_ANIM);
+            if (Input.GetKey(KeyCode.Space) && !hammer.gameObject.activeSelf)
+            {
+                hammer.gameObject.SetActive(true);
+                hammer.GetComponent<Direction4Way>().direction = direction.direction;
+                hammer.GetComponent<Animator2D>().Start();
+                hammer.GetComponent<Animator2D>().RestartAnimation(0);
+                Invoke(nameof(DisableHammer), 0.3f);
+                hammer.transform.localPosition = new Vector3(direction.direction.x, 0, -direction.direction.y);
+            }
 
-            return;
+            // Set animation state based on movement/attack
+            if (hammer.gameObject.activeSelf)
+            {
+                anim.SetAnimation(ATTACK_ANIM);
+            }
+            else
+            {
+                anim.SetAnimation(moveDirection != Vector3.zero ? WALK_ANIM : IDLE_ANIM);
+
+                return;
+            }
+
+            // Move character
+            transform.position += moveDirection.normalized * speed * Time.deltaTime;
         }
-
-        // Move character
-        transform.position += moveDirection.normalized * speed * Time.deltaTime;
     }
 
     public void DetachCharacter()
@@ -103,9 +123,13 @@ public class PlayerController : MonoBehaviour
     public void AttachCharacter()
     {
         this.gameObject.transform.position = oldPos;
-
         charActive = true;
         character.gameObject.transform.parent = this.transform;
 
     }
+    void DisableHammer()
+    {
+        hammer.gameObject.SetActive(false);
+    }
+
 }

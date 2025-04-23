@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32c8da6cee478d249a3424e5d16f9f83, type: 3}
+  m_Name: HammerAttack
+  m_EditorClassIdentifier: 
+  DownAnimationFrames:
+  - Sprite: {fileID: -1429574959, guid: 72c20b21be6962c478b96c9df2ce35b2, type: 3}
+    HoldForTicks: 10
+    flipX: 0
+  - Sprite: {fileID: -112614373, guid: 72c20b21be6962c478b96c9df2ce35b2, type: 3}
+    HoldForTicks: 10
+    flipX: 0
+  - Sprite: {fileID: 949450304, guid: 72c20b21be6962c478b96c9df2ce35b2, type: 3}
+    HoldForTicks: 10
+    flipX: 0
+  UpAnimationFrames:
+  - Sprite: {fileID: -1429574959, guid: 72c20b21be6962c478b96c9df2ce35b2, type: 3}
+    HoldForTicks: 10
+    flipX: 0
+  - Sprite: {fileID: -112614373, guid: 72c20b21be6962c478b96c9df2ce35b2, type: 3}
+    HoldForTicks: 10
+    flipX: 0
+  - Sprite: {fileID: 949450304, guid: 72c20b21be6962c478b96c9df2ce35b2, type: 3}
+    HoldForTicks: 10
+    flipX: 0
+  SideAnimationFrames:
+  - Sprite: {fileID: 2087479202, guid: 72c20b21be6962c478b96c9df2ce35b2, type: 3}
+    HoldForTicks: 10
+    flipX: 0
+  - Sprite: {fileID: 1059134103, guid: 72c20b21be6962c478b96c9df2ce35b2, type: 3}
+    HoldForTicks: 10
+    flipX: 0
+  - Sprite: {fileID: 1140089354, guid: 72c20b21be6962c478b96c9df2ce35b2, type: 3}
+    HoldForTicks: 10
+    flipX: 0
+  Looping: 0
+  LoopStart: 0
+  LoopEnd: 0
