@@ -22,6 +22,10 @@ public class EnemySO : ScriptableObject
     public int atk;
     public float speed;
     public int HP;
+    public int expGiven;
+    public int goldGiven;
     [TextArea]
     public string description;
+    public AnimationData anim1;
+    public AnimationData anim2;
 }
