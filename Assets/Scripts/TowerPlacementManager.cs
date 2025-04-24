@@ -34,6 +34,7 @@
 
 
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TowerPlacementManager : MonoBehaviour
@@ -52,36 +53,47 @@ public class TowerPlacementManager : MonoBehaviour
     private bool isPlacing = false; // Tracks whether the player is currently previewing a tower
 
     public GameObject player;
+    List<Material> towerOGMaterials = new();
 
     void Update()
     {
-        // Detects when the player presses "T" to start or confirm tower placement
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            if (!isPlacing)
-            {
-                StartPreview(); // Start preview mode
-            }
-            else
-            {
-                ConfirmPlacement(); // Confirm and finalize tower placement
-            }
-        }
+        // Ryan Commented
+        // // Detects when the player presses "T" to start or confirm tower placement
+        // if (Input.GetKeyDown(KeyCode.T))
+        // {
+        //     if (!isPlacing)
+        //     {
+        //         StartPreview(null); // Start preview mode
+        //     }
+        //     else
+        //     {
+        //         ConfirmPlacement(); // Confirm and finalize tower placement
+        //     }
+        // }
+
 
         // While in preview mode, keep updating the preview tower's position
         if (isPlacing && previewTower != null)
         {
+            //Ryan Added
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                ConfirmPlacement(); // Confirm and finalize tower placement
+            }
+
             UpdatePreview(); // Update the preview based on terrain check
         }
     }
 
     // Starts the tower placement preview
-    public void StartPreview()
+    public void StartPreview(TowerSO towerSO)
     {
-        GetTerrain();
         isPlacing = true; // Enable placement mode
-        previewTower = Instantiate(towerPrefab, player.transform, worldPositionStays: false); // Create the preview tower
+        previewTower = Instantiate(towerSO.tower, transform, worldPositionStays: false); // Create the preview tower
+        previewTower.GetComponent<Collider>().isTrigger = true;
         player.GetComponent<PlayerController>().DetachCharacter();
+        previewTower.GetComponent<TowerObj>().enabled = false;
+        GetOGTowerMaterial(previewTower);
         // Apply the transparent material to make it look like a preview
         SetTowerMaterial(previewTower, canPlaceMat);
     }
@@ -94,10 +106,12 @@ public class TowerPlacementManager : MonoBehaviour
             if (CanPlaceOnTerrain(splatMapData, terrainData, 1))//Checks to see if tower can be placed on speific terrain layer
             {
                 isPlacing = false; // Disable placement mode
-                SetTowerMaterial(previewTower, solidMaterial); // Apply the solid material to finalize the tower
+                ResetTowerMaterial(previewTower);
                 previewTower.transform.parent = null;
+                previewTower.GetComponent<TowerObj>().enabled = true;
                 previewTower = null; // Clear reference to preview tower
                 player.GetComponent<PlayerController>().AttachCharacter();
+                
             }
             else
             {
@@ -109,7 +123,7 @@ public class TowerPlacementManager : MonoBehaviour
     // Calculates the position where the tower should be placed
     Vector3 GetPlacementPosition()
     {
-        return new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z); // Place tower near the player at ground level
+        return new Vector3(player.transform.position.x, player.transform.position.y-1f, player.transform.position.z); // Place tower near the player at ground level
     }
 
     // Applies a given material to all parts of the tower (useful for changing transparency)
@@ -121,11 +135,31 @@ public class TowerPlacementManager : MonoBehaviour
             rend.material = material; // Apply the new material
         }
     }
+    void ResetTowerMaterial(GameObject tower)
+    {
+        Renderer[] renderers = tower.GetComponentsInChildren<Renderer>(); // Get all renderers in the tower object
+        for (int i = 0; i < renderers.Length; i++)
+        {
+            print(towerOGMaterials[i]);
+            renderers[i].material = towerOGMaterials[i];
+        }
+    }
+    void GetOGTowerMaterial(GameObject tower)
+    {
+        Renderer[] renderers = tower.GetComponentsInChildren<Renderer>(true); // Get all renderers in the tower object
+        foreach (Renderer v in renderers)
+        {
+            print(v.gameObject);
+            towerOGMaterials.Add(v.material);
+        }
+    }
 
     void GetTerrain() //function used to get the terrain data via raycast
-    {
-        Ray ray = new Ray(transform.position, Vector3.down); 
-        if (Physics.Raycast(ray, out RaycastHit hit, 10f))
+    { 
+        //1 unit up to offset the 1 unit down when displaying preview.
+        Ray ray = new Ray(previewTower.transform.position + Vector3.up * 1f, Vector3.down);
+        Debug.DrawRay(previewTower.transform.position + Vector3.up * 1f, Vector3.down);
+        if (Physics.Raycast(ray, out RaycastHit hit, 50f))
         {
             Debug.Log(hit);
             //check to see if a terrain was hit
@@ -140,7 +174,7 @@ public class TowerPlacementManager : MonoBehaviour
 
     void GenerateSplatMapData()
     {
-        Collider towerCollider = GetComponentInChildren<BoxCollider>();
+        Collider towerCollider = GetComponentInChildren<Collider>(); //any collider
         if (!towerCollider) return; //Ensure collider exists
 
         Bounds bounds = towerCollider.bounds; //get collider bounds
@@ -192,18 +226,18 @@ public class TowerPlacementManager : MonoBehaviour
             previewTower.transform.position = GetPlacementPosition();
         }
 
-        if (terrain != null)                 
+        if (terrain != null)
             GenerateSplatMapData();
-            if (CanPlaceOnTerrain(splatMapData, terrainData, 1))//check to see if it can be placed
-            {
-                SetTowerMaterial(previewTower, canPlaceMat);
-                Debug.Log("Placement allowed!");
-            }
-            else
-            {
-                SetTowerMaterial(previewTower, cannotPlaceMat);
-                Debug.Log("Placement blocked due to forbidden texture!");
-            }
+        if (CanPlaceOnTerrain(splatMapData, terrainData, 1))//check to see if it can be placed
+        {
+            SetTowerMaterial(previewTower, canPlaceMat);
+            Debug.Log("Placement allowed!");
+        }
+        else
+        {
+            SetTowerMaterial(previewTower, cannotPlaceMat);
+            Debug.Log("Placement blocked due to forbidden texture!");
+        }
     }
 }
 

@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b96fe1e1ad872a42923d7c552027264, type: 3}
+  m_Name: Barracks
+  m_EditorClassIdentifier: 
+  tower: {fileID: 2592525518262912839, guid: a2528a5afa5c8a34bb7b5cb1e5ca571f, type: 3}
+  aimRadius: 10
+  shootRateSecs: 1
+  projectile: {fileID: 0}
