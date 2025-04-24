@@ -16,5 +16,3 @@ MonoBehaviour:
   speed: 1
   HP: 30
   description: Rallies nearby enemies to go faster
-  anim1: {fileID: 11400000, guid: 55b9f690f38b28b47ba9ce8680c8879e, type: 2}
-  anim2: {fileID: 11400000, guid: 4f73f69842b2948429327be1d7d2ac04, type: 2}
