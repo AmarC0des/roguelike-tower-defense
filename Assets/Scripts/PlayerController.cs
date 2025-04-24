@@ -70,22 +70,24 @@ public class PlayerController : MonoBehaviour
         if (isWalkingLeft) moveDirection += Vector3.right;
         if (isWalkingRight) moveDirection += Vector3.left;  // Directions are flipped because of the rotation of the camera
 
+        // Only update direction when moving, and keep direction when not moving
+        if (moveDirection != Vector3.zero)
+        {
+            // Convert movement to be relative to the character's rotation
+            moveDirection = transform.rotation * moveDirection;
+
+            // Convert movement to local space for animations
+            Vector3 localMoveDirection = transform.InverseTransformDirection(moveDirection);
+            direction.direction = Vector2Int.RoundToInt(new Vector2(localMoveDirection.x, -localMoveDirection.z));
+
+            // Move character
+            transform.position += moveDirection.normalized * speed * Time.deltaTime;
+        }
+        
         if (charActive)
         {
-            // Only update direction when moving, and keep direction when not moving
-            if (moveDirection != Vector3.zero)
-            {
-                // Convert movement to be relative to the character's rotation
-                moveDirection = transform.rotation * moveDirection;
-
-                // Convert movement to local space for animations
-                Vector3 localMoveDirection = transform.InverseTransformDirection(moveDirection);
-                direction.direction = Vector2Int.RoundToInt(new Vector2(localMoveDirection.x, -localMoveDirection.z));
-
-                // Move character
-                transform.position += moveDirection.normalized * speed * Time.deltaTime;
-            }
-            if (Input.GetKey(KeyCode.Space) && !hammer.gameObject.activeSelf)
+            
+            if (Input.GetKeyDown(KeyCode.Space) && !hammer.gameObject.activeSelf)
             {
                 hammer.gameObject.SetActive(true);
                 hammer.GetComponent<Direction4Way>().direction = direction.direction;
@@ -106,10 +108,8 @@ public class PlayerController : MonoBehaviour
 
                 return;
             }
-
-            // Move character
-            transform.position += moveDirection.normalized * speed * Time.deltaTime;
         }
+        
     }
 
     public void DetachCharacter()

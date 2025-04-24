@@ -1,0 +1,160 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8913756589881283525
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 992209325357240933}
+  m_Layer: 0
+  m_Name: ShootPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &992209325357240933
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8913756589881283525}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 6.29, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 29715182570111385}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &568342716157159026
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 18bd59803580f904f80bfcf0f3e836f4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 28.05
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 18bd59803580f904f80bfcf0f3e836f4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.12
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 18bd59803580f904f80bfcf0f3e836f4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 47.898983
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 18bd59803580f904f80bfcf0f3e836f4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 18bd59803580f904f80bfcf0f3e836f4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 18bd59803580f904f80bfcf0f3e836f4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 18bd59803580f904f80bfcf0f3e836f4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 18bd59803580f904f80bfcf0f3e836f4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 18bd59803580f904f80bfcf0f3e836f4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 18bd59803580f904f80bfcf0f3e836f4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2577548232221058511, guid: 18bd59803580f904f80bfcf0f3e836f4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 18bd59803580f904f80bfcf0f3e836f4, type: 3}
+      propertyPath: m_Name
+      value: Magic Tower 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8632055958874330854, guid: 18bd59803580f904f80bfcf0f3e836f4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8632055958874330854, guid: 18bd59803580f904f80bfcf0f3e836f4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.1082983
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects:
+    - {fileID: 65702495048144492, guid: 18bd59803580f904f80bfcf0f3e836f4, type: 3}
+    - {fileID: -8700617353114198275, guid: 18bd59803580f904f80bfcf0f3e836f4, type: 3}
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 18bd59803580f904f80bfcf0f3e836f4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 992209325357240933}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 18bd59803580f904f80bfcf0f3e836f4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5372160869166424790}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 18bd59803580f904f80bfcf0f3e836f4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4731056575939298113}
+  m_SourcePrefab: {fileID: 100100000, guid: 18bd59803580f904f80bfcf0f3e836f4, type: 3}
+--- !u!4 &29715182570111385 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 18bd59803580f904f80bfcf0f3e836f4, type: 3}
+  m_PrefabInstance: {fileID: 568342716157159026}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &802275570895772451 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 18bd59803580f904f80bfcf0f3e836f4, type: 3}
+  m_PrefabInstance: {fileID: 568342716157159026}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &5372160869166424790
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 802275570895772451}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.4926548
+  m_Height: 5.993232
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.5039611, z: -0.0052318573}
+--- !u!114 &4731056575939298113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 802275570895772451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1ec715e7bceb244bad4ab5a74c67c2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerInfo: {fileID: 11400000, guid: 37ef6da1fae3d044d8c57d73298dab3e, type: 2}
+  shootPoint: {fileID: 992209325357240933}

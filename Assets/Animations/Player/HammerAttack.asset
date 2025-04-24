@@ -35,13 +35,13 @@ MonoBehaviour:
   SideAnimationFrames:
   - Sprite: {fileID: 2087479202, guid: 72c20b21be6962c478b96c9df2ce35b2, type: 3}
     HoldForTicks: 10
-    flipX: 0
+    flipX: 1
   - Sprite: {fileID: 1059134103, guid: 72c20b21be6962c478b96c9df2ce35b2, type: 3}
     HoldForTicks: 10
-    flipX: 0
+    flipX: 1
   - Sprite: {fileID: 1140089354, guid: 72c20b21be6962c478b96c9df2ce35b2, type: 3}
     HoldForTicks: 10
-    flipX: 0
+    flipX: 1
   Looping: 0
   LoopStart: 0
   LoopEnd: 0
