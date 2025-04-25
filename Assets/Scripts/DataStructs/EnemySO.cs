@@ -24,4 +24,11 @@ public class EnemySO : ScriptableObject
     public int HP;
     [TextArea]
     public string description;
+
+    public AnimationData anim1;
+    public AnimationData anim2;
+
+    public Ability abl1;
+    public Ability abl2;
+
 }

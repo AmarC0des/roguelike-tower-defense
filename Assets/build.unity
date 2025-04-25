@@ -2563,10 +2563,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TowerPlaceUI: {fileID: 93874755}
+  LevelUpUI: {fileID: 0}
   goldCountText: {fileID: 995321290}
   enemyCountText: {fileID: 407202604}
   waveCountText: {fileID: 749317836}
   charLevelText: {fileID: 625008903}
+  XPText: {fileID: 0}
+  strengthText: {fileID: 0}
+  speedText: {fileID: 0}
+  pointsText: {fileID: 0}
+  strengthButton: {fileID: 0}
+  speedButton: {fileID: 0}
+  closeButton: {fileID: 0}
 --- !u!1 &1448801018 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2204441266170474882, guid: 241c5a58093b21d4bb2a20e14562ec3a, type: 3}
@@ -3315,6 +3323,7 @@ MonoBehaviour:
   furthestTile: {fileID: 1448801018}
   selectionPanel: {fileID: 93874755}
   currentlySelectedButton: {fileID: 0}
+  path: {fileID: 0}
 --- !u!4 &2091057389
 Transform:
   m_ObjectHideFlags: 0
@@ -3348,11 +3357,19 @@ MonoBehaviour:
   nextState: 0
   uiManager: {fileID: 1424175618}
   towerManager: {fileID: 849394057}
+  pathManager: {fileID: 0}
   stateText: {fileID: 645153429}
+  castleCol: {fileID: 0}
+  maxCastleHp: 0
+  curCastleHp: 0
+  xp: 0
+  xpRequired: 0
+  points: 0
   goldCount: 0
   enemyCount: 0
   waveCount: 0
   charLevel: 0
+  enemiesToSpawn: []
 --- !u!114 &389875195056405352 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2705074291292625090, guid: d2c72e752b826c041aa3ecec4fbc72d3, type: 3}
