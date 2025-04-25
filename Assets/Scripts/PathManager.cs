@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using Cinemachine;
 public class PathManager : MonoBehaviour
 {
 
@@ -17,7 +17,7 @@ public class PathManager : MonoBehaviour
     private int selectedTileIndex = -1;
     public Button currentlySelectedButton = null;
 
-  
+    public CinemachinePath path;
     private void Start()
     {
         selectionPanel.SetActive(false);

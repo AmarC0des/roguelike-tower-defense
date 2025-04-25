@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Abilites : MonoBehaviour
+public class Ability : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -14,5 +14,10 @@ public class Abilites : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void Activate()
+    {
+
     }
 }
