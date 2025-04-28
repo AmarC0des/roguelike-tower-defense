@@ -16,3 +16,7 @@ MonoBehaviour:
   speed: 2
   HP: 15
   description: Disables Nearby Towers
+  anim1: {fileID: 11400000, guid: 50cac55276e582a4aa5e37d049aae1f6, type: 2}
+  anim2: {fileID: 11400000, guid: 6df6813e7a1989b4ead952124977f7cf, type: 2}
+  abl1: {fileID: 0}
+  abl2: {fileID: 0}

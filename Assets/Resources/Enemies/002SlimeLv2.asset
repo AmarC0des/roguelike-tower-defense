@@ -16,3 +16,7 @@ MonoBehaviour:
   speed: 1
   HP: 10
   description: 
+  anim1: {fileID: 11400000, guid: 9206958eefa01f044976a17405dd4a49, type: 2}
+  anim2: {fileID: 11400000, guid: 918cfc7913ee2b74fb78e79d1689a21e, type: 2}
+  abl1: {fileID: 0}
+  abl2: {fileID: 0}

@@ -16,3 +16,7 @@ MonoBehaviour:
   speed: 1
   HP: 20
   description: Physical Resistance
+  anim1: {fileID: 11400000, guid: 81059a0a50b97cc4b93d2fc2d19702fe, type: 2}
+  anim2: {fileID: 11400000, guid: 06b7a2ba94713e447be05fb57c9f23a8, type: 2}
+  abl1: {fileID: 0}
+  abl2: {fileID: 0}
