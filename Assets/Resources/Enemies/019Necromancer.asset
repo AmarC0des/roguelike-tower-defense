@@ -16,3 +16,7 @@ MonoBehaviour:
   speed: 1
   HP: 30
   description: "Physical Resist\t\nSummons Lvl 1 Skeletons to Fight"
+  anim1: {fileID: 11400000, guid: 7768664c22dc3074482073e19d6c457a, type: 2}
+  anim2: {fileID: 11400000, guid: 75c98c9b1637b704e9f60c0ba265a5af, type: 2}
+  abl1: {fileID: 0}
+  abl2: {fileID: 0}
