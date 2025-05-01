@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9106798792208556239}
   - component: {fileID: 5315875626749501868}
+  - component: {fileID: 2642005500257211168}
   m_Layer: 0
   m_Name: Tile_Forest_001
   m_TagString: Untagged
@@ -86,6 +87,23 @@ MonoBehaviour:
   - position: {x: 36.05956, y: 0, z: 0.46240997}
     tangent: {x: 0.3499031, y: 0, z: -1.1528854}
     roll: 0
+--- !u!114 &2642005500257211168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2204441266170474882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df9961677ea4e0a41a61c56e9517a175, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: {fileID: 11400000, guid: 5921c52079c180a48a4478a227c27e34, type: 2}
+  tileStats: {fileID: 11400000, guid: 9704d11446f38f04384a9e738ed95537, type: 2}
+  path: {fileID: 5315875626749501868}
+  enemyCount: 0
+  enemyCountText: {fileID: 0}
 --- !u!1 &3662776028278103977
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 815305469712644405}
   - component: {fileID: 269813694758782375}
   - component: {fileID: 2602183170363176300}
+  - component: {fileID: 6050918611322700566}
   m_Layer: 0
   m_Name: EnemyTest
   m_TagString: Untagged
@@ -157,3 +158,15 @@ MonoBehaviour:
   currentAnimation: 0
   currentAnimationFrame: 0
   finishedFrames: 0
+--- !u!114 &6050918611322700566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 70930510765673804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02358b460015cd54fbdd8f601bdba030, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

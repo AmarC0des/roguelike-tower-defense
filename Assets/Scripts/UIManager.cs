@@ -45,23 +45,23 @@ public class UIManager : MonoBehaviour
 
     public void UpdateGoldUI(int gold)
     {
-        goldCountText.text = "Gold: " + gold;
+        goldCountText.text = gold.ToString();
     }
 
     public void UpdateEnemyCountUI(int enemyCount)
     {
-        enemyCountText.text = "Enemies: " + enemyCount;
+        enemyCountText.text = enemyCount.ToString();
     }
 
     public void UpdateWaveCountUI(int waveCount)
     {
-        waveCountText.text = "Wave: " + waveCount;
+        waveCountText.text = waveCount.ToString();
     }
 
     public void UpdateLevelCountUI(int charLevel)
     {
 
-        charLevelText.text = "Character Level: " + charLevel;
+        charLevelText.text = charLevel.ToString();
     }
 
     public void UpdatePoints(int updatedPoints)

@@ -10,7 +10,7 @@ public class PathManager : MonoBehaviour
     public List<GameObject> tilesPrefabs = new List<GameObject>(); //tiles are made of terrain/buildings and paths
     public List<Button> tileOptionButtons = new List<Button>(); // UI tile option buttons (RawImages)
     public List<GameObject> placedTiles = new List<GameObject>();
-    public List<RawImage> tileOptionImages = new List<RawImage>();        // RawImages assigned in Inspector
+    public List<Image> tileOptionImages = new List<Image>();        // RawImages assigned in Inspector Ryan: changed to Images from Raw Images because Images support individual sprites instead of a full texture.
 
     public GameObject furthestTile; //set in inspector to be the first tile
 
@@ -76,7 +76,7 @@ public class PathManager : MonoBehaviour
             return;
         }
 
-        GameObject selectedPrefab = tilesPrefabs[selectedTileIndex];
+        GameObject selectedPrefab = tilesPrefabs[selectedTileIndex*3+Random.Range(0,3)]; //x3 is the starting index (what type is it), random value is the offset (what random tile is it thats in the group)
         GameObject newTile = Instantiate(selectedPrefab, furthestTile.transform.position + new Vector3(0, 0, 50), Quaternion.identity);
         furthestTile = newTile;
         placedTiles.Add(newTile);
