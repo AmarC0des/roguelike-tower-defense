@@ -28,9 +28,9 @@ public class Billboard : MonoBehaviour
         float camRad = camAngle * Mathf.Deg2Rad;
         Vector2Int camIntendedDirection = Vector2Int.RoundToInt(new Vector2((float)Mathf.Cos(camRad), (float)Mathf.Sin(camRad)));
 
-        direction4Way.direction = Vector2Int.RoundToInt((Vector2)intendedDirection - (Vector2)camIntendedDirection);
+        
         Vector2Int vector2Int;
-        Vector2 intendedMinusCam = intendedDirection - camIntendedDirection;
+        Vector2 intendedPlusCam = intendedDirection + camIntendedDirection;
         if(intendedDirection-camIntendedDirection == Vector2Int.zero)
         {
             vector2Int = Vector2Int.up;
@@ -39,15 +39,19 @@ public class Billboard : MonoBehaviour
         {
             vector2Int = Vector2Int.down;
         }
-        else if(intendedDirection == new Vector2(-1, 1) ||  intendedDirection == new Vector2(1, -1) || intendedDirection == new Vector2(-1, 1) || intendedDirection == Vector2.one || intendedDirection == -Vector2.one)
+        else if(intendedDirection.x * camIntendedDirection.y == -1 || intendedDirection.y * camIntendedDirection.x == 1)
         {
             vector2Int = Vector2Int.left;
+        }
+        else if(intendedDirection.x * camIntendedDirection.y == 1 || intendedDirection.y * camIntendedDirection.x == -1)
+        {
+            vector2Int = Vector2Int.right;
         }
         else
         {
             vector2Int = Vector2Int.right;
         }
-        
+        direction4Way.direction = vector2Int;
         /*
         enemy    cam
         {-1, 0}, { 0, 1} = {-1, 0}

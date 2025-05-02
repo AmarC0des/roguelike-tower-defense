@@ -13,17 +13,26 @@ MonoBehaviour:
   m_Name: BigAttack
   m_EditorClassIdentifier: 
   DownAnimationFrames:
-  - Sprite: {fileID: 0}
-    HoldForTicks: 0
+  - Sprite: {fileID: 1492408459, guid: 9b662833c63238f418cf33da54fc9b7a, type: 3}
+    HoldForTicks: 10
+    flipX: 0
+  - Sprite: {fileID: 1665750269, guid: 9b662833c63238f418cf33da54fc9b7a, type: 3}
+    HoldForTicks: 10
     flipX: 0
   UpAnimationFrames:
-  - Sprite: {fileID: 0}
-    HoldForTicks: 0
+  - Sprite: {fileID: 1044561380, guid: 9b662833c63238f418cf33da54fc9b7a, type: 3}
+    HoldForTicks: 10
+    flipX: 0
+  - Sprite: {fileID: -1558820355, guid: 9b662833c63238f418cf33da54fc9b7a, type: 3}
+    HoldForTicks: 10
     flipX: 0
   SideAnimationFrames:
-  - Sprite: {fileID: 0}
-    HoldForTicks: 0
-    flipX: 0
-  Looping: 0
+  - Sprite: {fileID: -146934229, guid: 9b662833c63238f418cf33da54fc9b7a, type: 3}
+    HoldForTicks: 10
+    flipX: 1
+  - Sprite: {fileID: -1609009637, guid: 9b662833c63238f418cf33da54fc9b7a, type: 3}
+    HoldForTicks: 10
+    flipX: 1
+  Looping: 1
   LoopStart: 0
-  LoopEnd: 0
+  LoopEnd: 1

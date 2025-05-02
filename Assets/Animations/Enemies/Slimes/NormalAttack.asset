@@ -15,18 +15,24 @@ MonoBehaviour:
   DownAnimationFrames:
   - Sprite: {fileID: -894630852, guid: b155f5d9b761de3459d41da8eb334354, type: 3}
     HoldForTicks: 10
+    flipX: 0
   - Sprite: {fileID: -1594679999, guid: b155f5d9b761de3459d41da8eb334354, type: 3}
     HoldForTicks: 10
+    flipX: 0
   UpAnimationFrames:
   - Sprite: {fileID: -1526629295, guid: b155f5d9b761de3459d41da8eb334354, type: 3}
     HoldForTicks: 10
+    flipX: 0
   - Sprite: {fileID: -2012976223, guid: b155f5d9b761de3459d41da8eb334354, type: 3}
     HoldForTicks: 10
+    flipX: 0
   SideAnimationFrames:
   - Sprite: {fileID: -902867776, guid: b155f5d9b761de3459d41da8eb334354, type: 3}
     HoldForTicks: 10
+    flipX: 0
   - Sprite: {fileID: 1724516024, guid: b155f5d9b761de3459d41da8eb334354, type: 3}
     HoldForTicks: 10
+    flipX: 0
   Looping: 1
   LoopStart: 0
   LoopEnd: 1

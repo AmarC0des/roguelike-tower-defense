@@ -13,17 +13,26 @@ MonoBehaviour:
   m_Name: Magic
   m_EditorClassIdentifier: 
   DownAnimationFrames:
-  - Sprite: {fileID: 0}
-    HoldForTicks: 0
+  - Sprite: {fileID: 1584166296, guid: de821b1e04f96b442a2486ecce95fa0a, type: 3}
+    HoldForTicks: 10
+    flipX: 0
+  - Sprite: {fileID: 736756009, guid: de821b1e04f96b442a2486ecce95fa0a, type: 3}
+    HoldForTicks: 10
     flipX: 0
   UpAnimationFrames:
-  - Sprite: {fileID: 0}
-    HoldForTicks: 0
+  - Sprite: {fileID: 440726579, guid: de821b1e04f96b442a2486ecce95fa0a, type: 3}
+    HoldForTicks: 10
+    flipX: 0
+  - Sprite: {fileID: 903113257, guid: de821b1e04f96b442a2486ecce95fa0a, type: 3}
+    HoldForTicks: 10
     flipX: 0
   SideAnimationFrames:
-  - Sprite: {fileID: 0}
-    HoldForTicks: 0
-    flipX: 0
-  Looping: 0
+  - Sprite: {fileID: -1333292121, guid: de821b1e04f96b442a2486ecce95fa0a, type: 3}
+    HoldForTicks: 10
+    flipX: 1
+  - Sprite: {fileID: 44337187, guid: de821b1e04f96b442a2486ecce95fa0a, type: 3}
+    HoldForTicks: 10
+    flipX: 1
+  Looping: 1
   LoopStart: 0
-  LoopEnd: 0
+  LoopEnd: 1

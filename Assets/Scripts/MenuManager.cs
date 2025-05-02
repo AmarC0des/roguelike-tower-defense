@@ -7,7 +7,7 @@ public class MenuManager : MonoBehaviour
 {
     public void StartGame()
     {
-        SceneManager.LoadScene("MyMainScene");
+        SceneManager.LoadScene("build");
     }
 
     public void QuitGame()
@@ -22,7 +22,7 @@ public class MenuManager : MonoBehaviour
 
     public void PlayAgain()
     {
-        SceneManager.LoadScene("MyMainScene");
+        SceneManager.LoadScene("build");
     }
 
     public void GoToEnd()

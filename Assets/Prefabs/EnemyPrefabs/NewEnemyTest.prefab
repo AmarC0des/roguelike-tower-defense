@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
-  stats: {fileID: 0}
+  stats: {fileID: 11400000, guid: 730e9073781611b45963bc594df27265, type: 2}
   cart: {fileID: 0}
   canChase: 0
   isAttacking: 0

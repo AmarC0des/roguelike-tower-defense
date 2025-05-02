@@ -17,6 +17,6 @@ MonoBehaviour:
   HP: 100
   description: Physical Resist
   anim1: {fileID: 11400000, guid: f5d5c86e29ceb2f42be2ce6ebb14cf8a, type: 2}
-  anim2: {fileID: 0}
+  anim2: {fileID: 11400000, guid: f5d5c86e29ceb2f42be2ce6ebb14cf8a, type: 2}
   abl1: {fileID: 0}
   abl2: {fileID: 0}

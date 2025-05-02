@@ -13,20 +13,26 @@ MonoBehaviour:
   m_Name: MagicWalk
   m_EditorClassIdentifier: 
   DownAnimationFrames:
-  - Sprite: {fileID: 819884659, guid: dacb41d77a8e5f94589ff473fab3392a, type: 3}
-    HoldForTicks: 10
-  - Sprite: {fileID: -960402270, guid: dacb41d77a8e5f94589ff473fab3392a, type: 3}
-    HoldForTicks: 10
-  UpAnimationFrames:
   - Sprite: {fileID: -1700832984, guid: dacb41d77a8e5f94589ff473fab3392a, type: 3}
     HoldForTicks: 10
+    flipX: 0
   - Sprite: {fileID: -2049441734, guid: dacb41d77a8e5f94589ff473fab3392a, type: 3}
     HoldForTicks: 10
+    flipX: 0
+  UpAnimationFrames:
+  - Sprite: {fileID: 819884659, guid: dacb41d77a8e5f94589ff473fab3392a, type: 3}
+    HoldForTicks: 10
+    flipX: 0
+  - Sprite: {fileID: -960402270, guid: dacb41d77a8e5f94589ff473fab3392a, type: 3}
+    HoldForTicks: 10
+    flipX: 0
   SideAnimationFrames:
   - Sprite: {fileID: 1251851302, guid: dacb41d77a8e5f94589ff473fab3392a, type: 3}
     HoldForTicks: 10
+    flipX: 0
   - Sprite: {fileID: -937625302, guid: dacb41d77a8e5f94589ff473fab3392a, type: 3}
     HoldForTicks: 10
+    flipX: 0
   Looping: 1
   LoopStart: 0
   LoopEnd: 2
