@@ -35,13 +35,14 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         Debug.Log(GameManager.Instance.pathManager.path);
+        GetComponent<Animator2D>().animations[0] = stats.anim1;
+        GetComponent<Animator2D>().animations[1] = stats.anim2;
         setMoveSpeed(5);
         setHp(1);
         setAtk(1);
+        setAtkRate();
 
         curHp = maxHp;
-        
-
     }
 
     // Update is called once per frame
@@ -50,8 +51,8 @@ public class EnemyController : MonoBehaviour
         if (isAttacking)
         {
             BeginAtk();
-
         }
+        GetComponent<Animator2D>().SetAnimation(isAttacking?1:0);
     }
 
     public void ChangeState(EnemyState state)

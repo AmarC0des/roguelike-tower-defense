@@ -18,3 +18,7 @@ MonoBehaviour:
   description: 'Magic Resist
 
 '
+  anim1: {fileID: 11400000, guid: 997bb4b6a3ebda04ba7bb5a4eb7618f7, type: 2}
+  anim2: {fileID: 0}
+  abl1: {fileID: 0}
+  abl2: {fileID: 0}

@@ -13,17 +13,53 @@ MonoBehaviour:
   m_Name: Flying
   m_EditorClassIdentifier: 
   DownAnimationFrames:
-  - Sprite: {fileID: 0}
-    HoldForTicks: 0
+  - Sprite: {fileID: -1880578405, guid: 2ce99d96bfa774b46bc1eede5468bc9b, type: 3}
+    HoldForTicks: 6
+    flipX: 0
+  - Sprite: {fileID: -101134827, guid: 2ce99d96bfa774b46bc1eede5468bc9b, type: 3}
+    HoldForTicks: 6
+    flipX: 0
+  - Sprite: {fileID: -699898958, guid: 2ce99d96bfa774b46bc1eede5468bc9b, type: 3}
+    HoldForTicks: 6
+    flipX: 0
+  - Sprite: {fileID: 1147141572, guid: 2ce99d96bfa774b46bc1eede5468bc9b, type: 3}
+    HoldForTicks: 6
+    flipX: 0
+  - Sprite: {fileID: 89262059, guid: 2ce99d96bfa774b46bc1eede5468bc9b, type: 3}
+    HoldForTicks: 6
     flipX: 0
   UpAnimationFrames:
-  - Sprite: {fileID: 0}
-    HoldForTicks: 0
+  - Sprite: {fileID: -1880578405, guid: 2ce99d96bfa774b46bc1eede5468bc9b, type: 3}
+    HoldForTicks: 6
+    flipX: 0
+  - Sprite: {fileID: -101134827, guid: 2ce99d96bfa774b46bc1eede5468bc9b, type: 3}
+    HoldForTicks: 6
+    flipX: 0
+  - Sprite: {fileID: -699898958, guid: 2ce99d96bfa774b46bc1eede5468bc9b, type: 3}
+    HoldForTicks: 6
+    flipX: 0
+  - Sprite: {fileID: 1147141572, guid: 2ce99d96bfa774b46bc1eede5468bc9b, type: 3}
+    HoldForTicks: 6
+    flipX: 0
+  - Sprite: {fileID: 89262059, guid: 2ce99d96bfa774b46bc1eede5468bc9b, type: 3}
+    HoldForTicks: 6
     flipX: 0
   SideAnimationFrames:
-  - Sprite: {fileID: 0}
-    HoldForTicks: 0
+  - Sprite: {fileID: -1880578405, guid: 2ce99d96bfa774b46bc1eede5468bc9b, type: 3}
+    HoldForTicks: 6
     flipX: 0
-  Looping: 0
+  - Sprite: {fileID: -101134827, guid: 2ce99d96bfa774b46bc1eede5468bc9b, type: 3}
+    HoldForTicks: 6
+    flipX: 0
+  - Sprite: {fileID: -699898958, guid: 2ce99d96bfa774b46bc1eede5468bc9b, type: 3}
+    HoldForTicks: 6
+    flipX: 0
+  - Sprite: {fileID: 1147141572, guid: 2ce99d96bfa774b46bc1eede5468bc9b, type: 3}
+    HoldForTicks: 6
+    flipX: 0
+  - Sprite: {fileID: 89262059, guid: 2ce99d96bfa774b46bc1eede5468bc9b, type: 3}
+    HoldForTicks: 6
+    flipX: 0
+  Looping: 1
   LoopStart: 0
-  LoopEnd: 0
+  LoopEnd: 4

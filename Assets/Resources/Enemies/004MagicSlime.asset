@@ -16,3 +16,7 @@ MonoBehaviour:
   speed: 1
   HP: 20
   description: Magic Resist
+  anim1: {fileID: 11400000, guid: efb1be5d02fd0e747a943a7ac30da6f1, type: 2}
+  anim2: {fileID: 11400000, guid: efb1be5d02fd0e747a943a7ac30da6f1, type: 2}
+  abl1: {fileID: 0}
+  abl2: {fileID: 0}

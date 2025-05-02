@@ -20,6 +20,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -38,7 +39,7 @@ public class TileManager : MonoBehaviour
     private int totalSpawnedEnemies = 0;
 
     [SerializeField]
-    private Text enemyCountText;
+    private TMP_Text enemyCountText; //changed to tmp_text cause thats what UI is using
 
     private List<GameObject> spawnedEnemies = new List<GameObject>(); // Stores spawned enemies
 
@@ -46,8 +47,9 @@ public class TileManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        tileStats = type.SetTileStats(); //sets TileStats via method in TileType 
-        path = gameObject.GetComponent<CinemachinePath>();
+        tileStats = type.SetTileStats(); //sets TileStats via method in TileType
+        if(!path) 
+            path = gameObject.GetComponent<CinemachinePath>();
 
         UpdateEnemyCountUI(); // Update UI at start
     }
@@ -94,7 +96,7 @@ public class TileManager : MonoBehaviour
     {
         if (enemyCountText != null)
         {
-            enemyCountText.text = "Enemies Left: " + enemyCount.ToString();
+            enemyCountText.text = enemyCount.ToString();
         }
     }//End of UpdateEnemyCountUI
 

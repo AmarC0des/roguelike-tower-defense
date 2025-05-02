@@ -16,3 +16,7 @@ MonoBehaviour:
   speed: 2
   HP: 40
   description: "Physical Resist\t\nSpeeds up nearby Skeletons\n"
+  anim1: {fileID: 11400000, guid: 846764e87c058fe4cbc145e0b5bfcf4f, type: 2}
+  anim2: {fileID: 11400000, guid: 846764e87c058fe4cbc145e0b5bfcf4f, type: 2}
+  abl1: {fileID: 0}
+  abl2: {fileID: 0}

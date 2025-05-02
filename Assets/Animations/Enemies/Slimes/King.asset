@@ -14,42 +14,42 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DownAnimationFrames:
   - Sprite: {fileID: -1429997186, guid: 7e99c45b492883645a1d6a548f3e6dd6, type: 3}
-    HoldForTicks: 10
+    HoldForTicks: 5
     flipX: 0
   - Sprite: {fileID: -1686101051, guid: 7e99c45b492883645a1d6a548f3e6dd6, type: 3}
-    HoldForTicks: 10
+    HoldForTicks: 5
     flipX: 0
   - Sprite: {fileID: -266393639, guid: 7e99c45b492883645a1d6a548f3e6dd6, type: 3}
-    HoldForTicks: 10
+    HoldForTicks: 5
     flipX: 0
   - Sprite: {fileID: -1499366061, guid: 7e99c45b492883645a1d6a548f3e6dd6, type: 3}
-    HoldForTicks: 10
+    HoldForTicks: 5
     flipX: 0
   UpAnimationFrames:
   - Sprite: {fileID: -1863994536, guid: 7e99c45b492883645a1d6a548f3e6dd6, type: 3}
-    HoldForTicks: 10
+    HoldForTicks: 5
     flipX: 0
   - Sprite: {fileID: -1154075881, guid: 7e99c45b492883645a1d6a548f3e6dd6, type: 3}
-    HoldForTicks: 10
+    HoldForTicks: 5
     flipX: 0
   - Sprite: {fileID: 974305822, guid: 7e99c45b492883645a1d6a548f3e6dd6, type: 3}
-    HoldForTicks: 10
+    HoldForTicks: 5
     flipX: 0
   - Sprite: {fileID: 88820090, guid: 7e99c45b492883645a1d6a548f3e6dd6, type: 3}
-    HoldForTicks: 10
+    HoldForTicks: 5
     flipX: 0
   SideAnimationFrames:
   - Sprite: {fileID: -1312324498, guid: 7e99c45b492883645a1d6a548f3e6dd6, type: 3}
-    HoldForTicks: 10
+    HoldForTicks: 5
     flipX: 1
   - Sprite: {fileID: 1690309986, guid: 7e99c45b492883645a1d6a548f3e6dd6, type: 3}
-    HoldForTicks: 10
+    HoldForTicks: 5
     flipX: 1
   - Sprite: {fileID: 2084746097, guid: 7e99c45b492883645a1d6a548f3e6dd6, type: 3}
-    HoldForTicks: 10
+    HoldForTicks: 5
     flipX: 1
   - Sprite: {fileID: -524718828, guid: 7e99c45b492883645a1d6a548f3e6dd6, type: 3}
-    HoldForTicks: 10
+    HoldForTicks: 5
     flipX: 1
   Looping: 1
   LoopStart: 0

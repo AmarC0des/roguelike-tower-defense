@@ -18,3 +18,7 @@ MonoBehaviour:
   description: 'Flying
 
 '
+  anim1: {fileID: 11400000, guid: 3104e310c4b0df24c98d5369e7aa34c2, type: 2}
+  anim2: {fileID: 11400000, guid: 3104e310c4b0df24c98d5369e7aa34c2, type: 2}
+  abl1: {fileID: 0}
+  abl2: {fileID: 0}

@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 2602183170363176300}
   - component: {fileID: 105943823830214012}
   - component: {fileID: 190001355871019842}
+  - component: {fileID: 1705136221749957279}
   m_Layer: 0
   m_Name: NewEnemyTest
   m_TagString: Untagged
@@ -168,18 +169,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 70930510765673804}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cc227ef71c21724c96d583ef5db3b30, type: 3}
+  m_Script: {fileID: 11500000, guid: 0a217266397d6884da35336bb519335f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
-  nextState: 0
   stats: {fileID: 11400000, guid: 730e9073781611b45963bc594df27265, type: 2}
-  cart: {fileID: 6489870423266313827}
+  cart: {fileID: 0}
   canChase: 0
   isAttacking: 0
-  atkRate: 1
-  atkPower: 1
-  hp: 1
+  atkRate: 0
+  atkPower: 0
+  maxHp: 0
+  curHp: 0
 --- !u!54 &190001355871019842
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -207,3 +208,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &1705136221749957279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 70930510765673804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02358b460015cd54fbdd8f601bdba030, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -18,3 +18,7 @@ MonoBehaviour:
   description: 'MAgic
 
 '
+  anim1: {fileID: 11400000, guid: ce7e1b08f861a6b4b9f4806d6eecbcaa, type: 2}
+  anim2: {fileID: 11400000, guid: ce7e1b08f861a6b4b9f4806d6eecbcaa, type: 2}
+  abl1: {fileID: 0}
+  abl2: {fileID: 0}
