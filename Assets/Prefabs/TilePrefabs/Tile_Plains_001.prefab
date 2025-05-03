@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: {fileID: 11400000, guid: 5921c52079c180a48a4478a227c27e34, type: 2}
-  tileStats: {fileID: 11400000, guid: 9704d11446f38f04384a9e738ed95537, type: 2}
+  tileStats: {fileID: 0}
   path: {fileID: 649403302722736941}
   enemyCount: 0
   enemyCountText: {fileID: 0}

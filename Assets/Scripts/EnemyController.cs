@@ -1,11 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using System;
-using UnityEditor.Playables;
-using UnityEditor;
-using Unity.VisualScripting;
 
 public class EnemyController : MonoBehaviour
 {
@@ -25,6 +20,7 @@ public class EnemyController : MonoBehaviour
     public float atkPower =0;
     public int maxHp = 0;
     public int curHp = 0;
+    [SerializeField] GameObject poof;
 
     void OnAwake()
     {
@@ -178,5 +174,11 @@ public class EnemyController : MonoBehaviour
     public void TakeDamage(int damage)
     {
         curHp -= damage;
+        if(curHp <= 0)
+        {
+            GameManager.Instance.enemyCount--;
+            Destroy(gameObject);
+        }
+        Instantiate(poof, transform.position, transform.rotation);
     }
 }

@@ -181,6 +181,7 @@ MonoBehaviour:
   atkPower: 0
   maxHp: 0
   curHp: 0
+  poof: {fileID: 986826597919350409, guid: 8ed4342406c5e324282c50de1590befe, type: 3}
 --- !u!54 &190001355871019842
 Rigidbody:
   m_ObjectHideFlags: 0

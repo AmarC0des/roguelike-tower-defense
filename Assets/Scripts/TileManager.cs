@@ -77,7 +77,7 @@ public class TileManager : MonoBehaviour
             GameObject newEnemy;
 
             Debug.Log("EnemySpawned");
-            newEnemy = Instantiate(tileStats.GetEnemy(), path.m_Waypoints[0].position, Quaternion.identity);
+            newEnemy = Instantiate(tileStats.GetEnemy(GameManager.Instance.waveCount), path.m_Waypoints[0].position, Quaternion.identity);
             newEnemy.GetComponent<CinemachineDollyCart>().m_Path = path;
             enemyCount++;
             spawnedEnemies.Add(newEnemy); // Keep track of spawned enemies

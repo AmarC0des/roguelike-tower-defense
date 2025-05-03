@@ -21,19 +21,40 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "NewTile", menuName = "Data/TileStats")]
-public class TileStats : ScriptableObject {
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-    public List<GameObject> enemies = new List<GameObject>();//List of enemies that spawn here
-    public float spawnRate; //how fast enemies spawn
-    public int maxEnemyCount; //maxium enemies allowed. 
-
-
-
-    public GameObject GetEnemy()
+//More stronger enemies show up as the wave number increases.
+//Ryan Trozzolo
+[CreateAssetMenu(fileName = "TileStats", menuName = "ScriptableObjects/TileStatsScriptableObject")]
+public class TileStats : ScriptableObject
+{
+    public const int TOTAL_WAVES = 10;
+    public int maxEnemyCount;
+    public float spawnRate;
+    public EnemyGroup[] enemyGroups;
+    public GameObject boss;
+    public GameObject finalBoss;
+    
+    
+    [System.Serializable]
+    public class EnemyGroup
     {
-        GameObject newEnemy;
-        newEnemy = enemies[Random.Range(0, enemies.Count)];
-        return newEnemy;
+        public GameObject[] enemies;
+        
+    }
+    public GameObject GetEnemy(int wave)
+    {
+        if(wave == 10)
+        {
+            return finalBoss;
+        }
+        EnemyGroup enemyGroup = enemyGroups[wave/(TOTAL_WAVES/enemyGroups.Length)]; //scale up to total waves by the number of enemy packs.
+        //ie if the number of enemy groups equals 5, and the total waves equals 10, then each enemy group will show up 2 times.
+        //0011223344
+        //enemy groups will then be customly sorted to be from weak to strong.
+        return enemyGroup.enemies[Random.Range(0, enemyGroup.enemies.Length)];
     }
 }
+

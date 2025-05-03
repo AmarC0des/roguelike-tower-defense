@@ -33,23 +33,23 @@ public class Billboard : MonoBehaviour
         Vector2 intendedPlusCam = intendedDirection + camIntendedDirection;
         if(intendedDirection-camIntendedDirection == Vector2Int.zero)
         {
-            vector2Int = Vector2Int.up;
+            vector2Int = Vector2Int.down;
         }
         else if(intendedDirection+camIntendedDirection == Vector2Int.zero)
         {
-            vector2Int = Vector2Int.down;
+            vector2Int = Vector2Int.up;
         }
         else if(intendedDirection.x * camIntendedDirection.y == -1 || intendedDirection.y * camIntendedDirection.x == 1)
         {
-            vector2Int = Vector2Int.left;
+            vector2Int = Vector2Int.right;
         }
         else if(intendedDirection.x * camIntendedDirection.y == 1 || intendedDirection.y * camIntendedDirection.x == -1)
         {
-            vector2Int = Vector2Int.right;
+            vector2Int = Vector2Int.left;
         }
         else
         {
-            vector2Int = Vector2Int.right;
+            vector2Int = Vector2Int.left;
         }
         direction4Way.direction = vector2Int;
         /*
