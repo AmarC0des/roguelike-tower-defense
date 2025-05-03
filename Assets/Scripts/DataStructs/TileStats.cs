@@ -13,16 +13,7 @@
  * 
  */
 
-using System.Collections;
-using System.Collections.Generic;
-using System.Text;
-using JetBrains.Annotations;
-using Unity.VisualScripting;
-using UnityEngine;
 
-
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 //More stronger enemies show up as the wave number increases.
