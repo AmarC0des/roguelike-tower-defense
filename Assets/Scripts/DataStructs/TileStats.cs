@@ -21,7 +21,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "TileStats", menuName = "ScriptableObjects/TileStatsScriptableObject")]
 public class TileStats : ScriptableObject
 {
-    public const int TOTAL_WAVES = 10;
+    public const int TOTAL_WAVES = 15;
     public int maxEnemyCount;
     public float spawnRate;
     public EnemyGroup[] enemyGroups;

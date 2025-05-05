@@ -27,6 +27,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
@@ -105,10 +106,13 @@ public class GameManager : MonoBehaviour
                 HandleProgression();
                 break;
             case GameState.WinGame:
-                HandleWinGame();
+                ToWinScreen();
                 break;
             case GameState.Gameover:
-                HandleGameOver();
+                ToGameOverScreen();
+                break;
+            case GameState.TitleScreen: //ryan t
+                ToTitleScreen();
                 break;
         }
     }
@@ -143,7 +147,7 @@ public class GameManager : MonoBehaviour
         towerManager.enabled = false;
         uiManager.TowerPlaceUI.SetActive(false);
         stateText.text = "Wave Phase";
-        nextState = GameState.Progression;
+        nextState = waveCount == 10 ? GameState.WinGame : GameState.Progression; //ryan t
 
         UpdateUI();
     }
@@ -184,7 +188,15 @@ public class GameManager : MonoBehaviour
 
     void ToTitleScreen()
     {
-
+        SceneManager.LoadScene("TitleScreen");
+    }
+    void ToWinScreen()
+    {
+        SceneManager.LoadScene("WinScreen");
+    }
+    void ToGameOverScreen()
+    {
+        SceneManager.LoadScene("EndScreen");
     }
 
     private void UpdateUI()
