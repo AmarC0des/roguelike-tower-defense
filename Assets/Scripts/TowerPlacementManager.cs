@@ -140,9 +140,9 @@ public class TowerPlacementManager : MonoBehaviour
         Renderer[] renderers = tower.GetComponentsInChildren<Renderer>(); // Get all renderers in the tower object
         for (int i = 0; i < renderers.Length; i++)
         {
-            print(towerOGMaterials[i]);
             renderers[i].material = towerOGMaterials[i];
         }
+        towerOGMaterials.Clear();
     }
     void GetOGTowerMaterial(GameObject tower)
     {
@@ -156,17 +156,16 @@ public class TowerPlacementManager : MonoBehaviour
 
     void GetTerrain() //function used to get the terrain data via raycast
     { 
+        if(!previewTower) return;
         //1 unit up to offset the 1 unit down when displaying preview.
         Ray ray = new Ray(previewTower.transform.position + Vector3.up * 1f, Vector3.down);
         Debug.DrawRay(previewTower.transform.position + Vector3.up * 1f, Vector3.down);
         if (Physics.Raycast(ray, out RaycastHit hit, 50f))
         {
-            Debug.Log(hit);
             //check to see if a terrain was hit
             if (hit.collider.GetType() == typeof(TerrainCollider))
             {
                 terrain = hit.collider.gameObject.GetComponent<Terrain>(); //get terrain from collider
-                Debug.Log(terrain.gameObject.name);
             }
 
         }
