@@ -18,9 +18,6 @@
 
 
 
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -114,6 +111,7 @@ public class PlayerController : MonoBehaviour
 
     public void DetachCharacter()
     {
+        if(!charActive) return;
         oldPos = transform.position;
         charActive = false;
         character.gameObject.transform.parent = null;

@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c37d67f450a3b9b43870e3bd4086ccf4, type: 3}
-  m_Name: Plains
+  m_Name: Forest
   m_EditorClassIdentifier: 
   allTileStats:
-  - {fileID: 11400000, guid: dee8df6b3b2d90448834b6b20f339126, type: 2}
-  - {fileID: 11400000, guid: 054b94a59afcb2d4283a089209a98b6d, type: 2}
-  - {fileID: 11400000, guid: da1b42b624b5e354597f5b54ded47340, type: 2}
+  - {fileID: 11400000, guid: 7d5dbe33552b54046934e193343917c1, type: 2}
+  - {fileID: 11400000, guid: a64d9a1912b5a4e43acac702792d50ba, type: 2}
+  - {fileID: 11400000, guid: 4294e2bbb6c5f544e816622209eb84c3, type: 2}

@@ -19,6 +19,7 @@ public class TowerProjectile : MonoBehaviour
         if ((transform.position - target.transform.position).magnitude < sizeRadius)
         {
             //Todo: Damage Enemy
+            target.GetComponent<EnemyController>().TakeDamage(damage);
             Die();
         }
     }

@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c37d67f450a3b9b43870e3bd4086ccf4, type: 3}
-  m_Name: Plains
+  m_Name: Wastes
   m_EditorClassIdentifier: 
   allTileStats:
-  - {fileID: 11400000, guid: dee8df6b3b2d90448834b6b20f339126, type: 2}
-  - {fileID: 11400000, guid: 054b94a59afcb2d4283a089209a98b6d, type: 2}
-  - {fileID: 11400000, guid: da1b42b624b5e354597f5b54ded47340, type: 2}
+  - {fileID: 11400000, guid: 1dbd19f44a6dd0a49abab72413e3ebcb, type: 2}
+  - {fileID: 11400000, guid: e35fe535bd91b5646a6bb3f4afb3c0e3, type: 2}
+  - {fileID: 11400000, guid: 0ae26453bbc743842bb99e8191a3d284, type: 2}

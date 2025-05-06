@@ -656,8 +656,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df9961677ea4e0a41a61c56e9517a175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: {fileID: 11400000, guid: 5921c52079c180a48a4478a227c27e34, type: 2}
-  tileStats: {fileID: 11400000, guid: 9704d11446f38f04384a9e738ed95537, type: 2}
+  type: {fileID: 11400000, guid: 6bff9b3375b32084f8c1041a6a7a9f01, type: 2}
+  tileStats: {fileID: 0}
   path: {fileID: 3706094470224187518}
   enemyCount: 0
   enemyCountText: {fileID: 0}

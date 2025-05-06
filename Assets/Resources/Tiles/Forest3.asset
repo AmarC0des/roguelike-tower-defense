@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe12a265675b0a347890f9253f03b05b, type: 3}
+  m_Name: Forest3
+  m_EditorClassIdentifier: 
+  maxEnemyCount: 10
+  spawnRate: 0.5
+  enemyGroups:
+  - enemies:
+    - {fileID: 5170109799770366935, guid: e232f48cb5350c7498ee0b4915401e5f, type: 3}
+    - {fileID: 5170109799770366935, guid: 8a380d88beb63284295d0d2dde99e729, type: 3}
+    - {fileID: 5170109799770366935, guid: 54fa979575c92224b90b8424ed307017, type: 3}
+    - {fileID: 5170109799770366935, guid: 39b24b89ee360a74aa8430779967a8dc, type: 3}
+  - enemies:
+    - {fileID: 5170109799770366935, guid: 54fa979575c92224b90b8424ed307017, type: 3}
+    - {fileID: 5170109799770366935, guid: 1aaf5cfb40a95104ba8469e6790aed95, type: 3}
+    - {fileID: 5170109799770366935, guid: 700188045d2e8c043bd3d2c9ac5de9ad, type: 3}
+    - {fileID: 5170109799770366935, guid: d1641f65363d29c459e8c7ba0a9c52a8, type: 3}
+  - enemies:
+    - {fileID: 5170109799770366935, guid: 1aaf5cfb40a95104ba8469e6790aed95, type: 3}
+    - {fileID: 5170109799770366935, guid: 700188045d2e8c043bd3d2c9ac5de9ad, type: 3}
+    - {fileID: 5170109799770366935, guid: d1641f65363d29c459e8c7ba0a9c52a8, type: 3}
+  - enemies:
+    - {fileID: 5170109799770366935, guid: 0cb93d65d6f15c44792a125fbcf08152, type: 3}
+    - {fileID: 5170109799770366935, guid: 8f1a76304b11f064aac250b2f157e193, type: 3}
+    - {fileID: 5170109799770366935, guid: e166797da7f2cf341b2709b594a57756, type: 3}
+    - {fileID: 5170109799770366935, guid: 700188045d2e8c043bd3d2c9ac5de9ad, type: 3}
+    - {fileID: 5170109799770366935, guid: aed07b6550e9a0540bdd8492cc7d8caf, type: 3}
+  - enemies:
+    - {fileID: 5170109799770366935, guid: 8f1a76304b11f064aac250b2f157e193, type: 3}
+    - {fileID: 5170109799770366935, guid: 17286557b3c3fd8498715541ccdce9c4, type: 3}
+    - {fileID: 5170109799770366935, guid: 57fd245d43b8c7240857cdf75c9d28f8, type: 3}
+    - {fileID: 5170109799770366935, guid: 9628bb74aa922334ab288b88031dd0a8, type: 3}
+    - {fileID: 5170109799770366935, guid: aed07b6550e9a0540bdd8492cc7d8caf, type: 3}
+  boss: {fileID: 5170109799770366935, guid: 624a85c12cca2fe4483437ddd202163a, type: 3}
+  finalBoss: {fileID: 5170109799770366935, guid: 0eee2ee83d245634a9b4f0ba7a8a1c5b, type: 3}
