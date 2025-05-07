@@ -29,11 +29,9 @@ public class TileManager : MonoBehaviour
     public TileType type;
     private float timeSinceLastSpawn = -5; //5 second runoff before spawntimer begins
 
-    [SerializeField]
-    private TileStats tileStats;
+    public TileStats tileStats;
 
     bool canSpawn;
-    public int enemyCount;
     private int totalSpawnedEnemies = 0;
 
     private List<GameObject> spawnedEnemies = new List<GameObject>(); // Stores spawned enemies
@@ -76,15 +74,15 @@ public class TileManager : MonoBehaviour
     //Method used to spawn enemies on the tile
     public void SpawnEnemy()
     {
-        if( totalSpawnedEnemies <= tileStats.maxEnemyCount) //checks to make sure max enemy count per tile is set.
+        if( totalSpawnedEnemies < tileStats.maxEnemyCount) //checks to make sure max enemy count per tile is set.
         {
             GameObject newEnemy;
             newEnemy = Instantiate(tileStats.GetEnemy(GameManager.Instance.waveCount), GameManager.Instance.pathManager.path.m_Waypoints[0].position, Quaternion.identity);
             newEnemy.GetComponent<CinemachineDollyCart>().m_Path = GameManager.Instance.pathManager.path;
-            enemyCount++;
             spawnedEnemies.Add(newEnemy); //keep track of spawned enemies
             totalSpawnedEnemies++;
-
+            GameManager.Instance.UpdateUI();
+            
  
             return;
         }

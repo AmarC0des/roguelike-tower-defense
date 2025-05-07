@@ -61,28 +61,25 @@ public class PathManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) //just a test, will be removed when game is more defined
-        {
-            PlaceTile();
-        }
+       
     }
 
     //Method for dropping a new terrain in. 
     public void PlaceTile()
     {
-        
-         if (selectedTileIndex < 0 || selectedTileIndex >= tilesPrefabs.Count)
-         {
-             Debug.LogWarning("No valid tile selected!");
-             return;
-         } 
 
-         GameObject selectedPrefab = tilesPrefabs[selectedTileIndex*3+Random.Range(0,3)]; //x3 is the starting index (what type is it), random value is the offset (what random tile is it thats in the group)
+        if (selectedTileIndex < 0 || selectedTileIndex >= tilesPrefabs.Count)
+        {
+            Debug.LogWarning("No valid tile selected!");
+            return;
+        }
+
+        GameObject selectedPrefab = tilesPrefabs[selectedTileIndex * 3 + Random.Range(0, 3)]; //x3 is the starting index (what type is it), random value is the offset (what random tile is it thats in the group)
         // GameObject selectedPrefab = tilesPrefabs[Random.Range(0, tilesPrefabs.Count)];
 
         GameObject newTile = Instantiate(selectedPrefab, furthestTile.transform.position + new Vector3(0, 0, 50), Quaternion.identity);
         furthestTile = newTile;
-        placedTiles.Insert(0,newTile);
+        placedTiles.Insert(0, newTile);
 
         selectionPanel.SetActive(false);
 
@@ -96,7 +93,7 @@ public class PathManager : MonoBehaviour
 
         selectedTileIndex = -1;
         ConnectPaths();
-
+        GameManager.Instance.ChangeState();
     }
 
 
@@ -116,6 +113,7 @@ public class PathManager : MonoBehaviour
                 tilePath.m_Waypoints[i].position.z += zOffset;
                 allWaypoints.Add(tilePath.m_Waypoints[i]); //add to waypoint to all waypoint list.
                 tilePath.m_Waypoints[i].position.z -= zOffset;
+               
             }
 
         }
@@ -125,5 +123,20 @@ public class PathManager : MonoBehaviour
         path.InvalidateDistanceCache();
 
         Debug.Log($"Merged {allWaypoints.Count} waypoints into the combined path.");
+    }
+
+    public int GetMaxEnemyCount()
+    {
+        int count = 0;
+
+        foreach (GameObject tile in placedTiles)
+        {
+            if (tile.GetComponent<TileManager>() != null)
+            {
+                count += tile.GetComponent<TileManager>().tileStats.maxEnemyCount;
+            }
+        }
+
+        return count;
     }
 }

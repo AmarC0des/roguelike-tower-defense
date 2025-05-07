@@ -191,8 +191,5 @@ public class PlayerController : MonoBehaviour
        
     }
 
-    public void SetSpeed() //invert this make it a mehtod of gm
-    {
-        speed = GameManager.Instance.speed;
-    }
+
 }

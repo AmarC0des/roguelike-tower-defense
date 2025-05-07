@@ -172,18 +172,18 @@ public class EnemyController : MonoBehaviour
         curHp -= damage;
         if(curHp <= 0)
         {
-            GameManager.Instance.enemyCount--;
-            Destroy(gameObject);
+            Die();
         }
         Instantiate(poof, transform.position, transform.rotation);
     }
 
     void Die()
     {
-        GameManager.Instance.enemyCount--;
+        GameManager.Instance.maxEnemyCount--;
         GameManager.Instance.goldCount+= stats.gold;
-        GameManager.Instance.xp += stats.xp;
+        GameManager.Instance.GainXP(stats.xp);
+        GameManager.Instance.UpdateUI();
 
-        Destroy(gameObject);
+        Destroy(this.gameObject);
     }
 }
