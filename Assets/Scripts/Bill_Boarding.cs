@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Billboard : MonoBehaviour
 {
-    private Camera targetCamera; // Reference to the camera
+    public Camera targetCamera; // Reference to the camera
     Direction4Way direction4Way;
 
     private PlayerController player;
@@ -19,6 +19,8 @@ public class Billboard : MonoBehaviour
 
     void LateUpdate()
     {
+
+
         //find facing direction as a vector2.
         float angle = transform.rotation.eulerAngles.y-90;
         float rad = angle * Mathf.Deg2Rad;
@@ -73,7 +75,7 @@ public class Billboard : MonoBehaviour
 
             transform.rotation = Quaternion.LookRotation(-direction); // Faces the camera
         }
-        
+
 
     }
 }

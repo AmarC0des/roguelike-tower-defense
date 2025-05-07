@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
 {
     public GameObject TowerPlaceUI;
     public GameObject LevelUpUI;  // New Level-Up Panel
+    public GameObject OpeningScreenUI;
 
     public TMP_Text goldCountText, enemyCountText, waveCountText, charLevelText, XPText;
     public TMP_Text strengthText, speedText, pointsText;

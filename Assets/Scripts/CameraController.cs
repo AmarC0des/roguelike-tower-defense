@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 //This class will eventually be absorbed by GameManager or PlayerController
 //Commented code is for mouse rotation for future consideration
@@ -9,7 +10,7 @@ public class CameraController : MonoBehaviour
     public GameObject frontView;
     private float currentRotation = 0f; // Tracks the current rotation angle
     private float targetRotation = 0f;
-
+    public GameObject charSprite;
     // Variables for mouse rotation option
     // private float mouseX, mouseY;
     // private bool isFreeLook = true; // Flag to toggle free camera rotation
@@ -33,12 +34,7 @@ public class CameraController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q)) RotateCamera(-90f); // Counterclockwise
         if (Input.GetKeyDown(KeyCode.E)) RotateCamera(90f);  // Clockwise
 
-        /* For Camera rotation with mouse if needed
-        if (isFreeLook)
-        {
-            RotateCamera();
-        } 
-        */
+       
         currentRotation = Mathf.LerpAngle(currentRotation, targetRotation, Time.deltaTime * 5);
         transform.rotation = Quaternion.Euler(0, currentRotation, 0);
     }
@@ -52,24 +48,12 @@ public class CameraController : MonoBehaviour
         targetRotation += angle;
     }
 
-    // Handles free camera rotation around the character
-    /* Rotation with mouse alternative option
-    void RotateCamera()
-    {
-        mouseX += Input.GetAxis("Mouse X") * rotationSpeed;
-        mouseY -= Input.GetAxis("Mouse Y") * rotationSpeed;
-        mouseY = Mathf.Clamp(mouseY, -30, 60); // Limits vertical rotation
-
-        // Rotates the character itself
-        transform.rotation = Quaternion.Euler(0, mouseX, 0);
-    } 
-    */
-
     void ChangeToTopView()
     {
         //isFreeLook = false; // Disables free rotation
         topView.SetActive(true);
         frontView.SetActive(false);
+      
     }
 
     void ChangeToFrontView()
@@ -77,5 +61,6 @@ public class CameraController : MonoBehaviour
         //isFreeLook = true; // Enables free rotation
         topView.SetActive(false);
         frontView.SetActive(true);
+
     }
 }

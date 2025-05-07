@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
     public UIManager uiManager;
     public TowerPlacementManager towerManager;
     public PathManager pathManager;
-
+    public PlayerController player;
 
     public TMP_Text stateText;
 
@@ -49,12 +49,17 @@ public class GameManager : MonoBehaviour
 
     public int xp, xpRequired, points;
     public int goldCount;
-    public int enemyCount;
+    public int maxEnemyCount;
     public int waveCount;
     public int charLevel;
 
-    public List<GameObject> enemiesToSpawn = new List<GameObject>();
-    private List<GameObject> spawnedEnemies = new List<GameObject>(); // Stores spawned enemies
+    public int power;
+    public float speed;
+
+    public bool canSpawnBoss;
+
+    public GameObject finalBoss;
+    
 
 
     void Awake()
@@ -68,16 +73,25 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        curCastleHp = maxCastleHp;
         nextState = GameState.StartGame;
         ChangeState();
+        
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (xp >= xpRequired)
         {
-            FindObjectOfType<GameManager>().GainXP(50);
+            GainXP(50);
+        }
+        if (currentState == GameState.Wave && maxEnemyCount <= 0)
+        {
+            ChangeState();
+        }
+
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            CastleTakeDamage(10);
         }
     }
 
@@ -119,20 +133,24 @@ public class GameManager : MonoBehaviour
 
     private void HandleStartGame()
     {
+        pathManager.ConnectPaths();
+        curCastleHp = maxCastleHp;
         stateText.text = "Game Started";
         nextState = GameState.SetUp;
         goldCount = 0;
-        enemyCount = 0;
+        maxEnemyCount = 0;
         waveCount = 0;
         charLevel = 1;
+        power = 5;
+        speed = 3f;
         xpRequired = CalculateXPRequirement(charLevel);
-
+        uiManager.OpeningScreenUI.SetActive(true);
         UpdateUI();
-
     }
 
     private void HandlePlanning()
     {
+        uiManager.OpeningScreenUI.SetActive(false);
         waveCount++;
         towerManager.enabled = true;
         uiManager.TowerPlaceUI.SetActive(true);
@@ -144,11 +162,15 @@ public class GameManager : MonoBehaviour
 
     private void HandleWave()
     {
+        maxEnemyCount = pathManager.GetMaxEnemyCount();
         towerManager.enabled = false;
         uiManager.TowerPlaceUI.SetActive(false);
         stateText.text = "Wave Phase";
-        nextState = waveCount == 10 ? GameState.WinGame : GameState.Progression; //ryan t
-
+        if (waveCount == 10)
+        {
+            SpawnBoss();
+        }
+        nextState = GameState.Progression;
         UpdateUI();
     }
 
@@ -171,13 +193,7 @@ public class GameManager : MonoBehaviour
     private void HandleGameOver()
     {
         stateText.text = "Game Over Phase";
-        nextState = GameState.TitleScreen;
-    }
-
-    bool AllEnemiesDefeated()
-    {
-
-        return false;
+        SceneManager.LoadScene("EndScreen");
     }
 
     public void PlayerDied()
@@ -199,10 +215,10 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("EndScreen");
     }
 
-    private void UpdateUI()
+    public void UpdateUI()
     {
         uiManager.UpdateGoldUI(goldCount);
-        uiManager.UpdateEnemyCountUI(enemyCount);
+        uiManager.UpdateEnemyCountUI(maxEnemyCount);
         uiManager.UpdateWaveCountUI(waveCount);
         uiManager.UpdateLevelCountUI(charLevel);
         uiManager.UpdateXPUI(xp, xpRequired);
@@ -212,17 +228,18 @@ public class GameManager : MonoBehaviour
     {
         curCastleHp -= Mathf.RoundToInt(damage);
         Debug.Log(curCastleHp);
+        if (curCastleHp <= 0)
+        {
+            nextState = GameState.Gameover;
+            ChangeState();
+        }
     }
-    public void PlayerTakeDamage(float damage)
-    {
-
-    }
-
+  
     public void GainXP(int amount)
     {
         xp += amount;
 
-        while (xp >= xpRequired)
+        if (xp >= xpRequired)
         {
             LevelUp();
         }
@@ -232,6 +249,7 @@ public class GameManager : MonoBehaviour
     // Trigger level-up when XP threshold is reached
     public void LevelUp()
     {
+        Time.timeScale = 0f;
         charLevel++; // Increase character level
         points = 3; // Give player 3 stat points upon leveling up
         xp = 0; // Reset XP after leveling up
@@ -244,9 +262,48 @@ public class GameManager : MonoBehaviour
         uiManager.LevelUpUI.SetActive(true); // Show the level-up screen
     }
 
+    public void incPower()
+    {
+        power++;
+    }
+    public void incSpeed()
+    {
+        speed += .5f;
+    }
+
+    public void DoneLeveling()
+    {
+        Time.timeScale = 1f;
+        uiManager.LevelUpUI.SetActive(true); // Show the level-up screen
+        SetSpeed(speed);
+    }
+    public void SetSpeed(float spdValue) //invert this make it a mehtod of gm
+    {
+        player.speed = spdValue;
+    }
     // Calculate XP required for the next level (scales per level)
     int CalculateXPRequirement(int charLevel)
     {
-        return 100 + (charLevel - 1) * 50;
+        return 50 + (charLevel - 1) * 50;
+    }
+
+
+    public void SpawnBoss()
+    {
+        if (canSpawnBoss)
+        {
+            GameObject boss;
+            boss = Instantiate(finalBoss, pathManager.path.m_Waypoints[0].position, Quaternion.identity);
+        }
+        
+    }
+
+    public void RepairCastle()
+    {
+        if (goldCount >= 50)
+        {
+            goldCount -=50;
+            curCastleHp = maxCastleHp;
+        }
     }
 }

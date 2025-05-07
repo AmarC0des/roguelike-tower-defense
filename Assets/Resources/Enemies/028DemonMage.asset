@@ -22,3 +22,5 @@ MonoBehaviour:
   anim2: {fileID: 11400000, guid: e1a7fbb6d5087bd45802b42edea3e73d, type: 2}
   abl1: {fileID: 0}
   abl2: {fileID: 0}
+  gold: 12
+  xp: 25

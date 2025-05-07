@@ -117,6 +117,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3272423230683434550}
   - component: {fileID: 2220632991271032579}
+  - component: {fileID: 615434641985926222}
   m_Layer: 0
   m_Name: Tile_Forest_003
   m_TagString: Untagged
@@ -145,7 +146,6 @@ Transform:
   - {fileID: 7686824520238232524}
   - {fileID: 8161989987176804923}
   - {fileID: 6368537002202791911}
-  - {fileID: 7629932577399414707}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2220632991271032579
@@ -161,10 +161,57 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: {fileID: 11400000, guid: 35db37c6608a8ad40b9ac6189d488d27, type: 2}
-  tileStats: {fileID: 11400000, guid: 9704d11446f38f04384a9e738ed95537, type: 2}
-  path: {fileID: 184226666432360849}
+  tileStats: {fileID: 11400000, guid: 4294e2bbb6c5f544e816622209eb84c3, type: 2}
   enemyCount: 0
-  enemyCountText: {fileID: 0}
+--- !u!114 &615434641985926222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2509899134061384227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d37e5385efd7064cb1d54c94960acae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Resolution: 20
+  m_Appearance:
+    pathColor: {r: 0, g: 1, b: 0, a: 1}
+    inactivePathColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    width: 0.2
+  m_Looped: 0
+  m_Waypoints:
+  - position: {x: 25.345297, y: 0, z: 48.94278}
+    tangent: {x: 1, y: 0, z: 0}
+    roll: 0
+  - position: {x: 24.492538, y: 0, z: 39.77826}
+    tangent: {x: -0.9081095, y: 0, z: -0.41873267}
+    roll: 0
+  - position: {x: 5.9115076, y: 0, z: 39.86235}
+    tangent: {x: 0.145401, y: 0, z: 0.2393341}
+    roll: 0
+  - position: {x: 5.379742, y: 0, z: 30.568253}
+    tangent: {x: 1, y: 0, z: 0}
+    roll: 0
+  - position: {x: 41.03032, y: 0, z: 30.189087}
+    tangent: {x: 2.4941444, y: 0, z: -1.9552917}
+    roll: 0
+  - position: {x: 41.187313, y: 0, z: 20.17804}
+    tangent: {x: -2.3707542, y: 0, z: 0}
+    roll: 0
+  - position: {x: 6.2025247, y: 0, z: 19.538223}
+    tangent: {x: -2.1519465, y: 0, z: 0}
+    roll: 0
+  - position: {x: 7.117242, y: 0, z: 9.195732}
+    tangent: {x: 1, y: 0, z: 0}
+    roll: 0
+  - position: {x: 24.62004, y: 0, z: 10.390793}
+    tangent: {x: 1, y: 0, z: -1.2199554}
+    roll: 0
+  - position: {x: 25.18155, y: 0, z: 1.2197647}
+    tangent: {x: 0.037317276, y: 0, z: 0}
+    roll: 0
 --- !u!1 &2675929301670079064
 GameObject:
   m_ObjectHideFlags: 0
@@ -900,84 +947,3 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 2534964839176971238, guid: 9759c8dab02c0ed459d2c183741be79e, type: 3}
---- !u!1 &6304554859655786592
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7629932577399414707}
-  - component: {fileID: 184226666432360849}
-  m_Layer: 0
-  m_Name: Path
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7629932577399414707
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6304554859655786592}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 20.87, y: 11.4, z: 92.3}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3272423230683434550}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &184226666432360849
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6304554859655786592}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d37e5385efd7064cb1d54c94960acae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Resolution: 20
-  m_Appearance:
-    pathColor: {r: 0, g: 1, b: 0, a: 1}
-    inactivePathColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    width: 0.2
-  m_Looped: 0
-  m_Waypoints:
-  - position: {x: 4.0264664, y: -11.417639, z: -42.18825}
-    tangent: {x: 1, y: 0, z: 0}
-    roll: 0
-  - position: {x: 4.2271776, y: -11.41764, z: -52.065796}
-    tangent: {x: 1, y: 0, z: 0}
-    roll: 0
-  - position: {x: -16.494795, y: -11.41764, z: -52.065796}
-    tangent: {x: 1, y: 0, z: 0}
-    roll: 0
-  - position: {x: -16.209217, y: -11.41764, z: -60.996048}
-    tangent: {x: 1, y: 0, z: 0}
-    roll: 0
-  - position: {x: 18.36853, y: -11.41764, z: -61.28182}
-    tangent: {x: 1, y: 0, z: 0}
-    roll: 0
-  - position: {x: 21.083138, y: -11.41764, z: -71.49803}
-    tangent: {x: 1, y: 0, z: 0}
-    roll: 0
-  - position: {x: -16.28123, y: -11.41764, z: -71.49803}
-    tangent: {x: 1, y: 0, z: 0}
-    roll: 0
-  - position: {x: -15.066905, y: -11.41764, z: -83.21452}
-    tangent: {x: 1, y: 0, z: 0}
-    roll: 0
-  - position: {x: 3.1041822, y: -11.41764, z: -81.49741}
-    tangent: {x: 1, y: 0, z: 0}
-    roll: 0
-  - position: {x: 4.1788387, y: -11.41764, z: -92.098694}
-    tangent: {x: 1, y: 0, z: 0}
-    roll: 0

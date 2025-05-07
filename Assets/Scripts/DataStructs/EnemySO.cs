@@ -31,4 +31,7 @@ public class EnemySO : ScriptableObject
     public Ability abl1;
     public Ability abl2;
 
+    public int gold;
+    public int xp;
+
 }

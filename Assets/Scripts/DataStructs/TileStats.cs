@@ -25,8 +25,7 @@ public class TileStats : ScriptableObject
     public int maxEnemyCount;
     public float spawnRate;
     public EnemyGroup[] enemyGroups;
-    public GameObject boss;
-    public GameObject finalBoss;
+
     
     
     [System.Serializable]
@@ -39,7 +38,8 @@ public class TileStats : ScriptableObject
     {
         if(wave == 10)
         {
-            return finalBoss;
+            maxEnemyCount = 0;
+            return null;
         }
         EnemyGroup enemyGroup = enemyGroups[wave/(TOTAL_WAVES/enemyGroups.Length)]; //scale up to total waves by the number of enemy packs.
         //ie if the number of enemy groups equals 5, and the total waves equals 10, then each enemy group will show up 2 times.

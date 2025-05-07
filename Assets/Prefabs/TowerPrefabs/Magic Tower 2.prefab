@@ -106,10 +106,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0d177009c3dc0be45a8a972013ba0d8f, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5196291760597087871}
+      addedObject: {fileID: 969259392529796309}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0d177009c3dc0be45a8a972013ba0d8f, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 969259392529796309}
+      addedObject: {fileID: 5196291760597087871}
   m_SourcePrefab: {fileID: 100100000, guid: 0d177009c3dc0be45a8a972013ba0d8f, type: 3}
 --- !u!4 &8416320679988307770 stripped
 Transform:
@@ -121,6 +121,20 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 0d177009c3dc0be45a8a972013ba0d8f, type: 3}
   m_PrefabInstance: {fileID: 8306465566676697297}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &969259392529796309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9189339667416907136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1ec715e7bceb244bad4ab5a74c67c2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerInfo: {fileID: 11400000, guid: 908cb7af1951e22459b786390fda2ac7, type: 2}
+  shootPoint: {fileID: 4380856926577008224}
 --- !u!136 &5196291760597087871
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -144,17 +158,3 @@ CapsuleCollider:
   m_Height: 5.993232
   m_Direction: 1
   m_Center: {x: 0, y: 1.5039611, z: -0.0052318573}
---- !u!114 &969259392529796309
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9189339667416907136}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1ec715e7bceb244bad4ab5a74c67c2f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  towerInfo: {fileID: 11400000, guid: 908cb7af1951e22459b786390fda2ac7, type: 2}
-  shootPoint: {fileID: 4380856926577008224}

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Barracks
   m_EditorClassIdentifier: 
   tower: {fileID: 2592525518262912839, guid: a2528a5afa5c8a34bb7b5cb1e5ca571f, type: 3}
-  aimRadius: 0
+  aimRadius: 2
   shootRateSecs: 10000
   projectile: {fileID: 0}

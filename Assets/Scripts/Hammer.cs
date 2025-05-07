@@ -9,7 +9,7 @@ public class Hammer : MonoBehaviour
         if(other.TryGetComponent(out EnemyController ec))
         {
             PlayerController playerController = GetComponentInParent<PlayerController>();
-            ec.TakeDamage(10);
+            ec.TakeDamage(GameManager.Instance.power);
         }
     }
 }
