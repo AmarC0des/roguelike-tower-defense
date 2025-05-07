@@ -88,6 +88,17 @@ public class TowerPlacementManager : MonoBehaviour
     // Starts the tower placement preview
     public void StartPreview(TowerSO towerSO)
     {
+        if(isPlacing) return; //prevent doing this again
+
+        if(GameManager.Instance.goldCount >= 50)
+        {
+            GameManager.Instance.goldCount-=50;
+            GameManager.Instance.UpdateUI();
+        }
+        else
+        {
+            return;
+        }
         isPlacing = true; // Enable placement mode
         previewTower = Instantiate(towerSO.tower, transform, worldPositionStays: false); // Create the preview tower
         previewTower.GetComponent<Collider>().isTrigger = true;

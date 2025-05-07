@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe12a265675b0a347890f9253f03b05b, type: 3}
   m_Name: Wastes2
   m_EditorClassIdentifier: 
-  maxEnemyCount: 15
+  maxEnemyCount: 30
   spawnRate: 2
   enemyGroups:
   - enemies:
@@ -29,6 +29,7 @@ MonoBehaviour:
     - {fileID: 5170109799770366935, guid: 2165b5a294798cb4bbc18cd6b3f83681, type: 3}
     - {fileID: 5170109799770366935, guid: f5ed5313b9382a64eac508fc747a22d7, type: 3}
     - {fileID: 5170109799770366935, guid: e166797da7f2cf341b2709b594a57756, type: 3}
+    - {fileID: 5170109799770366935, guid: 21f02fda8234fe749b1e571eb6816910, type: 3}
   - enemies:
     - {fileID: 5170109799770366935, guid: 0cb93d65d6f15c44792a125fbcf08152, type: 3}
     - {fileID: 5170109799770366935, guid: 8f1a76304b11f064aac250b2f157e193, type: 3}
@@ -41,5 +42,3 @@ MonoBehaviour:
     - {fileID: 5170109799770366935, guid: 57fd245d43b8c7240857cdf75c9d28f8, type: 3}
     - {fileID: 5170109799770366935, guid: 9628bb74aa922334ab288b88031dd0a8, type: 3}
     - {fileID: 5170109799770366935, guid: aed07b6550e9a0540bdd8492cc7d8caf, type: 3}
-  boss: {fileID: 5170109799770366935, guid: 21f02fda8234fe749b1e571eb6816910, type: 3}
-  finalBoss: {fileID: 5170109799770366935, guid: 0eee2ee83d245634a9b4f0ba7a8a1c5b, type: 3}

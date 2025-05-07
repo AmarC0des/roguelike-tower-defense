@@ -28,6 +28,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine.SceneManagement;
+using Cinemachine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
@@ -52,6 +53,8 @@ public class GameManager : MonoBehaviour
     public int maxEnemyCount;
     public int waveCount;
     public int charLevel;
+    public int charHP;
+    public int charMaxHP;
 
     public int power;
     public float speed;
@@ -59,6 +62,8 @@ public class GameManager : MonoBehaviour
     public bool canSpawnBoss;
 
     public GameObject finalBoss;
+    public AudioClip battle;
+    public AudioClip planning;
     
 
 
@@ -93,6 +98,7 @@ public class GameManager : MonoBehaviour
         {
             CastleTakeDamage(10);
         }
+        
     }
 
     public void ChangeState()
@@ -137,7 +143,7 @@ public class GameManager : MonoBehaviour
         curCastleHp = maxCastleHp;
         stateText.text = "Game Started";
         nextState = GameState.SetUp;
-        goldCount = 0;
+        goldCount = 50;
         maxEnemyCount = 0;
         waveCount = 0;
         charLevel = 1;
@@ -146,6 +152,8 @@ public class GameManager : MonoBehaviour
         xpRequired = CalculateXPRequirement(charLevel);
         uiManager.OpeningScreenUI.SetActive(true);
         UpdateUI();
+        GetComponent<AudioSource>().clip = planning;
+        GetComponent<AudioSource>().Play();
     }
 
     private void HandlePlanning()
@@ -158,6 +166,7 @@ public class GameManager : MonoBehaviour
         nextState = GameState.Wave;
 
         UpdateUI();
+        
     }
 
     private void HandleWave()
@@ -166,22 +175,25 @@ public class GameManager : MonoBehaviour
         towerManager.enabled = false;
         uiManager.TowerPlaceUI.SetActive(false);
         stateText.text = "Wave Phase";
-        if (waveCount == 10)
+        if (waveCount == 15)
         {
             SpawnBoss();
         }
         nextState = GameState.Progression;
         UpdateUI();
+        GetComponent<AudioSource>().clip = battle;
+        GetComponent<AudioSource>().Play();
     }
 
     private void HandleProgression()
     {
         pathManager.ShowTileSelection();  // Show tile selection UI to the player
-        charLevel++;
         stateText.text = "Progress Phase";
         nextState = GameState.SetUp;
 
         UpdateUI();
+        GetComponent<AudioSource>().clip = planning;
+        GetComponent<AudioSource>().Play();
     }
 
     private void HandleWinGame()
@@ -232,6 +244,7 @@ public class GameManager : MonoBehaviour
         {
             nextState = GameState.Gameover;
             ChangeState();
+            SceneManager.LoadScene("EndScreen");
         }
     }
   
@@ -290,20 +303,23 @@ public class GameManager : MonoBehaviour
 
     public void SpawnBoss()
     {
-        if (canSpawnBoss)
-        {
-            GameObject boss;
-            boss = Instantiate(finalBoss, pathManager.path.m_Waypoints[0].position, Quaternion.identity);
-        }
-        
+        GameObject boss;
+        boss = Instantiate(finalBoss, pathManager.path.m_Waypoints[0].position, Quaternion.identity);
+        boss.GetComponent<CinemachineDollyCart>().m_Path = pathManager.path;
+    }
+    public void AbleToSpawnBoss()
+    {
+        canSpawnBoss = true;
+        SpawnBoss();
     }
 
     public void RepairCastle()
     {
         if (goldCount >= 50)
         {
-            goldCount -=50;
+            goldCount -= 50;
             curCastleHp = maxCastleHp;
+            UpdateUI();
         }
     }
 }

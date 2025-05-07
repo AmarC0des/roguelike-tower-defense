@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tower: {fileID: 2963145111765098310, guid: 98100f5170a6ed14b99e5496d78da744, type: 3}
   aimRadius: 0
-  shootRateSecs: 0
+  shootRateSecs: 10000
   projectile: {fileID: 0}

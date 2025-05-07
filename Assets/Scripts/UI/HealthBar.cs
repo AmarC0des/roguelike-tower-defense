@@ -3,49 +3,22 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    public Image healthBarFill;  // Assign the red bar UI Image
-    public float maxHealth = 100f;
-    private float currentHealth;
-
+    public RectTransform fill;
+    RectTransform tf;
+    public bool TruePlayerFalseCastle;
     void Start()
     {
-        currentHealth = maxHealth;  // Start at full health
-        UpdateHealthBar();
+        tf = GetComponent<RectTransform>();
     }
-
-    public void TakeDamage(float damage)
-    {
-        currentHealth -= damage;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);  // Prevent negative health
-        UpdateHealthBar();
-    }
-
-    public void Heal(float amount)
-    {
-        currentHealth += amount;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);  // Prevent overhealing
-        UpdateHealthBar();
-    }
-
-    void UpdateHealthBar()
-    {
-        healthBarFill.fillAmount = currentHealth / maxHealth;  // Adjust the fill amount
-    }
-
-    //If statements in the method are for testing for now
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G))
+        float fillRatio = TruePlayerFalseCastle
+            ? (float)GameManager.Instance.charHP/GameManager.Instance.charMaxHP
+            : (float)GameManager.Instance.curCastleHp/GameManager.Instance.maxCastleHp;
+        fill.sizeDelta = new Vector2(tf.sizeDelta.x*fillRatio, fill.sizeDelta.y);
+        if(Input.GetKeyDown(KeyCode.Delete))
         {
-            TakeDamage(10f);  // Lose 10 HP when pressing Space
+            GameManager.Instance.charHP -= 1;
         }
-
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            Heal(5f);  // Heal 5 HP when pressing H
-        }
-
-        UpdateHealthBar();
     }
-
 }

@@ -53,7 +53,8 @@ public class Billboard : MonoBehaviour
         {
             vector2Int = Vector2Int.left;
         }
-        direction4Way.direction = vector2Int;
+        if(direction4Way)
+            direction4Way.direction = vector2Int;
         /*
         enemy    cam
         {-1, 0}, { 0, 1} = {-1, 0}

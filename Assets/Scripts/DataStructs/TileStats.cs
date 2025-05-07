@@ -36,12 +36,7 @@ public class TileStats : ScriptableObject
     }
     public GameObject GetEnemy(int wave)
     {
-        if(wave == 10)
-        {
-            maxEnemyCount = 0;
-            return null;
-        }
-        EnemyGroup enemyGroup = enemyGroups[wave/(TOTAL_WAVES/enemyGroups.Length)]; //scale up to total waves by the number of enemy packs.
+        EnemyGroup enemyGroup = enemyGroups[(wave-1)/(TOTAL_WAVES/enemyGroups.Length)]; //scale up to total waves by the number of enemy packs.
         //ie if the number of enemy groups equals 5, and the total waves equals 10, then each enemy group will show up 2 times.
         //0011223344
         //enemy groups will then be customly sorted to be from weak to strong.

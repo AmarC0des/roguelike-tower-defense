@@ -40,6 +40,14 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2602183170363176300, guid: 0663ba83945e0d54db434bc6a4f1879b, type: 3}
+      propertyPath: animations.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 9ad6e02def2dfc946b596e2660507172, type: 2}
+    - target: {fileID: 2602183170363176300, guid: 0663ba83945e0d54db434bc6a4f1879b, type: 3}
+      propertyPath: animations.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 8e4101a4025f51d48965ca8bf0c75b8e, type: 2}
     - target: {fileID: 8503493943978581454, guid: 0663ba83945e0d54db434bc6a4f1879b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
