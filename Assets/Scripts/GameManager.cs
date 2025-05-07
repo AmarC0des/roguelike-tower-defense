@@ -297,4 +297,13 @@ public class GameManager : MonoBehaviour
         }
         
     }
+
+    public void RepairCastle()
+    {
+        if (goldCount >= 50)
+        {
+            goldCount -=50;
+            curCastleHp = maxCastleHp;
+        }
+    }
 }
