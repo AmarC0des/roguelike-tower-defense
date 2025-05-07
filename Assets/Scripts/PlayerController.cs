@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
 
     Animator2D anim;
     Direction4Way direction;
-    public float speed = 3;
+    public float speed;
 
     const int IDLE_ANIM = 0;
     const int WALK_ANIM = 1;
@@ -37,18 +37,29 @@ public class PlayerController : MonoBehaviour
     bool charActive;
     Vector3 oldPos;
 
+    public float rotationSpeed = 3f;
+    public GameObject topView;
+    public GameObject frontView;
+    private float currentRotation = 0f; // Tracks the current rotation angle
+    private float targetRotation = 0f;
+    public bool topViewActive;
+
     private void Start()
     {
         charActive = true;
         anim = GetComponentInChildren<Animator2D>();
         direction = GetComponentInChildren<Direction4Way>();
         hammer.gameObject.SetActive(false);
+        topViewActive = false;
+        ChangeToFrontView();
+        speed = GameManager.Instance.speed;
     }
 
     // Update is called once per frame
     void Update()
     {
         CheckMovement();
+        CheckCamera();  
     }
 
     void CheckMovement() // Checks player movement
@@ -109,6 +120,7 @@ public class PlayerController : MonoBehaviour
         
     }
 
+
     public void DetachCharacter()
     {
         if(!charActive) return;
@@ -130,4 +142,57 @@ public class PlayerController : MonoBehaviour
         hammer.gameObject.SetActive(false);
     }
 
+    void CheckCamera()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1)) ChangeToTopView();
+        if (Input.GetKeyDown(KeyCode.Alpha2)) ChangeToFrontView();
+
+        // Rotate camera using Q and E keys
+        if (Input.GetKeyDown(KeyCode.Q)) RotateCamera(-90f); // Counterclockwise
+        if (Input.GetKeyDown(KeyCode.E)) RotateCamera(90f);  // Clockwise
+
+
+        currentRotation = Mathf.LerpAngle(currentRotation, targetRotation, Time.deltaTime * 5);
+        transform.rotation = Quaternion.Euler(0, currentRotation, 0);
+    }
+
+    void RotateCamera(float angle)
+    {
+        targetRotation += angle;
+    }
+
+    void ChangeToTopView()
+    {
+       
+        topView.SetActive(true);
+        frontView.SetActive(false);
+        if(topViewActive == false)
+        {
+            topViewActive = true;
+            character.transform.Rotate(270, 0, 0);
+            hammer.transform.Rotate(270, 0, 0);
+        }
+        
+
+    }
+
+    void ChangeToFrontView()
+    {
+
+       
+        topView.SetActive(false);
+        frontView.SetActive(true);
+        if(topViewActive == true)
+        {
+            topViewActive = false;
+            character.transform.Rotate(-270, 0, 0);
+            hammer.transform.Rotate(-270, 0, 0);
+        }
+       
+    }
+
+    public void SetSpeed() //invert this make it a mehtod of gm
+    {
+        speed = GameManager.Instance.speed;
+    }
 }

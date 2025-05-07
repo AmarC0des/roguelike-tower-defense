@@ -134,11 +134,6 @@ public class EnemyController : MonoBehaviour
             GameManager.Instance.CastleTakeDamage(damage);
             return;
         }
-        if(currentState == EnemyState.AtkPlayer)
-        {
-            GameManager.Instance.PlayerTakeDamage(damage);
-            return;
-        }
     }
 
     void BeginAtk()
@@ -159,7 +154,7 @@ public class EnemyController : MonoBehaviour
     {
         if (other.CompareTag("Castle"))
         {
-            Debug.Log("Attacking"); 
+            Debug.Log("Attacking Castle"); 
             ChangeState(EnemyState.AtkCastle);
             isAttacking = true;
 
@@ -170,6 +165,7 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+   
 
     public void TakeDamage(int damage)
     {
@@ -180,5 +176,14 @@ public class EnemyController : MonoBehaviour
             Destroy(gameObject);
         }
         Instantiate(poof, transform.position, transform.rotation);
+    }
+
+    void Die()
+    {
+        GameManager.Instance.enemyCount--;
+        GameManager.Instance.goldCount+= stats.gold;
+        GameManager.Instance.xp += stats.xp;
+
+        Destroy(gameObject);
     }
 }

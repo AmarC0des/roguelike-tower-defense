@@ -106,10 +106,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 18bd59803580f904f80bfcf0f3e836f4, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5372160869166424790}
+      addedObject: {fileID: 4731056575939298113}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 18bd59803580f904f80bfcf0f3e836f4, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4731056575939298113}
+      addedObject: {fileID: 5372160869166424790}
   m_SourcePrefab: {fileID: 100100000, guid: 18bd59803580f904f80bfcf0f3e836f4, type: 3}
 --- !u!4 &29715182570111385 stripped
 Transform:
@@ -121,6 +121,20 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 18bd59803580f904f80bfcf0f3e836f4, type: 3}
   m_PrefabInstance: {fileID: 568342716157159026}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4731056575939298113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 802275570895772451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1ec715e7bceb244bad4ab5a74c67c2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerInfo: {fileID: 11400000, guid: 37ef6da1fae3d044d8c57d73298dab3e, type: 2}
+  shootPoint: {fileID: 992209325357240933}
 --- !u!136 &5372160869166424790
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -144,17 +158,3 @@ CapsuleCollider:
   m_Height: 5.993232
   m_Direction: 1
   m_Center: {x: 0, y: 1.5039611, z: -0.0052318573}
---- !u!114 &4731056575939298113
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 802275570895772451}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1ec715e7bceb244bad4ab5a74c67c2f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  towerInfo: {fileID: 11400000, guid: 37ef6da1fae3d044d8c57d73298dab3e, type: 2}
-  shootPoint: {fileID: 992209325357240933}

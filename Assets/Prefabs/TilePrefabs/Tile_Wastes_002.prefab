@@ -387,7 +387,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5564807966144628837}
   - component: {fileID: 4720656897174981013}
-  - component: {fileID: 5359416397214958168}
+  - component: {fileID: 4263404259016423610}
   m_Layer: 0
   m_Name: Tile_Wastes_002
   m_TagString: Untagged
@@ -427,11 +427,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: {fileID: 11400000, guid: 6bff9b3375b32084f8c1041a6a7a9f01, type: 2}
-  tileStats: {fileID: 0}
-  path: {fileID: 8903241121533048426}
+  tileStats: {fileID: 11400000, guid: e35fe535bd91b5646a6bb3f4afb3c0e3, type: 2}
   enemyCount: 0
-  enemyCountText: {fileID: 0}
---- !u!114 &5359416397214958168
+--- !u!114 &4263404259016423610
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -450,11 +448,11 @@ MonoBehaviour:
     width: 0.2
   m_Looped: 0
   m_Waypoints:
-  - position: {x: 15.9514, y: 27.5, z: 35.50168}
+  - position: {x: 24.984282, y: 0, z: 49.60118}
     tangent: {x: 1, y: 0, z: 0}
     roll: 0
-  - position: {x: 16.82103, y: 27.4, z: -14.835064}
-    tangent: {x: 1, y: 0, z: 0}
+  - position: {x: 25.260418, y: 0, z: 1.5760193}
+    tangent: {x: 0.7331581, y: 0, z: 0}
     roll: 0
 --- !u!1 &1688901051863943076
 GameObject:
@@ -548,7 +546,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1527604333579861707}
-  - component: {fileID: 8903241121533048426}
   m_Layer: 0
   m_Name: Path
   m_TagString: Untagged
@@ -571,31 +568,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5564807966144628837}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8903241121533048426
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1852981768767111388}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d37e5385efd7064cb1d54c94960acae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Resolution: 20
-  m_Appearance:
-    pathColor: {r: 0, g: 1, b: 0, a: 1}
-    inactivePathColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    width: 0.2
-  m_Looped: 0
-  m_Waypoints:
-  - position: {x: 15.9514, y: 27.5, z: 35.50168}
-    tangent: {x: 1, y: 0, z: 0}
-    roll: 0
-  - position: {x: 16.82103, y: 27.4, z: -14.835064}
-    tangent: {x: 1, y: 0, z: 0}
-    roll: 0
 --- !u!1 &2408010245812304517
 GameObject:
   m_ObjectHideFlags: 0

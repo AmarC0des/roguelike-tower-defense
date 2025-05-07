@@ -70,16 +70,19 @@ public class PathManager : MonoBehaviour
     //Method for dropping a new terrain in. 
     public void PlaceTile()
     {
-        if (selectedTileIndex < 0 || selectedTileIndex >= tilesPrefabs.Count)
-        {
-            Debug.LogWarning("No valid tile selected!");
-            return;
-        }
+        
+         if (selectedTileIndex < 0 || selectedTileIndex >= tilesPrefabs.Count)
+         {
+             Debug.LogWarning("No valid tile selected!");
+             return;
+         } 
 
-        GameObject selectedPrefab = tilesPrefabs[selectedTileIndex*3+Random.Range(0,3)]; //x3 is the starting index (what type is it), random value is the offset (what random tile is it thats in the group)
+         GameObject selectedPrefab = tilesPrefabs[selectedTileIndex*3+Random.Range(0,3)]; //x3 is the starting index (what type is it), random value is the offset (what random tile is it thats in the group)
+        // GameObject selectedPrefab = tilesPrefabs[Random.Range(0, tilesPrefabs.Count)];
+
         GameObject newTile = Instantiate(selectedPrefab, furthestTile.transform.position + new Vector3(0, 0, 50), Quaternion.identity);
         furthestTile = newTile;
-        placedTiles.Add(newTile);
+        placedTiles.Insert(0,newTile);
 
         selectionPanel.SetActive(false);
 
@@ -92,12 +95,35 @@ public class PathManager : MonoBehaviour
         }
 
         selectedTileIndex = -1;
+        ConnectPaths();
+
     }
 
 
 
-    private void ConnectPaths()
+    public void ConnectPaths()
     {
-        //connects the enemy paths from each tile
+        float zOffset = 0;
+        List<CinemachinePath.Waypoint> allWaypoints = new List<CinemachinePath.Waypoint>(); //creates a list of way points due to not knowing size of path at runtime
+
+        foreach (GameObject tile in placedTiles)
+        {
+            zOffset = tile.transform.position.z;
+            CinemachinePath tilePath = tile.GetComponent<CinemachinePath>(); //grabs current tiles path
+
+            for (int i = 0; i < tilePath.m_Waypoints.Length; i++)  //for each Waypoint in the tile path:
+            {
+                tilePath.m_Waypoints[i].position.z += zOffset;
+                allWaypoints.Add(tilePath.m_Waypoints[i]); //add to waypoint to all waypoint list.
+                tilePath.m_Waypoints[i].position.z -= zOffset;
+            }
+
+        }
+
+        path.m_Waypoints = allWaypoints.ToArray();
+
+        path.InvalidateDistanceCache();
+
+        Debug.Log($"Merged {allWaypoints.Count} waypoints into the combined path.");
     }
 }
