@@ -110,6 +110,7 @@ public class PathManager : MonoBehaviour
 
             for (int i = 0; i < tilePath.m_Waypoints.Length; i++)  //for each Waypoint in the tile path:
             {
+                if(allWaypoints.Contains(tilePath.m_Waypoints[i])) continue;
                 tilePath.m_Waypoints[i].position.z += zOffset;
                 allWaypoints.Add(tilePath.m_Waypoints[i]); //add to waypoint to all waypoint list.
                 tilePath.m_Waypoints[i].position.z -= zOffset;

@@ -15,6 +15,10 @@ public class TowerProjectile : MonoBehaviour
     }
     void Update()
     {
+        if(target == null)
+        {
+            Die();
+        }
         transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
         if ((transform.position - target.transform.position).magnitude < sizeRadius)
         {

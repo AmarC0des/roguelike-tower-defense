@@ -84,9 +84,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: {fileID: 11400000, guid: 5921c52079c180a48a4478a227c27e34, type: 2}
   tileStats: {fileID: 11400000, guid: 7d5dbe33552b54046934e193343917c1, type: 2}
-  path: {fileID: 5171611260555913179}
-  enemyCount: 0
-  enemyCountText: {fileID: 0}
 --- !u!114 &5171611260555913179
 MonoBehaviour:
   m_ObjectHideFlags: 0

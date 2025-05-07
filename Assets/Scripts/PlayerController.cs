@@ -60,6 +60,11 @@ public class PlayerController : MonoBehaviour
     {
         CheckMovement();
         CheckCamera();  
+        if(transform.position.y < -10)
+        {
+            //fallen off map
+            transform.position = new Vector3(16,1,46);
+        }
     }
 
     void CheckMovement() // Checks player movement

@@ -65,6 +65,7 @@ public class TileManager : MonoBehaviour
         else
         {
             canSpawn = false;
+            totalSpawnedEnemies = 0;
         }
     
 
@@ -82,9 +83,11 @@ public class TileManager : MonoBehaviour
             spawnedEnemies.Add(newEnemy); //keep track of spawned enemies
             totalSpawnedEnemies++;
             GameManager.Instance.UpdateUI();
-            
- 
             return;
+        }
+        else
+        {
+            GameManager.Instance.canSpawnBoss = true;
         }
 
     }//End of SpawnEnemy

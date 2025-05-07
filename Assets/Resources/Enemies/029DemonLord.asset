@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   atk: 10
   speed: 0.5
-  HP: 200
+  HP: 1000
   description: 
   anim1: {fileID: 11400000, guid: 710732f85d209f84d9ad0f6fadacc8e9, type: 2}
   anim2: {fileID: 11400000, guid: 710732f85d209f84d9ad0f6fadacc8e9, type: 2}

@@ -49,6 +49,11 @@ public class EnemyController : MonoBehaviour
             BeginAtk();
         }
         GetComponent<Animator2D>().SetAnimation(isAttacking?1:0);
+        if(Input.GetKeyDown(KeyCode.Delete))
+        {
+            Die();
+            GameManager.Instance.maxEnemyCount = 0;
+        }
     }
 
     public void ChangeState(EnemyState state)
