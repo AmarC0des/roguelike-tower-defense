@@ -143,7 +143,7 @@ public class GameManager : MonoBehaviour
         curCastleHp = maxCastleHp;
         stateText.text = "Game Started";
         nextState = GameState.SetUp;
-        goldCount = 20;
+        goldCount = 50;
         maxEnemyCount = 0;
         waveCount = 0;
         charLevel = 1;
@@ -152,6 +152,8 @@ public class GameManager : MonoBehaviour
         xpRequired = CalculateXPRequirement(charLevel);
         uiManager.OpeningScreenUI.SetActive(true);
         UpdateUI();
+        GetComponent<AudioSource>().clip = planning;
+        GetComponent<AudioSource>().Play();
     }
 
     private void HandlePlanning()
@@ -242,6 +244,7 @@ public class GameManager : MonoBehaviour
         {
             nextState = GameState.Gameover;
             ChangeState();
+            SceneManager.LoadScene("EndScreen");
         }
     }
   
@@ -314,8 +317,9 @@ public class GameManager : MonoBehaviour
     {
         if (goldCount >= 50)
         {
-            goldCount -=50;
+            goldCount -= 50;
             curCastleHp = maxCastleHp;
+            UpdateUI();
         }
     }
 }
